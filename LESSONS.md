@@ -33,3 +33,14 @@
   the volume key (`cmd media_session volume --set` did not take).
 - 10.11.2026: headless Chrome cannot render a true 390 px phone (it lays out wider); an HTML page with iframes of 390
   and 768 px rendered off screen gives the real widths.
+
+## 10.11.2026 (Mantra Room)
+- A 20% brightness cap taken literally on an 8-bit canvas is nearly black: treat it as 20% of LIGHT (linear), encode with
+  gamma 2.2 in the shader, and add temporal dither or the slow ramp steps visibly.
+- A 2D canvas gradient redrawn each frame in a WebView stutters; one WebGL fragment shader with time as a uniform is smooth.
+  Reuse one WebGL context per canvas (loseContext makes the canvas unusable for the next getContext).
+- gh release upload turns spaces in file names into dots; give a label (`file#label`) if the display name matters.
+- Suno's Create button meets a Cloudflare captcha: voice Marko on the Nothing (`phonesay`), never solve it. The
+  Sound Recorder needs Firefox on the song page (`firefoxctl open` it first) or it answers "not on a Suno song page".
+- The VM Gemini worker is a shared pipe: Gemini's per-account limit (auroville.community resets 13:41 UTC on 10.11.2026)
+  and an HTTP 500 for the gmail profile stopped the room pictures; batch.json was backed up as batch-before-mantra-room.json.

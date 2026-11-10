@@ -1,4 +1,4 @@
-# TAKEOVER: Chakra and Elements Toning (Mantra)
+# TAKEOVER: Mantra Room (Mantra Meditation Room), formerly Chakra and Elements Toning
 
 **What it is.** An Android meditation app for a mindfulness audience, built on Marko's (DJ Mantra's) chakra toning.
 Package `com.mantra.chakratoning`, launcher name "Chakra Toning (Mantra)", full name "Chakra and Elements Toning (Mantra)".
@@ -159,3 +159,36 @@ out-breath (sine easing); the home timer ends the session with the bowl bell; th
 - **Pin**: `adb shell am start -n com.mantra.chakratoning/.MainActivity --ez pin true` asks Nova to put the icon on the
   home screen (its own Add dialog, confirmed once).
 - Lighthouse on the live site (mobile, 10.11.2026 evening): performance 100, accessibility 100, best practices 100, SEO 100.
+
+
+## The makeover, 10.11.2026 (requests 25 to 30): Mantra Room
+
+- **Names.** Repository `markoboskoauroville/MANTRA_ROOM` (renamed from CHAKRA_ELEMENTS_TONING, folder ~/Developer/MANTRA_ROOM).
+  App name "Mantra Meditation Room", launcher "Mantra Room". applicationId `com.mantra.chakratoning` and the keystore are
+  unchanged, so every version installs over the last. Site: https://mantraroom.pages.dev (Pages project `mantraroom`,
+  `.github/workflows/site.yml`); the old chakra-and-elements-toning Pages project is deleted after the new one is verified.
+- **The concept.** The app will live inside the Mantra Room: one colour, one armchair in the middle, laser projectors
+  drawing dark-yellow line-art chakra symbols on four walls. You enter, the app waits, you choose your sound, and over
+  Bluetooth the Aputure lights take the sound's colour and breathe with it. Also usable at home. "Room lights" in the
+  app (Additional modules) is a MOCK-UP: no Bluetooth is used, nothing is sent.
+- **The colour screen (v16 on).** One design for every sound: a dark glowing ball, colour in the centre fading to black;
+  only brightness breathes, from 0 to 20% of full light (gamma-encoded so it is dark but visible), 6 s in, 2 s hold, 6 s
+  out, 2 s hold, cosine eased; hue never changes. Colours: Earth gold, Water blue `#2E7FB8`, Fire crimson `#D8232F`, Air
+  green `#2FB45A`, OM violet, A-U-I-O a RADIAL rainbow (root red in the centre, the rest as rings outward).
+  Constants `PULSE_MAX`, `BREATH_*` at the top of that block in `app.js`.
+- **GPU (v17 on, request 28).** The ball is a WebGL fragment shader (`BallGL` in app.js): time and brightness are uniforms,
+  temporal dithering against banding. MainActivity picks the display mode nearest 60 Hz (`pickRefreshRate`, from
+  Display.getSupportedModes) and tells the page (`Native.display()`); a faint line under the top edge and the log
+  line `MRFPS` show the measured fps. Nothing A142: 60 fps, modes 60/90/120 Hz, asked 60.
+- **Two song styles (v17 on, request 26).** Every stripe is split into two halves with no gap: left Mantra Voice, right
+  Indian Raga, the symbol without petals exactly on the seam. Files `assets/web/audio/<id>-voice.ogg` and `<id>-raga.ogg`
+  (id = earth, water, fire, air, ether, aum); `HAS_RAGA` in app.js lists the sounds that have a raga; the other half says
+  "soon". WAV downloads: release `songs` (not Latest) named `<sound> - Mantra Voice.wav` / `<sound> - Indian Raga.wav`.
+  Raga WAVs are recorded with Sound Recorder (`MANTRA_SOUND_RECORDER/tools/record_suno_list.py`, Firefox must be on the
+  Suno song page: `firefoxctl open <song url>` first); Mantra Voice WAVs are the kept v8 takes.
+- **The symbols and the table (request 30).** Source: Marin G Vayu, *Secret of the 5 Elements* (PDF on Drive id
+  1V4Rcj9MNKybWCrC-R1jiEkFzSFsd0VJi, 89 pages). His tantric symbols: Earth square, Water crescent, Fire downward triangle,
+  Wind six-pointed star, Ether circle; Ajna = Moon, Sahasrara = Sun, no element symbol. The app's stripe symbols follow them.
+  The Philosophy screen has his correspondence table as five cards (chakra, level, sense, output, virtue, India colour,
+  numbers). His senses: smell = earth, taste = water, sight = fire, touch = WIND, hearing = ether (not "touch = earth"; he
+  notes the wind/earth swap is possible by another logic). The table is a short summary in our own words, credited.
