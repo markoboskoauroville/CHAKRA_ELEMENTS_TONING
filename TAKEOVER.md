@@ -145,3 +145,17 @@ out-breath (sine easing); the home timer ends the session with the bowl bell; th
   rainbow order left to right; a title gets one rainbow stripe. **OM, never AUM.**
 - **The logotype** (concentric circles, then the smooth violet-white-gold disc) was rejected for the app on 10.11.2026
   ("very ugly"); the launcher icon still uses the disc until a new mark is chosen; the site keeps it until he decides.
+
+## Since v13 (10.11.2026, requests 21 to 24)
+
+- **A sing-along**: each stripe shows its vowel and "Sing A with the melody"; the site's hero, SEO title/description and
+  JSON-LD lead with singing along (six songs, one vowel each). The stripe symbols have no petals any more.
+- **Icons**: the page icon (site title, favicons) is the heart chakra, a circle with the six-pointed star, soft white on
+  black (brand/heart_icon.py). The launcher icon is still the stripes screen in a circle (brand/stripes_icon.py); Marko
+  is asked whether to use one mark for both.
+- **Songs in the app**: v15 has the long Suno songs for Earth, Water and Fire (task 89 recorder, tools/suno/takes, WAVs
+  ignored by git; `tools/song_loops.py <element> <wav>` makes the Opus file with fades only). Air, Ether and OM follow.
+  The OM song (spec in tools/suno/songs.py) waits on Suno's human check (blocker card b1a1c3fe5212).
+- **Pin**: `adb shell am start -n com.mantra.chakratoning/.MainActivity --ez pin true` asks Nova to put the icon on the
+  home screen (its own Add dialog, confirmed once).
+- Lighthouse on the live site (mobile, 10.11.2026 evening): performance 100, accessibility 100, best practices 100, SEO 100.
