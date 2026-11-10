@@ -187,7 +187,7 @@ out-breath (sine easing); the home timer ends the session with the bowl bell; th
   Raga WAVs are recorded with Sound Recorder (`MANTRA_SOUND_RECORDER/tools/record_suno_list.py`, Firefox must be on the
   Suno song page: `firefoxctl open <song url>` first); Mantra Voice WAVs are the kept v8 takes.
 - **The symbols and the table (request 30).** Source: Marin G Vayu, *Secret of the 5 Elements* (PDF on Drive id
-  1V4Rcj9MNKybWCrC-R1jiEkFzSFsd0VJi, 89 pages). His tantric symbols: Earth square, Water crescent, Fire downward triangle,
+  1V4Rcj9MNKybWCrC-R1jiEkFzSFsd0VJi, 89 pages). His tantric symbols: Earth square, Water triangle up (Marko 10.11.2026, replaces the crescent), Fire downward triangle,
   Wind six-pointed star, Ether circle; Ajna = Moon, Sahasrara = Sun, no element symbol. The app's stripe symbols follow them.
   The Philosophy screen has his correspondence table as five cards (chakra, level, sense, output, virtue, India colour,
   numbers). His senses: smell = earth, taste = water, sight = fire, touch = WIND, hearing = ether (not "touch = earth"; he
