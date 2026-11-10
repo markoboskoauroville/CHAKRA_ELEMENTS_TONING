@@ -112,7 +112,7 @@ const ELEMENTS = [
 // Fine lines, a soft glow, a slow breath and turn; sharp at any size (the canvas is drawn at the screen's pixel density).
 const YANTRA={ earth:{petals:4}, water:{petals:6}, fire:{petals:10}, air:{petals:12}, ether:{petals:16}, aum:{petals:2} };
 function yantra(ctx, el, W, H, t){
-  const k=W/ctx.canvas.clientWidth||1, cx=W*0.80, cy=H*0.5, R=Math.min(H*0.40, W*0.18)*(1+0.025*Math.sin(t*0.5));
+  const k=W/ctx.canvas.clientWidth||1, cx=W*0.5, cy=H*0.5, R=Math.min(H*0.40, W*0.085)*(1+0.025*Math.sin(t*0.5));
   const col=el.id==="aum"?"#B58CF0":(el.rainbow?"#FFFFFF":el.color), lw=1.3*k, rot=t*0.02;
   const P=YANTRA[el.id]; if(!P) return;
   ctx.save(); ctx.translate(cx,cy); ctx.lineWidth=lw; ctx.lineJoin="round"; ctx.shadowBlur=9*k;

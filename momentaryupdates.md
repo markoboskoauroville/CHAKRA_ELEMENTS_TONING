@@ -131,3 +131,15 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 26 (10.11.2026): two styles of songs, split buttons
 
 > I have two styles of songs. One where my voice is strong and we can hear how we tone the chakras, which is on most chakras right now. And I have latest songs which are generated with Suno with Indian Melos. So first of all put all these songs for download, .wav files on the GitHub. I give it A first letter minus Indian Raga and A minus Mantra voice. Chakra Voice and each of categories has two songs and then each button on the user interface is divided in two halves so user can choose one or the other song and in the transition between these two buttons which doesn't have any gap should be the symbol of the chakra only symbol without petals and everything should perfectly centered one above the other
+
+## Request 27 (10.11.2026): the voice note on Suno
+
+> Please listen to my voice notes on the Suno. Somewhere is a sample of my voice from which for example these songs which are not ragas are generated. And whatever is missing use that voice note, download it, cut it out to sound we need to generate, I mean song, and then make it.
+
+## Request 28 (10.11.2026): the pulsation stutters, move it to the GPU
+
+> In the app the colors are stuttering, I mean the pulsation is stuttering. Please move pulsation algorithm to the GPU so everything goes smooth and the frame rate should be 30 frames per second or 60. You need to see what is the capacity of this phone. 60 is ideal. or better to say capacity of each phone
+
+## Request 29 (10.11.2026): captchas by voice on the Nothing Phone
+
+> if captcha are jumping on the screen to generate Suno songs, just tell me in Nothing phone in the voice that I need to solve the captcha

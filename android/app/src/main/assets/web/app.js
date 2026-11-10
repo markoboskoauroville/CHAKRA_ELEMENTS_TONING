@@ -91,16 +91,19 @@ document.querySelectorAll("#timerChoice button").forEach(b=>b.onclick=()=>{ time
 // ---------------------------------------------------------------- THE JOURNEY (Play on the start screen)
 // The guide that explains everything, then each element song once, in the natural order (earth at the bottom up to
 // the throat, then OM), then back to the start screen. Visuals: the MilkDrop screen.
+// two styles per sound: "voice" = Mantra Voice (his strong toning voice), "raga" = Indian Raga (the long Suno songs)
+const HAS_RAGA=new Set(["earth","water","fire"]);
+const songId=(id,style)=>`${id}-${style||(HAS_RAGA.has(id)?"raga":"voice")}`;
 const JOURNEY=[["guide","The guide"],["earth","Earth · A"],["water","Water · U"],["fire","Fire · I"],["air","Air · O"],["ether","Ether · A-U-I-O"],["aum","OM"]];
 const journey={on:false, ix:0, t0:0};
 function journeyPlay(ix){
   journey.ix=ix; journey.t0=Date.now();
-  const [id,name]=JOURNEY[ix];
+  let [id,name]=JOURNEY[ix]; if(id!=="guide") id=songId(id);
   N.play(id, false, id==="guide" ? "Chakra toning · the guide" : name); mirror.load(id, false);
   $("#presetName").textContent = `${ix+1} / ${JOURNEY.length} · ${name}`;
 }
 function journeyTick(){
-  const [id]=JOURNEY[journey.ix];
+  let [id]=JOURNEY[journey.ix]; if(id!=="guide") id=songId(id);
   if(Date.now()-journey.t0 < 4000 || st.id!==id || st.playing || !st.dur) return;
   if(st.pos < st.dur-1500) return;                       // paused by hand or by the timer: wait
   if(journey.ix+1 < JOURNEY.length) journeyPlay(journey.ix+1); else endJourney();
@@ -208,19 +211,24 @@ const stripeCanvases=[]; let stripesRaf=0;
 function buildStripes(){
   const box=$("#stripes"); box.innerHTML="";
   ELEMENTS.forEach(el=>{
-    const d=document.createElement("button"); d.className="stripe"; d.setAttribute("aria-label", el.name);
+    // one stripe = two halves with no gap: Mantra Voice (left) and Indian Raga (right); the chakra symbol, without
+    // petals, sits exactly on the seam between them (Marko 10.11.2026), everything centred
+    const d=document.createElement("div"); d.className="stripe";
     d.style.background = el.rainbow
       ? "linear-gradient(90deg,rgba(200,16,46,.22),rgba(255,138,43,.22),rgba(233,200,74,.22),rgba(47,180,90,.22),rgba(56,182,236,.22),rgba(90,162,240,.22),rgba(159,122,224,.22))"
-      : el.nohue   // no hue of their own (Marko 10.11.2026): water a reflection, fire a light, air a haze
-        ? "#000"   // black with faint mist (drawn on the canvas), never a light fill
-        : rgba(el.color, 0.22);
+      : el.nohue ? "#000" : rgba(el.color, 0.22);
     const c=document.createElement("canvas"); d.appendChild(c);
-    const lab=document.createElement("div"); lab.className="sLabel";
-    lab.innerHTML=`<span class="vowel"></span><span class="name"></span>`;
-    lab.querySelector(".vowel").textContent=el.vowel;
-    lab.querySelector(".vowel").style.color = el.rainbow ? "#FFFFFF" : el.color;
-    lab.querySelector(".name").textContent = `Sing ${el.vowel} with the melody`;   // a sing-along (Marko 10.11.2026): the vowel and one cue
-    d.appendChild(lab); d.onclick=()=>openElement(el);
+    [["voice","Mantra Voice"],["raga","Indian Raga"]].forEach(([style,cap])=>{
+      const h=document.createElement("button"); h.className="half "+style;
+      const ok = style==="voice" || HAS_RAGA.has(el.id);
+      h.setAttribute("aria-label", `${el.name} ${cap}`+(ok?"":" (not recorded yet)"));
+      h.innerHTML=`<span class="vowel"></span><span class="cap"></span>`;
+      h.querySelector(".vowel").textContent=el.vowel;
+      h.querySelector(".vowel").style.color = el.rainbow ? "#FFFFFF" : el.color;
+      h.querySelector(".cap").textContent = ok ? cap : cap+" · soon";
+      if(ok) h.onclick=()=>openElement(el,style); else h.classList.add("soon");
+      d.appendChild(h);
+    });
     box.appendChild(d); stripeCanvases.push({c,el});
   });
 }
@@ -236,11 +244,12 @@ function openElements(){ show("elements"); N.immersive(false);
 
 // ---------------------------------------------------------------- ONE ELEMENT, full screen, looping
 let openEl=null, elRaf=0, elLabelTimer=0;
-function openElement(el){
+function openElement(el, style){
+  style = style || (HAS_RAGA.has(el.id)?"raga":"voice"); const sid=songId(el.id,style);
   mirror.ensure(); openEl=el; show("element"); N.immersive(true); N.keepAwake(true);
   const c=$("#elCanvas"); const k=Math.min(2, window.devicePixelRatio||1); c.width=c.clientWidth*k; c.height=c.clientHeight*k;
   const x=c.getContext("2d"); x.fillStyle="#000"; x.fillRect(0,0,c.width,c.height);
-  N.play(el.id, true, el.title); N.setTimer(timerMin); startSession(el.id); mirror.load(el.id, true);
+  N.play(sid, true, el.title+(style==="raga"?" · Indian Raga":" · Mantra Voice")); N.setTimer(timerMin); startSession(el.id); mirror.load(sid, true);
   const lab=$("#elLabel"); lab.innerHTML = `Sing ${el.vowel} with the melody<small>tap to return</small>`; lab.classList.remove("hide");
   clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
   // ONE design for every sound (Marko 10.11.2026): a dark glowing ball, the colour in the centre fading to black at the

@@ -185,3 +185,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .roomBall{width:100%;height:100%}
 .roomState{text-align:center;opacity:.8;margin:4px 16px;font-size:14px}
 #roomLights{flex-wrap:wrap}
+
+/* split stripes: two halves, no gap, the symbol on the seam */
+.stripe{display:flex}
+.stripe .half{position:relative;flex:1 1 50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;height:100%;padding:0;background:transparent}
+.stripe .half.voice{padding-right:13vw}
+.stripe .half.raga{padding-left:13vw;background:rgba(255,255,255,.04)}
+.stripe .half .vowel{font-size:34px;font-weight:300;letter-spacing:2px;line-height:1}
+.stripe .half .cap{font-size:13px;opacity:.85;text-align:center}
+.stripe .half.soon{opacity:.4}
