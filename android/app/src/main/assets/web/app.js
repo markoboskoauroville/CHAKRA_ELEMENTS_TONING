@@ -289,7 +289,7 @@ void main(){
     float w = d<.35 ? mix(1.,.55,d/.35) : d<.7 ? mix(.55,.12,(d-.35)/.35) : mix(.12,0.,clamp((d-.7)/.3,0.,1.));
     c=col*w;
   }
-  c*=lvl;
+  c=pow(max(c*lvl,0.),vec3(1./2.2)); // lvl is LIGHT (0..20% of full light); the screen shows it gamma-encoded, dark but visible
   c+= (hash(f)+hash(f+7.3)-1.)/255.;
   gl_FragColor=vec4(max(c,0.),1.);
 }`;

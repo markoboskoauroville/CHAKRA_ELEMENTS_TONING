@@ -143,3 +143,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 29 (10.11.2026): captchas by voice on the Nothing Phone
 
 > if captcha are jumping on the screen to generate Suno songs, just tell me in Nothing phone in the voice that I need to solve the captcha
+
+## Request 30 (10.11.2026): the book from Mantra Yug, tantric symbols and the table of the elements
+
+> There is somewhere in my repository's book from Mantra YUG about chakras and elements. He has something he called the tantric symbols of the elements and please copy that from there. https://drive.google.com/file/d/1V4Rcj9MNKybWCrC-R1jiEkFzSFsd0VJi/view?usp=drivesdk If you don't have it, it's here. In philosophy section of my app, I want you to make a table which he did to put this element like in different modalities like character of people, like every sense has element attached to it, sight is a fire and touch is earth, etc. So put these things in my lessons and take his symbols for each element.
