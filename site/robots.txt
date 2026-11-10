@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chakra-and-elements-toning.pages.dev/sitemap.xml

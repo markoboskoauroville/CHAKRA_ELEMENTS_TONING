@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chakra and Elements Toning</title>
+<meta name="description" content="A free meditation app for Android: chakra toning with MilkDrop visuals, five elements to sing along, a breath circle and a soft bell. Offline, no account.">
+<meta property="og:title" content="Chakra and Elements Toning">
+<meta property="og:description" content="Sing the five elements with DJ Mantra's chakra toning. Free for Android, offline, no account.">
+<meta property="og:image" content="https://chakra-and-elements-toning.pages.dev/img/hero.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=1">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=1">
+<link rel="apple-touch-icon" href="icon-180.png?v=1">
+<style>
+:root{--ground:#101215;--panel:#1A1D22;--line:#2A2F36;--text:#ECEDEF;--dim:#9AA1A9;--amber:#E8A64B;
+  --earth:#D4AF37;--water:#F3EEE2;--fire:#C8102E;--air:#2FB45A;
+  --rainbow:linear-gradient(90deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#5AA2F0,#9F7AE0)}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+img{max-width:100%;display:block}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,18,21,0) 35%,rgba(16,18,21,.95))}
+.hero .wrap{position:relative;z-index:1;padding-bottom:48px}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.08;margin:0 0 14px;font-weight:600}
+h2{font-size:clamp(24px,3.6vw,34px);margin:0 0 14px;font-weight:600}
+.lead{font-size:19px;color:#D5D8DC;max-width:640px;margin:0 0 26px}
+.btn{display:inline-block;background:var(--amber);color:#14161A;font-weight:700;text-decoration:none;padding:16px 26px;border-radius:12px;font-size:17px}
+.small{color:var(--dim);font-size:14px;margin-top:10px}
+.stripes{display:flex;gap:6px;margin:0 0 22px}
+.stripes i{flex:1;height:6px;border-radius:3px;max-width:90px}
+section{padding:64px 0;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.card .txt{padding:18px}
+.card h3{margin:0 0 6px;font-size:20px}
+.card p{margin:0;color:var(--dim)}
+.el{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.el div{border-radius:14px;padding:16px;background:var(--panel);border:1px solid var(--line)}
+.el b{font-size:30px;font-weight:300;display:block}
+.el span{color:var(--dim);font-size:14px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+ul.feat{padding-left:18px;color:#D5D8DC} ul.feat li{margin:6px 0}
+footer{padding:40px 0 60px;color:var(--dim);font-size:14px;border-top:1px solid var(--line)}
+footer a{color:var(--dim)}
+</style>
+<!-- SEO (MANTRA_MANIFEST kits/seo) -->
+<link rel="canonical" href="https://chakra-and-elements-toning.pages.dev/">
+<meta name="robots" content="index, follow">
+<meta name="keywords" content="chakra toning, meditation app, sound healing, vowel toning, MilkDrop, mindfulness, Android">
+<meta name="author" content="Marko Bosko, Mantra Productions">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://chakra-and-elements-toning.pages.dev/">
+<meta property="og:site_name" content="Mantra Productions">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Chakra and Elements Toning">
+<meta name="twitter:description" content="A free meditation app for Android: chakra toning with MilkDrop visuals, five elements to sing along, a breath circle and a soft bell. Offline, no account.">
+<meta name="twitter:image" content="https://chakra-and-elements-toning.pages.dev/img/hero.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Chakra and Elements Toning", "url": "https://chakra-and-elements-toning.pages.dev/", "description": "A free meditation app for Android: chakra toning with MilkDrop visuals, five elements to sing along, a breath circle and a soft bell. Offline, no account.", "applicationCategory": "HealthApplication", "operatingSystem": "Android", "softwareVersion": "1", "image": "https://chakra-and-elements-toning.pages.dev/img/hero.jpg", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Marko Bosko", "url": "https://markobosko.pages.dev"}, "publisher": {"@type": "Organization", "name": "Mantra Productions"}, "potentialAction": {"@type": "DonateAction", "name": "Put something in the bowl", "target": "https://revolut.me/mbosko0612"}, "downloadUrl": "https://chakra-and-elements-toning.pages.dev/download/chakra-elements-toning-latest.apk"}</script>
+<!-- /SEO -->
+</head>
+<body>
+<header class="hero">
+  <img class="bg" src="img/hero.jpg" alt="A woman sitting cross-legged at dawn, eyes closed, singing a long vowel">
+  <div class="wrap">
+    <div class="stripes"><i style="background:var(--earth)"></i><i style="background:var(--water)"></i><i style="background:var(--fire)"></i><i style="background:var(--air)"></i><i style="background:var(--rainbow)"></i></div>
+    <h1>Chakra and Elements Toning</h1>
+    <p class="lead">Sing yourself quiet. A free meditation app for Android built on DJ Mantra's chakra toning: one voice, held notes, five elements, and light that moves with the sound.</p>
+    <a class="btn" href="download/chakra-elements-toning-latest.apk" data-dl-app="chakratoning">Download the latest version</a>
+    <p class="small">Android 10 or newer. Offline, no account, no internet permission.</p>
+  </div>
+</header>
+
+<main>
+<section><div class="wrap">
+  <h2>Three ways in</h2>
+  <div class="grid">
+    <div class="card"><img src="img/guide.jpg" alt="The guide playing with a MilkDrop visual"><div class="txt"><h3>Guide</h3><p>Press one button and the chakra toning plays, five minutes of held notes, while MilkDrop visuals breathe with the voice. Choose a style or let them change by themselves.</p></div></div>
+    <div class="card"><img src="img/elements.jpg" alt="Five coloured stripes, one per element"><div class="txt"><h3>Elements</h3><p>Five stripes, five sounds to sing along. Tap one and it fills the screen, its song loops in its own colour until you tap again.</p></div></div>
+    <div class="card"><img src="img/breath.jpg" alt="A slow breathing circle"><div class="txt"><h3>Breath</h3><p>A slow circle to breathe with before or after toning: calm 4·6, box breathing, or 4·7·8.</p></div></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>The five elements</h2>
+  <div class="el">
+    <div><b style="color:var(--earth)">A</b>Earth<br><span>the root, grounding, gold</span></div>
+    <div><b style="color:var(--water)">U</b>Water<br><span>below the navel, creativity, milky white</span></div>
+    <div><b style="color:var(--fire)">I</b>Fire<br><span>the navel, energy, crimson</span></div>
+    <div><b style="color:var(--air)">O</b>Air<br><span>the heart, love, green</span></div>
+    <div><b style="background:var(--rainbow);-webkit-background-clip:text;background-clip:text;color:transparent">A-U-I-O</b>Ether<br><span>the throat, truth, every colour</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap split">
+  <img src="img/lifestyle.jpg" alt="A phone with the app resting beside a meditation cushion" style="border-radius:16px">
+  <div>
+    <h2>Made for a daily practice</h2>
+    <ul class="feat">
+      <li>Session timer with a slow fade and a soft bowl bell.</li>
+      <li>Keeps playing with the screen off, with lock-screen controls.</li>
+      <li>A gentle log: days in a row and minutes this week, kept on your phone only.</li>
+      <li>Works offline. No account, no ads, no tracking.</li>
+    </ul>
+    <a class="btn" href="download/chakra-elements-toning-latest.apk" data-dl-app="chakratoning">Download the latest version</a>
+  </div>
+</div></section>
+
+<!-- THE MANTRA PAYMENT GATEWAY, the donation bowl (MANTRA_MANIFEST modules/donation-bowl.md, payment-links.md).
+     Step 1, on the page: only the title and the Tibetan bowl (a photoreal Nano Banana Pro render).
+     Step 2, after a tap: the bowl rings (a singing bowl synthesised in the browser, nothing downloaded), fades away, and
+     the giving panel takes its place: a "Give with Revolut" button, his Revolut QR code, a way back to the bowl.
+     Paste this block into the page; put tibetan-bowl.jpg and revolut-qr.png in the page's img/ folder.
+     Self-contained: its own styles (scoped to .mantra-bowl) and script; no library, no tracking. -->
+<section class="mantra-bowl" data-revolut="https://revolut.me/mbosko0612" aria-label="Support Marko Mantra">
+  <style>
+    .mantra-bowl { --brass: #f3c97a; --glow: rgba(255, 196, 120, .45); --card: #292c2f; text-align: center; padding: 64px 16px; }
+    .mantra-bowl h2 { margin: 0 0 26px; }
+    .mantra-bowl .stage { position: relative; display: grid; place-items: center; min-height: 380px; aspect-ratio: auto; background: none; overflow: visible; border-radius: 0; }
+    .mantra-bowl .stage > * { grid-area: 1 / 1; transition: opacity .9s ease, transform .9s ease; }
+    .mantra-bowl .bowl { background: none; border: 0; padding: 0; cursor: pointer; position: relative; color: inherit; font: inherit; -webkit-tap-highlight-color: transparent; }
+    .mantra-bowl .bowl:focus-visible { outline: 2px solid var(--brass); outline-offset: 8px; border-radius: 24px; }
+    .mantra-bowl .bowl img { width: min(360px, 82vw); height: auto; display: block; border-radius: 24px; transition: transform .4s ease, filter .4s ease; }
+    .mantra-bowl .hint { display: block; margin-top: 16px; font-size: 15px; letter-spacing: .06em; opacity: .75; }
+    .mantra-bowl .bowl:hover img { transform: translateY(-3px); filter: brightness(1.08); }
+    .mantra-bowl .ring { position: absolute; left: 50%; top: 36%; width: 60%; aspect-ratio: 3 / 1; border: 2px solid var(--glow); border-radius: 50%;
+      transform: translate(-50%, -50%) scale(.6); opacity: 0; pointer-events: none; }
+    .mantra-bowl.ringing .ring { animation: mantra-bowl-ring 2.4s ease-out forwards; }
+    .mantra-bowl.ringing .ring.r2 { animation-delay: .5s; }
+    .mantra-bowl.ringing .ring.r3 { animation-delay: 1s; }
+    @keyframes mantra-bowl-ring { 0% { opacity: .9; transform: translate(-50%, -50%) scale(.6); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(2.2); } }
+    /* step 2: the bowl gives way to the panel */
+    .mantra-bowl.giving .bowl { opacity: 0; transform: scale(.94); pointer-events: none; }
+    .mantra-bowl .panel { opacity: 0; transform: translateY(14px); pointer-events: none; width: min(420px, 92vw); }
+    .mantra-bowl.giving .panel { opacity: 1; transform: none; pointer-events: auto; transition-delay: .35s; }
+    .mantra-bowl .give { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px 22px; border-radius: 999px;
+      background: linear-gradient(90deg, #f3c97a, #fff0c4, #f3c97a); color: #1a1206; font-weight: 700; font-size: 17px; text-decoration: none;
+      box-shadow: 0 0 30px var(--glow); box-sizing: border-box; }
+    .mantra-bowl .qr { margin: 22px auto 0; background: var(--card); border-radius: 22px; padding: 22px; width: min(260px, 70vw); box-sizing: border-box; }
+    .mantra-bowl .qr img { width: 100%; height: auto; display: block; }
+    .mantra-bowl .small { font-size: 14px; opacity: .7; margin: 14px 0 0; }
+    .mantra-bowl .back { background: none; border: 0; color: inherit; opacity: .6; font-size: 14px; margin-top: 18px; cursor: pointer; text-decoration: underline; }
+    @media (prefers-reduced-motion: reduce) { .mantra-bowl.ringing .ring { animation: none; } .mantra-bowl .stage > * { transition: none; } }
+  </style>
+  <h2>Put something in the bowl</h2>
+  <div class="stage">
+    <button type="button" class="bowl" aria-label="Ring the bowl to give">
+      <span class="ring"></span><span class="ring r2"></span><span class="ring r3"></span>
+      <img src="img/tibetan-bowl.jpg" alt="A Tibetan singing bowl on a red cushion, coins inside" width="900" height="900">
+      <span class="hint">Click on the bowl to donate</span>
+    </button>
+    <div class="panel" aria-hidden="true">
+      <a class="give" href="https://revolut.me/mbosko0612" target="_blank" rel="noopener">Give with Revolut →</a>
+      <p class="small">Any amount, by card or Revolut. No Revolut account needed. It goes straight to Marko.</p>
+      <div class="qr"><img src="img/revolut-qr.png" alt="Revolut QR code for @mbosko0612" width="620" height="760"></div>
+      <p class="small">On a computer? Scan it with your phone.</p>
+      <button type="button" class="back">back to the bowl</button>
+    </div>
+  </div>
+  <script>
+  (() => {
+    const box = document.currentScript.closest('.mantra-bowl');
+    const bowl = box.querySelector('.bowl'), panel = box.querySelector('.panel');
+    box.querySelector('.give').href = box.dataset.revolut;
+    // A singing bowl's voice: a low fundamental with inharmonic partials (about 1, 2.76, 5.4, 8.9 times), each a pair a
+    // few tenths of a hertz apart so the tone beats, a soft strike and a long fading hum.
+    function ring() {
+      const Ctx = window.AudioContext || window.webkitAudioContext; if (!Ctx) return;
+      const ac = new Ctx(), now = ac.currentTime, out = ac.createGain();
+      out.gain.value = 0.32; out.connect(ac.destination);
+      [[1, 1, 9], [2.76, .5, 6], [5.4, .25, 4], [8.93, .12, 2.5]].forEach(([k, amp, dur]) => {
+        [0, 0.6].forEach(detune => {
+          const o = ac.createOscillator(), g = ac.createGain();
+          o.type = 'sine'; o.frequency.value = 196 * k + detune;
+          g.gain.setValueAtTime(0, now);
+          g.gain.linearRampToValueAtTime(amp / 2, now + 0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+          o.connect(g); g.connect(out); o.start(now); o.stop(now + dur + 0.1);
+        });
+      });
+      setTimeout(() => ac.close(), 10000);
+    }
+    bowl.addEventListener('click', () => {
+      ring();
+      box.classList.remove('ringing'); void box.offsetWidth; box.classList.add('ringing');
+      // the bowl sounds first, then gives way to the panel
+      setTimeout(() => { box.classList.add('giving'); panel.setAttribute('aria-hidden', 'false'); bowl.setAttribute('aria-hidden', 'true'); }, 1300);
+    });
+    box.querySelector('.back').addEventListener('click', () => {
+      box.classList.remove('giving', 'ringing'); panel.setAttribute('aria-hidden', 'true'); bowl.removeAttribute('aria-hidden');
+    });
+  })();
+  </script>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  Chakra toning and the element songs: DJ Mantra (Marko Bosko, Mantra Productions). Visuals: butterchurn, a MilkDrop engine (MIT), with presets by the MilkDrop community.
+  · <a href="https://markobosko.pages.dev/#/kod">Marko Bosko</a>
+</div></footer>
+<script src="https://mantra-downloads.marko-bosko-925.workers.dev/counter.js" defer></script>
+<script src="https://speechifykeys.pages.dev/speechify-keys.js" defer></script>
+</body>
+</html>
