@@ -57,3 +57,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 10 (10.11.2026): the rainbow principle, one white light through a prism
 
 > First when you play each elements in background is element color and that's it. But in the bottom there is a control bar it says visualization column and then the list of visualizations and each of those visualizations the text itself has different color. So we are going always to the colors of the rainbow. That's the principle of this app. So if you have multiple texts, go from the left to the right. And Chakra and Elements toning, we have, you kind of did the colors there for each individual thing, but no, have one stripe of rainbow colors. That's all. Rainbow colors is our idea. So idea for this site is like on this Pink Floyd album, that one white light is breaking We communicate through visual cues.
+
+## Request 11 (10.11.2026): the logotype, violet outside, gold inside, white between, smooth
+
+> please for chakra and element toning outer ring should be violet color and inside ring should be gold color and then in between is a white color and make this transition very smooth
