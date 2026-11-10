@@ -5,7 +5,7 @@
   --ground:#14161A; --panel:#1C2026; --raised:#2C323A; --line:#2A2F36; --text:#E6E8EA; --dim:#8A9199;
   --amber:#E8A64B;
   --earth:#D4AF37; --water:#DCE6EA; --fire:#FFF1D8; --air:#EEF4F1; --om:#7F00FF;
-  /* Marko 10.11.2026: only Earth (gold) and Om (violet) are colours; water reflects, fire is light, air is a haze */
+  /* Marko 10.11.2026: only Earth (gold) and OM (violet) are colours; water reflects, fire is light, air is a haze */
   --rainbow:linear-gradient(90deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#5AA2F0,#9F7AE0);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -148,7 +148,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .explore{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#8A9199;font-size:15px;padding:12px 18px;min-height:44px;letter-spacing:.3px}
 .card.folder .cardTitle{font-size:20px}
 /* breath: grey when small, the pattern's own soft glowing colour as it grows */
-.breathCircle{background:radial-gradient(circle,rgba(170,175,180,.55),rgba(150,155,160,.16) 55%,rgba(150,155,160,.02) 72%)!important}
+.breathCircle{background:radial-gradient(circle,rgba(150,155,160,.30),rgba(130,135,140,.10) 55%,rgba(130,135,140,.02) 72%)!important}
 .breathGlow{position:absolute;width:62vw;height:62vw;max-width:280px;max-height:280px;border-radius:50%;opacity:0;transform:scale(.5);filter:blur(6px);pointer-events:none}
 
 /* the rainbow principle (Marko 10.11.2026): one white light breaks into the rainbow; labels in a row take the rainbow
@@ -173,3 +173,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .startStage{margin-top:-120px}
 .startPlay{padding:3px!important;background:conic-gradient(#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#4B0082,#9F7AE0,#C8102E)!important;opacity:.95}
 .startPlay span{background:rgba(16,18,21,.72)!important}
+
+/* the one quiet entry on the first screen: three thin lines, top right (Additional modules) */
+.moreBtn{position:absolute;top:12px;right:12px;width:48px;height:48px;border-radius:24px;background:rgba(0,0,0,.28);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;z-index:5}
+.moreBtn i{display:block;width:18px;height:2px;border-radius:1px;background:rgba(255,255,255,.75)}

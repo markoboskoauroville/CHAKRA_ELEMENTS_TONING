@@ -8,22 +8,6 @@
 </head>
 <body>
 
-<!-- START (Marko 10.11.2026: "from simplicity to complexity"): only the logotype and Play; Explore at the bottom -->
-<section id="start" class="screen on">
-  <div class="spot s1"></div><div class="spot s2"></div><div class="spot s3"></div><div class="spot s4"></div>
-  <div class="startStage">
-    <svg class="startLogo" viewBox="0 0 64 64" aria-hidden="true">
-      <defs><radialGradient id="cetS" cx="32" cy="32" r="31" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#D4AF37"/><stop offset=".22" stop-color="#D9B74A"/><stop offset=".40" stop-color="#F2E6C2"/>
-        <stop offset=".56" stop-color="#FFFFFF"/><stop offset=".72" stop-color="#E7D6FF"/><stop offset=".86" stop-color="#B17DFF"/>
-        <stop offset="1" stop-color="#7F00FF"/></radialGradient></defs>
-      <circle cx="32" cy="32" r="31" fill="url(#cetS)"/>
-    </svg>
-    <button class="startPlay" id="startPlay" aria-label="Play the journey"><span></span></button>
-  </div>
-  <div class="startNow" id="startNow"></div>
-  <button class="modulesBtn" id="toExplore"><span class="mIcon"></span>Additional modules</button>
-</section>
 
 <!-- EXPLORE: folders, one line each; open one to see its details -->
 <section id="home" class="screen">
@@ -32,6 +16,7 @@
     <div class="title small">Additional modules</div>
     <span class="icon"></span>
   </header>
+  <button class="card folder" id="toJourney"><span class="cardTitle">Journey</span><span class="cardLine">The guide that explains everything, then each element in turn</span></button>
   <button class="card folder" id="toBreath"><span class="cardTitle">Pranayama</span><span class="cardLine">Breathing with a ball that grows and rests, with a countdown</span></button>
   <button class="card folder" id="toEdu"><span class="cardTitle">Education</span><span class="cardLine">The philosophy and the natural order of the elements</span></button>
   <button class="card folder" id="toElements">
@@ -100,9 +85,10 @@
 </section>
 
 <!-- ELEMENTS -->
-<section id="elements" class="screen black">
+<!-- THE FIRST SCREEN (Marko 10.11.2026: "This should be the first screen ... so user can play any chakra") -->
+<section id="elements" class="screen black on">
   <div class="stripes" id="stripes"></div>
-  <button class="icon floatClose" id="elementsClose" aria-label="Close">&#10005;</button>
+  <button class="moreBtn" id="toModules" aria-label="Additional modules"><i></i><i></i><i></i></button>
 </section>
 
 <!-- ONE ELEMENT, FULL SCREEN -->
@@ -150,13 +136,13 @@
     </defs>
     <circle cx="100" cy="30" r="30" fill="url(#om)"/>
     <g class="floor" data-el="ether"><path d="M100,12 C112,26 112,40 100,48 C88,40 88,26 100,12 Z" fill="url(#rbw)"/></g>
-    <g class="floor" data-el="air"><path d="M58,62 Q100,104 142,62 Q100,82 58,62 Z" fill="#EEF4F1" fill-opacity=".55" stroke="#EEF4F1" stroke-opacity=".8"/></g>
-    <g class="floor" data-el="fire"><path d="M100,92 L146,164 L54,164 Z" fill="url(#fir)"/></g>
-    <g class="floor" data-el="water"><circle cx="100" cy="206" r="40" fill="url(#wat)" stroke="#DCE6EA" stroke-opacity=".7"/></g>
+    <g class="floor" data-el="air"><path d="M58,62 Q100,104 142,62 Q100,82 58,62 Z" fill="#FFFFFF" fill-opacity=".06" stroke="#EEF4F1" stroke-opacity=".6"/></g>
+    <g class="floor" data-el="fire"><path d="M100,92 L146,164 L54,164 Z" fill="#FFFFFF" fill-opacity=".06" stroke="#FFF1D8" stroke-opacity=".6"/></g>
+    <g class="floor" data-el="water"><circle cx="100" cy="206" r="40" fill="#FFFFFF" fill-opacity=".06" stroke="#DCE6EA" stroke-opacity=".6"/></g>
     <g class="floor" data-el="earth"><rect x="46" y="250" width="108" height="72" rx="3" fill="#D4AF37"/></g>
   </svg>
   <div class="orderText">
-    <p><b>Earth</b> at the bottom, the ground that carries everything. <b>On earth comes water.</b> Where there is water, <b>fire</b> can burn; where there is fire, <b>air</b> rises. Above them all, open space, and the sound of Om.</p>
+    <p><b>Earth</b> at the bottom, the ground that carries everything. <b>On earth comes water.</b> Where there is water, <b>fire</b> can burn; where there is fire, <b>air</b> rises. Above them all, open space, and the sound of OM.</p>
     <p>This is how the elements sit in nature, in the body, and in the five-ring pagoda of Japan, one element to each floor in the same order. Every element lives in every other, yet this is their natural order: simple enough for a child, deep enough for a lifetime of looking.</p>
     <p class="dim">Tap a floor to sing its sound.</p>
   </div>
@@ -183,7 +169,7 @@
     <div class="pTitle">The way of the sounds</div>
     <div class="aboutText philo">
       <p>Everything starts with honouring nature: the sun and the moon, the stars, the rivers, the trees and the birds. The body is a yantra, a small universe; the sun, the moon and the river live in us too.</p>
-      <p>Everything begins as <b>vision</b>. In the silence of <b>Om</b>, pure violet, a creative seeing is born.</p>
+      <p>Everything begins as <b>vision</b>. In the silence of <b>OM</b>, pure violet, a creative seeing is born.</p>
       <p>Vision flows into <b>Water</b>, U. Water has no colour of its own; it reflects. It is creativity, the creative energy of a human being, the mood within us. Yet water needs ground: without earth it has nowhere to land and cannot move.</p>
       <p><b>Earth</b>, A, is the one true colour: grounding gold. Living matter, the body, our daily work, the joy of being here in a body.</p>
       <p>On that ground <b>Fire</b>, I, is kindled. Not a colour but pure energy: the strength of the body, rising to do the work the vision asks for.</p>

@@ -1,6 +1,6 @@
-// The five elements and AUM: their vowel, chakra, colour (MANTRA_MANIFEST chakra-colors.md, Marko 10.11.2026: only
+// The five elements and OM: their vowel, chakra, colour (MANTRA_MANIFEST chakra-colors.md, Marko 10.11.2026: only
 // Earth has a true colour, gold; Water is reflection, Fire is energy, Air is connection, none of them a hue; the throat
-// is every colour; Om is pure violet) and a symbolic drawing. `line` is the philosophy, one sentence.
+// is every colour; OM is pure violet) and a symbolic drawing. `line` is the philosophy, one sentence.
 // draw(ctx, w, h, t, a): a.faint = the stripe background (no audio, very faint); otherwise the full-screen view,
 // a.level 0..1 and a.bins (frequency bytes) from the analyser. Everything is drawn in the element's colour.
 const RAINBOW = ["#C8102E","#FF8A2B","#E9C84A","#2FB45A","#38B6EC","#5AA2F0","#9F7AE0"];
@@ -89,9 +89,9 @@ const ELEMENTS = [
      ctx.strokeStyle=rgba("#FFFFFF",a.faint?0.08:0.4); ctx.beginPath(); ctx.arc(cx,cy,r*0.25,0,7); ctx.stroke();
      if(!a.faint) ring(ctx,cx,cy,r*1.12,a,(x,o)=>rgba(rainbowAt(x+t*0.02),o),t);
    }},
- { id:"aum", vowel:"AUM", name:"Om", chakra:"Vision · violet", color:"#7F00FF", title:"AUM · the third eye",
+ { id:"aum", vowel:"OM", name:"OM", chakra:"Vision · violet", color:"#7F00FF", title:"OM · the third eye",
    line:"Vision. The creative seeing from which everything begins.",
-   // rung 6 of the DJ Mantra toning ladder (djmantra.pages.dev): AUM (OM), from yoga; pure violet, vision (Marko 10.11.2026)
+   // rung 6 of the DJ Mantra toning ladder (djmantra.pages.dev): OM, from yoga; pure violet, vision (Marko 10.11.2026)
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h/2, r=Math.min(w,h)*(a.faint?0.30:0.20)*(1+(a.level||0)*0.2), al=a.faint?0.10:0.75;
      ctx.lineWidth=a.faint?1.2:2.5; ctx.strokeStyle=rgba(this.color,al);
@@ -102,3 +102,65 @@ const ELEMENTS = [
      if(!a.faint) ring(ctx,cx,cy,r*1.25,a,(x,o)=>rgba(this.color,o*0.7),t);
    }},
 ];
+
+// ---------------------------------------------------------------- THE CHAKRA SYMBOLS behind the stripes
+// Marko 10.11.2026: "find the chakra's symbols, put them behind in better quality". Drawn as pure geometry after the
+// yantras of the Sat-chakra-nirupana (Arthur Avalon / John Woodroffe, The Serpent Power, 1919): Muladhara 4 petals and
+// the square of earth; Svadhisthana 6 petals and the crescent moon of water; Manipura 10 petals and the triangle of fire
+// (pointing down in the chakra yantra; the tattva card of Tejas points up); Anahata 12 petals and the six-pointed star of
+// air; Vishuddha 16 petals and the full moon of space in a triangle; Ajna 2 petals and the syllable OM.
+// Fine lines, a soft glow, a slow breath and turn; sharp at any size (the canvas is drawn at the screen's pixel density).
+const YANTRA={ earth:{petals:4}, water:{petals:6}, fire:{petals:10}, air:{petals:12}, ether:{petals:16}, aum:{petals:2} };
+function yantra(ctx, el, W, H, t){
+  const k=W/ctx.canvas.clientWidth||1, cx=W*0.68, cy=H*0.5, R=Math.min(H*0.40, W*0.26)*(1+0.025*Math.sin(t*0.5));
+  const col=el.id==="aum"?"#B58CF0":(el.rainbow?"#FFFFFF":el.color), lw=1.3*k, rot=t*0.02;
+  const P=YANTRA[el.id]; if(!P) return;
+  ctx.save(); ctx.translate(cx,cy); ctx.lineWidth=lw; ctx.lineJoin="round"; ctx.shadowBlur=9*k;
+  const stroke=(c,a)=>{ ctx.strokeStyle=rgba(c,a); ctx.shadowColor=rgba(c,a*0.9); };
+  // the lotus: N petals around the circle
+  const n=P.petals, r0=R*0.62, r1=R*(n===2?1.0:0.98);
+  ctx.save(); ctx.rotate(rot);
+  for(let i=0;i<n;i++){
+    const a=i/n*Math.PI*2-Math.PI/2, w=Math.PI/n*(n===2?0.55:0.92);
+    stroke(el.rainbow?rainbowAt(i/n):col, 0.30);
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a-w)*r0, Math.sin(a-w)*r0);
+    ctx.quadraticCurveTo(Math.cos(a-w*0.55)*r1*1.02, Math.sin(a-w*0.55)*r1*1.02, Math.cos(a)*r1, Math.sin(a)*r1);
+    ctx.quadraticCurveTo(Math.cos(a+w*0.55)*r1*1.02, Math.sin(a+w*0.55)*r1*1.02, Math.cos(a+w)*r0, Math.sin(a+w)*r0);
+    ctx.stroke();
+  }
+  ctx.restore();
+  stroke(el.rainbow?"#FFFFFF":col, 0.34); ctx.beginPath(); ctx.arc(0,0,r0,0,Math.PI*2); ctx.stroke();
+  // the yantra of the element inside
+  const r=r0*0.86; stroke(el.rainbow?"#FFFFFF":col, 0.46); ctx.beginPath();
+  const tri=(rr,down)=>{ for(let i=0;i<3;i++){ const a=(down?Math.PI/2:-Math.PI/2)+i*Math.PI*2/3; i?ctx.lineTo(Math.cos(a)*rr,Math.sin(a)*rr):ctx.moveTo(Math.cos(a)*rr,Math.sin(a)*rr); } ctx.closePath(); };
+  if(el.id==="earth"){ const s=r*0.70; ctx.rect(-s,-s,2*s,2*s); ctx.stroke(); ctx.beginPath(); tri(s*0.62,true); ctx.stroke(); }
+  else if(el.id==="water"){ ctx.arc(0,0,r*0.82,0,Math.PI*2); ctx.stroke(); ctx.beginPath(); // the crescent, horns up
+    ctx.arc(0,r*0.12,r*0.5,0.12*Math.PI,0.88*Math.PI); ctx.arc(0,-r*0.05,r*0.42,0.82*Math.PI,0.18*Math.PI,true); ctx.closePath(); ctx.stroke(); }
+  else if(el.id==="fire"){ tri(r*0.92,true); ctx.stroke(); }
+  else if(el.id==="air"){ tri(r*0.9,false); ctx.stroke(); ctx.beginPath(); tri(r*0.9,true); ctx.stroke(); }
+  else if(el.id==="ether"){ tri(r*0.95,true); ctx.stroke(); ctx.beginPath(); ctx.arc(0,r*0.08,r*0.36,0,Math.PI*2); ctx.stroke(); }
+  else if(el.id==="aum"){ ctx.arc(0,0,r*0.78,0,Math.PI*2); ctx.stroke();
+    ctx.shadowBlur=12*k; ctx.fillStyle=rgba("#D9C4FF",0.55); ctx.textAlign="center"; ctx.textBaseline="middle";
+    ctx.font=`${Math.round(r*0.95)}px "Noto Sans Devanagari", sans-serif`; ctx.fillText("ॐ",0,r*0.04); }
+  ctx.restore();
+}
+
+// ---------------------------------------------------------------- MIST (Marko 10.11.2026: "dark mode black with faint
+// white kind of clouds or mist over it"): water, fire and air live on black; they differ by motion, not brightness.
+// water drifts sideways like a reflection, fire rises, air turns slowly around.
+const MIST_SEEDS=[...Array(9)].map((_,i)=>({x:((i*0.379)%1), y:((i*0.613+0.2)%1), r:0.35+((i*0.271)%1)*0.45, s:0.6+((i*0.457)%1)*0.8}));
+function mist(ctx, W, H, t, kind, strength){
+  ctx.save(); ctx.globalCompositeOperation="lighter";
+  MIST_SEEDS.forEach((m,i)=>{
+    let x=m.x, y=m.y;
+    if(kind==="water"){ x=(m.x + t*0.012*m.s)%1.3-0.15; y=m.y+0.03*Math.sin(t*0.3+i); }
+    else if(kind==="fire"){ y=1.2-((m.y + t*0.015*m.s)%1.4); x=m.x+0.04*Math.sin(t*0.5+i); }
+    else { const a=t*0.03*m.s+i; x=0.5+Math.cos(a)*0.35*m.r*1.6; y=0.5+Math.sin(a)*0.3*m.r*1.6; }
+    const R=Math.max(W,H)*m.r*0.5, g=ctx.createRadialGradient(x*W,y*H,0,x*W,y*H,R);
+    const al=strength*(0.55+0.45*Math.sin(t*0.2+i*1.7));
+    g.addColorStop(0,`rgba(255,255,255,${al.toFixed(3)})`); g.addColorStop(1,"rgba(255,255,255,0)");
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  });
+  ctx.restore();
+}

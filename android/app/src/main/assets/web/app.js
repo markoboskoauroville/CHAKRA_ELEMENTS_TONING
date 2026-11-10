@@ -12,7 +12,7 @@ const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d
 const fmt = ms => { const s=Math.max(0,Math.floor(ms/1000)); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); };
 
 // ---------------------------------------------------------------- screens
-let current = "start";
+let current = "elements";
 function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on", s.id===id)); current=id; }
 
 // ---------------------------------------------------------------- the silent mirror
@@ -90,8 +90,8 @@ document.querySelectorAll("#timerChoice button").forEach(b=>b.onclick=()=>{ time
 
 // ---------------------------------------------------------------- THE JOURNEY (Play on the start screen)
 // The guide that explains everything, then each element song once, in the natural order (earth at the bottom up to
-// the throat, then Om), then back to the start screen. Visuals: the MilkDrop screen.
-const JOURNEY=[["guide","The guide"],["earth","Earth · A"],["water","Water · U"],["fire","Fire · I"],["air","Air · O"],["ether","Ether · A-U-I-O"],["aum","Om · AUM"]];
+// the throat, then OM), then back to the start screen. Visuals: the MilkDrop screen.
+const JOURNEY=[["guide","The guide"],["earth","Earth · A"],["water","Water · U"],["fire","Fire · I"],["air","Air · O"],["ether","Ether · A-U-I-O"],["aum","OM"]];
 const journey={on:false, ix:0, t0:0};
 function journeyPlay(ix){
   journey.ix=ix; journey.t0=Date.now();
@@ -180,7 +180,7 @@ async function openGuide(forJourney){
 }
 function closeGuide(){ if(journey.on) backTo="start"; N.stop(1500); N.setTimer(0); mirror.stop(); clearInterval(autoTimer); endSession();
   N.immersive(false); N.keepAwake(false); $("#styleSheet").classList.remove("on");
-  const wasJourney=journey.on; journey.on=false; show(wasJourney || backTo==="start" ? "start" : "home"); }
+  const wasJourney=journey.on; journey.on=false; if(wasJourney || backTo==="start") openElements(); else show("home"); }
 let backTo="home";
 function guideUi(){
   $("#guidePlay").textContent = st.playing ? "Pause" : "Play";
@@ -203,7 +203,7 @@ $("#guideTimer").onclick=()=>{ // one tap cycles the timer of this session
   const opts=[0,5,10,20,30,45]; timerMin=opts[(opts.indexOf(timerMin)+1)%opts.length]; store.set("timer",timerMin); renderTimer();
   N.setTimer(timerMin); pokeOverlay(); };
 
-// ---------------------------------------------------------------- ELEMENTS: the stripes (five elements and AUM)
+// ---------------------------------------------------------------- ELEMENTS: the stripes (five elements and OM)
 const stripeCanvases=[]; let stripesRaf=0;
 function buildStripes(){
   const box=$("#stripes"); box.innerHTML="";
@@ -212,9 +212,7 @@ function buildStripes(){
     d.style.background = el.rainbow
       ? "linear-gradient(90deg,rgba(200,16,46,.22),rgba(255,138,43,.22),rgba(233,200,74,.22),rgba(47,180,90,.22),rgba(56,182,236,.22),rgba(90,162,240,.22),rgba(159,122,224,.22))"
       : el.nohue   // no hue of their own (Marko 10.11.2026): water a reflection, fire a light, air a haze
-        ? ({water:"linear-gradient(180deg,rgba(220,230,234,.13),rgba(220,230,234,.03) 55%,rgba(220,230,234,.10))",
-            fire:"radial-gradient(ellipse at 50% 120%,rgba(255,241,216,.20),rgba(255,241,216,.02) 70%)",
-            air:"radial-gradient(ellipse at 50% 50%,rgba(238,244,241,.12),rgba(238,244,241,.02) 75%)"})[el.id]
+        ? "#000"   // black with faint mist (drawn on the canvas), never a light fill
         : rgba(el.color, 0.22);
     const c=document.createElement("canvas"); d.appendChild(c);
     const lab=document.createElement("div"); lab.className="sLabel";
@@ -227,10 +225,11 @@ function buildStripes(){
   });
 }
 function openElements(){ show("elements"); N.immersive(false);
-  stripeCanvases.forEach(({c})=>{ c.width=c.clientWidth; c.height=c.clientHeight; });
+  const dpr=Math.min(3, window.devicePixelRatio||1);
+  stripeCanvases.forEach(({c})=>{ c.width=Math.round(c.clientWidth*dpr); c.height=Math.round(c.clientHeight*dpr); });
   cancelAnimationFrame(stripesRaf); const t0=performance.now();
   const loop=now=>{ if(current!=="elements") return; const t=(now-t0)/1000;
-    stripeCanvases.forEach(({c,el})=>{ const x=c.getContext("2d"); x.clearRect(0,0,c.width,c.height); el.draw(x,c.width,c.height,t,{faint:true,level:0.08+0.05*Math.sin(t*0.6)}); });
+    stripeCanvases.forEach(({c,el})=>{ const x=c.getContext("2d"); x.clearRect(0,0,c.width,c.height); if(el.nohue) mist(x,c.width,c.height,t,el.id,0.05); yantra(x,el,c.width,c.height,t); });
     stripesRaf=requestAnimationFrame(loop); };
   stripesRaf=requestAnimationFrame(loop);
 }
@@ -245,20 +244,20 @@ function openElement(el){
   const lab=$("#elLabel"); lab.innerHTML = `${el.name} · sing ${el.vowel}<small>${el.line}</small><small>tap to return</small>`; lab.classList.remove("hide");
   clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
   // the element's own colour (or light) fills the screen, and breathes a little with the voice; nothing else
-  const BG={earth:["#D4AF37","#8A6E16"], water:["#E9EFF2","#7E8C93"], fire:["#FFF6E6","#E8C890"], air:["#F2F6F4","#AEB8B3"], aum:["#8B2BFF","#3A0070"]};
+  const BG={earth:["#D4AF37","#8A6E16"], aum:["#8B2BFF","#3A0070"]};
   cancelAnimationFrame(elRaf); const t0=performance.now(); let lv=0;
   const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000, a=mirror.read(); lv=lv*0.9+a.level*0.1;
     const W=c.width, H=c.height;
     if(el.rainbow){ const g=x.createLinearGradient(0,0,0,H); RAINBOW7.forEach((col,i)=>g.addColorStop(i/6,col)); x.fillStyle=g; x.fillRect(0,0,W,H); }
+    else if(el.nohue){ x.fillStyle="#000"; x.fillRect(0,0,W,H); mist(x,W,H,t,el.id,0.06+lv*0.10); }
     else { const [c1,c2]=BG[el.id]||["#333","#111"]; const r=Math.max(W,H)*(0.55+0.08*Math.sin(t*0.4)+lv*0.25);
-      const g=x.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,r); g.addColorStop(0,c1); g.addColorStop(1,c2); x.fillStyle=g; x.fillRect(0,0,W,H);
-      if(el.id==="water"){ x.fillStyle=`rgba(255,255,255,${0.10+lv*0.2})`; for(let k=0;k<6;k++){ x.fillRect(0,H*(0.2+k*0.12)+Math.sin(t*0.6+k)*8,W,2); } } }
+      const g=x.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,r); g.addColorStop(0,c1); g.addColorStop(1,c2); x.fillStyle=g; x.fillRect(0,0,W,H); }
     elRaf=requestAnimationFrame(loop); };
   elRaf=requestAnimationFrame(loop);
 }
 function closeElement(){ N.stop(2500); N.setTimer(0); mirror.stop(); endSession(); N.keepAwake(false); openEl=null; openElements(); }
 $("#element").onclick=closeElement;
-$("#elementsClose").onclick=()=>show("home");
+
 
 // ---------------------------------------------------------------- BREATH
 // Patterns: [in, hold, out, hold] in seconds (sources in TAKEOVER "Breath patterns"). kind: pranayama or modern.
@@ -275,7 +274,7 @@ const PATTERNS=[
 ];
 // The ball takes the logotype's colours, violet, white and gold (Marko 10.11.2026), in a different mix for each pattern:
 // [heart, middle, edge] of its glow. Grey when small, the glow grows in with the in-breath.
-const V="#8B2BFF", W="#FFFFFF", G="#D4AF37";
+const V="#8B2BFF", W="#D8D2E2", G="#D4AF37";   // the white is a soft mist white, never glaring
 const BREATH_COLOR={coherent:[W,"#E7D6FF",V], box:[G,W,G], "478":[V,"#E7D6FF",W], sama:[W,"#F2E6C2",G], ujjayi:[G,W,V],
   nadi:[W,W,"#B17DFF"], bhramari:[G,"#F2E6C2",W], kapal:[G,G,"#B17DFF"], custom:[V,W,G]};
 const breath = { running:false, id:store.get("breathId","coherent"), custom:store.get("breathCustom",[4,2,6,2]), t0:0, raf:0, cue:store.get("breathCue",false), lastPhase:-1, bellDone:false };
@@ -292,7 +291,7 @@ function renderBreathChoice(){
   ["cIn","cH1","cOut","cH2"].forEach((k,i)=>{ const e=$("#"+k); e.value=breath.custom[i]; e.onchange=()=>{ breath.custom[i]=Math.max(i%2?0:1, +e.value||0); store.set("breathCustom",breath.custom); }; });
   $("#breathInfo").textContent=patNow().info;
   const [c1,c2,c3]=BREATH_COLOR[breath.id]||[W,W,V];
-  $("#breathGlow").style.background=`radial-gradient(circle,${c1}e6,${c2}aa 38%,${c3}66 58%,${c3}14 70%,transparent 74%)`;
+  $("#breathGlow").style.background=`radial-gradient(circle,${c1}99,${c2}70 38%,${c3}55 58%,${c3}12 70%,transparent 74%)`;
   $("#breathCue").classList.toggle("on", breath.cue);
 }
 $("#breathCue").onclick=()=>{ breath.cue=!breath.cue; store.set("breathCue",breath.cue); renderBreathChoice(); };
@@ -336,7 +335,7 @@ function closeBreath(){ if(breath.running){ stopBreath(); } show("home"); }
 $("#breathClose").onclick=closeBreath;
 
 // ---------------------------------------------------------------- SETTINGS / ABOUT
-const MODE_NAMES={journey:"Journey",aum:"Om",guide:"Guide",breath:"Breath",earth:"Earth",water:"Water",fire:"Fire",air:"Air",ether:"Ether"};
+const MODE_NAMES={journey:"Journey",aum:"OM",guide:"Guide",breath:"Breath",earth:"Earth",water:"Water",fire:"Fire",air:"Air",ether:"Ether"};
 function openSettings(){
   const log=store.get("log",[]); const total=log.reduce((a,x)=>a+x.s,0);
   $("#logSummary").textContent = log.length ? `${log.length} sessions, ${Math.round(total/60)} minutes in all.` : "No sessions yet. Every session of a minute or more is written here, on this phone only.";
@@ -353,9 +352,9 @@ $("#philoClose").onclick=()=>show("edu");
 $("#timerClose").onclick=()=>show("home");
 
 // ---------------------------------------------------------------- home, back
-$("#startPlay").onclick=startJourney;
-$("#toExplore").onclick=()=>show("home");
-$("#exploreClose").onclick=()=>show("start");
+$("#toModules").onclick=()=>show("home");
+$("#exploreClose").onclick=openElements;
+$("#toJourney").onclick=startJourney;
 $("#toGuide").onclick=()=>{ backTo="home"; openGuide(false); };
 $("#toPhilo").onclick=()=>show("philo");
 $("#toEdu").onclick=()=>show("edu");
@@ -374,10 +373,10 @@ window.appBack=()=>{
   if(current==="element"){ closeElement(); return true; }
   if(current==="breath"){ closeBreath(); return true; }
   if(current==="order"||current==="philo"){ show("edu"); return true; }
-  if(current==="home"){ show("start"); return true; }
-  if(current!=="start"){ show("home"); return true; }
+  if(current==="home"){ openElements(); return true; }
+  if(current!=="elements"){ show("home"); return true; }
   return false;
 };
 window.addEventListener("resize", ()=>{ if(current==="guide") sizeMilk(); });
-buildStripes(); renderTimer(); renderStreak();
+buildStripes(); renderTimer(); renderStreak(); openElements();
 rainbowRow($("#timerChoice"),"button");
