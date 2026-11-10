@@ -36,7 +36,7 @@ const ELEMENTS = [
      if(!a.faint){ ring(ctx,cx,cy,base*0.62,a,(x,o)=>rgba(this.color,o),t);
        for(let i=0;i<40;i++){ const y=((i*97+t*12)%h), x=(i*233)%w; ctx.fillStyle=rgba(this.color,0.25); ctx.fillRect(x,h-y,2,2); } }
    }},
- { id:"water", vowel:"U", name:"Water", chakra:"Creativity · reflection", color:"#DCE6EA", nohue:true, title:"Water · U · below the navel",
+ { id:"water", vowel:"U", name:"Water", chakra:"Creativity · reflection", color:"#DCE6EA", ball:"#2E7FB8", nohue:true, title:"Water · U · below the navel",
    line:"Creativity. Creative energy takes the shape of what holds it, the mood within us; without ground it has nowhere to land.",
    draw(ctx,w,h,t,a){
      const L=a.level||0, lines=a.faint?6:14, al=a.faint?0.09:0.55;
@@ -52,7 +52,7 @@ const ELEMENTS = [
        ctx.strokeStyle=rgba(this.color,0.7); ctx.lineWidth=3; ctx.beginPath(); ctx.arc(cx,cy,r*(1+L*0.3),0.15*Math.PI,0.85*Math.PI); ctx.stroke();
        ring(ctx,cx,cy,r*1.5,a,(x,o)=>rgba(this.color,o*0.8),t); }
    }},
- { id:"fire", vowel:"I", name:"Fire", chakra:"Strength · pure energy", color:"#FFF1D8", nohue:true, title:"Fire · I · the navel",
+ { id:"fire", vowel:"I", name:"Fire", chakra:"Strength · pure energy", color:"#FFF1D8", ball:"#D8232F", nohue:true, title:"Fire · I · the navel",
    line:"Strength. The pure energy of the body, kindled to do the work the vision asks for.",
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h*(a.faint?0.5:0.52), s=Math.min(w,h)*(a.faint?0.75:0.42), L=a.level||0, al=a.faint?0.13:0.85;
@@ -66,7 +66,7 @@ const ELEMENTS = [
        ctx.fillStyle=rgba(i%3?this.color:"#FFFFFF",(a.faint?0.12:0.6)*(1-life)); ctx.beginPath(); ctx.arc(x,y,(a.faint?1.5:2.5+L*4)*(1-life),0,7); ctx.fill(); }
      if(!a.faint) ring(ctx,cx,cy,s*0.36,a,(x,o)=>rgba(this.color,o),t);
    }},
- { id:"air", vowel:"O", name:"Air", chakra:"Connection · beyond sight", color:"#EEF4F1", nohue:true, title:"Air · O · the heart",
+ { id:"air", vowel:"O", name:"Air", chakra:"Connection · beyond sight", color:"#EEF4F1", ball:"#2FB45A", nohue:true, title:"Air · O · the heart",
    line:"Connection. Beyond sight we feel one another; all work ends in serving each other's growth.",
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h/2, r=Math.min(w,h)*(a.faint?0.42:0.26)*(1+(a.level||0)*0.2), al=a.faint?0.11:0.8;

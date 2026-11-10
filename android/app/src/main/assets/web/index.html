@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=contain">
-<title>Chakra and Elements Toning</title>
+<title>Mantra Room</title>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -23,6 +23,7 @@
     <span class="rainbowStripe"></span>
     <span class="cardTitle">Elements</span><span class="cardLine">Six sounds to sing along, one at a time</span></button>
   <button class="card folder" id="toGuide"><span class="cardTitle">Guide</span><span class="cardLine">The chakra toning alone, with visualizations</span></button>
+  <button class="card folder" id="toRoom"><span class="cardTitle">Room lights</span><span class="cardLine">Mock-up: the Mantra Room lights breathe with your sound over Bluetooth</span></button>
   <button class="card folder" id="toTimer"><span class="cardTitle">Timer and bell</span><span class="cardLine">How long a session lasts, a soft bell at the end</span></button>
   <button class="card folder" id="toJournal"><span class="cardTitle">Journal</span><span class="cardLine">Your days of practice, on this phone only</span></button>
   <button class="card folder" id="toSettings"><span class="cardTitle">About</span><span class="cardLine">Credits and the version</span></button>
@@ -37,6 +38,22 @@
   </header>
   <button class="card folder" id="toPhilo"><span class="cardTitle">Philosophy</span><span class="cardLine">One white light, the way of the sounds, from vision to voice</span></button>
   <button class="card folder" id="toOrder"><span class="cardTitle">Natural order</span><span class="cardLine">Earth carries water, water feeds fire, fire lifts air</span></button>
+</section>
+
+<!-- ROOM LIGHTS: a MOCK-UP, no Bluetooth is used yet -->
+<section id="room" class="screen">
+  <header class="top">
+    <button class="icon" id="roomClose" aria-label="Back">&#10005;</button>
+    <div class="title small">Room lights</div>
+    <span class="icon"></span>
+  </header>
+  <div class="mockBadge">MOCK-UP &#183; nothing is sent, no Bluetooth is used yet</div>
+  <div class="label">In the Mantra Room the app waits for you. You choose your sound, and the lights (Aputure) take its colour and breathe with it over Bluetooth.</div>
+  <div class="roomPreview" id="roomPreview"><div class="roomBall" id="roomBall"></div></div>
+  <div class="roomState" id="roomState">Not connected</div>
+  <div class="choice" id="roomLights"></div>
+  <button class="card folder" id="roomConnect"><span class="cardTitle">Connect to the room</span><span class="cardLine">Pretends to find four Aputure lights; the preview above is what they would show</span></button>
+  <div class="choice" id="roomSounds"></div>
 </section>
 
 <!-- TIMER -->

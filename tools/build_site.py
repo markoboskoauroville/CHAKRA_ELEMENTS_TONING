@@ -1,7 +1,7 @@
 # The Croatian page /hr/ from the English master site/index.html (one source, two languages; hreflang both ways).
 # Run after every change to site/index.html: python3 tools/build_site.py
 import os
-U = "https://chakra-and-elements-toning.pages.dev/"
+U = "https://mantraroom.pages.dev/"
 root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 s = open(os.path.join(root, "index.html")).read()
 R = [

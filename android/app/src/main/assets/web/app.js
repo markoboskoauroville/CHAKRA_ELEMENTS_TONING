@@ -1,11 +1,11 @@
-// Chakra and Elements Toning (Mantra): the interface. The sound is native (Native.*, PlaybackService); the page plays a
+// Mantra Room (Mantra Meditation Room): the interface. The sound is native (Native.*, PlaybackService); the page plays a
 // silent mirror of the same file only to feed the visuals (butterchurn and the element drawings), kept in step with the
 // native position.
 "use strict";
 const N = window.Native || { // a stub so the page also opens in a desktop browser
   play(){}, pause(){}, resume(){}, stop(){}, seek(){}, setTimer(){}, bell(){}, immersive(){}, keepAwake(){}, openUrl(u){ window.open(u); },
   state(){ return JSON.stringify({id:"",playing:false,pos:0,dur:0,timerLeft:0}); }, version(){ return "dev"; } };
-const RELEASES = "https://github.com/markoboskoauroville/CHAKRA_ELEMENTS_TONING/releases/latest";
+const RELEASES = "https://github.com/markoboskoauroville/MANTRA_ROOM/releases/latest";
 const $ = s => document.querySelector(s);
 const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
                 set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} } };
@@ -243,18 +243,54 @@ function openElement(el){
   N.play(el.id, true, el.title); N.setTimer(timerMin); startSession(el.id); mirror.load(el.id, true);
   const lab=$("#elLabel"); lab.innerHTML = `Sing ${el.vowel} with the melody<small>tap to return</small>`; lab.classList.remove("hide");
   clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
-  // the element's own colour (or light) fills the screen, and breathes a little with the voice; nothing else
-  const BG={earth:["#D4AF37","#8A6E16"], aum:["#8B2BFF","#3A0070"]};
-  cancelAnimationFrame(elRaf); const t0=performance.now(); let lv=0;
-  const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000, a=mirror.read(); lv=lv*0.9+a.level*0.1;
-    const W=c.width, H=c.height;
-    if(el.rainbow){ const g=x.createLinearGradient(0,0,0,H); RAINBOW7.forEach((col,i)=>g.addColorStop(i/6,col)); x.fillStyle=g; x.fillRect(0,0,W,H); }
-    else if(el.nohue){ x.fillStyle="#000"; x.fillRect(0,0,W,H); mist(x,W,H,t,el.id,0.06+lv*0.10); }
-    else { const [c1,c2]=BG[el.id]||["#333","#111"]; const r=Math.max(W,H)*(0.55+0.08*Math.sin(t*0.4)+lv*0.25);
-      const g=x.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,r); g.addColorStop(0,c1); g.addColorStop(1,c2); x.fillStyle=g; x.fillRect(0,0,W,H); }
+  // ONE design for every sound (Marko 10.11.2026): a dark glowing ball, the colour in the centre fading to black at the
+  // edges; only its BRIGHTNESS breathes, between 0% and PULSE_MAX of the colour, very slowly (pranayama tempo); the hue
+  // never changes. The rainbow is a radial gradient: the first colour (root) in the centre, the rest as rings outward.
+  cancelAnimationFrame(elRaf); const t0=performance.now();
+  const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000;
+    const W=c.width, H=c.height, b=breathLevel(t)*PULSE_MAX, R=Math.max(W,H)*0.62;
+    x.fillStyle="#000"; x.fillRect(0,0,W,H);
+    const g=x.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,R);
+    if(el.rainbow){ RAINBOW7.forEach((col,i)=>g.addColorStop(i/7*0.85, dim(col,b)));
+      g.addColorStop(1,"#000"); }
+    else { g.addColorStop(0,dim(el.ball||el.color,b)); g.addColorStop(0.35,dim(el.ball||el.color,b*0.55));
+      g.addColorStop(0.7,dim(el.ball||el.color,b*0.12)); g.addColorStop(1,"#000"); }
+    x.fillStyle=g; x.fillRect(0,0,W,H);
     elRaf=requestAnimationFrame(loop); };
   elRaf=requestAnimationFrame(loop);
 }
+// breathing light: in 6 s, hold 2 s, out 6 s, hold 2 s (a 16 s cycle), eased; returns 0..1
+const PULSE_MAX=0.20, BREATH_IN=6, BREATH_HOLD=2, BREATH_OUT=6;
+function breathLevel(t){
+  const T=BREATH_IN+BREATH_HOLD+BREATH_OUT+BREATH_HOLD, u=t%T, ease=v=>0.5-0.5*Math.cos(Math.PI*v);
+  if(u<BREATH_IN) return ease(u/BREATH_IN);
+  if(u<BREATH_IN+BREATH_HOLD) return 1;
+  if(u<BREATH_IN+BREATH_HOLD+BREATH_OUT) return 1-ease((u-BREATH_IN-BREATH_HOLD)/BREATH_OUT);
+  return 0;
+}
+// the colour at brightness f (0..1 of full), hue unchanged
+function dim(hex,f){ const n=parseInt(hex.slice(1),16); return `rgb(${Math.round((n>>16)*f)},${Math.round(((n>>8)&255)*f)},${Math.round((n&255)*f)})`; }
+// ---------------------------------------------------------------- ROOM LIGHTS (mock-up, no Bluetooth)
+let roomEl=ELEMENTS[0], roomOn=false, roomRaf=0;
+const ROOM_LIGHTS=["Aputure 1 · north wall","Aputure 2 · east wall","Aputure 3 · south wall","Aputure 4 · west wall"];
+function ballColor(el){ return el.ball||el.color; }
+function paintBall(node, el, b){
+  if(el.rainbow){ node.style.background=`radial-gradient(circle, ${RAINBOW7.map((c,i)=>dim(c,b)+" "+Math.round(i/7*85)+"%").join(",")}, #000 100%)`; }
+  else { const c=ballColor(el); node.style.background=`radial-gradient(circle, ${dim(c,b)} 0%, ${dim(c,b*0.55)} 35%, ${dim(c,b*0.12)} 70%, #000 100%)`; }
+}
+function renderRoom(){
+  $("#roomState").textContent = roomOn ? "Connected (mock-up): 4 lights follow the preview" : "Not connected";
+  $("#roomConnect .cardTitle").textContent = roomOn ? "Disconnect" : "Connect to the room";
+  $("#roomLights").innerHTML = roomOn ? ROOM_LIGHTS.map(n=>`<button class="sel">${n}</button>`).join("") : "";
+  const rs=$("#roomSounds"); rs.innerHTML="";
+  ELEMENTS.forEach(el=>{ const b=document.createElement("button"); b.textContent=el.vowel; if(el===roomEl) b.className="sel"; b.onclick=()=>{ roomEl=el; renderRoom(); }; rs.appendChild(b); });
+}
+function openRoom(){ show("room"); renderRoom(); cancelAnimationFrame(roomRaf); const t0=performance.now();
+  const loop=now=>{ if(current!=="room") return; paintBall($("#roomBall"), roomEl, breathLevel((now-t0)/1000)*PULSE_MAX); roomRaf=requestAnimationFrame(loop); };
+  roomRaf=requestAnimationFrame(loop); }
+$("#toRoom").onclick=openRoom; $("#roomClose").onclick=()=>show("home");
+$("#roomConnect").onclick=()=>{ roomOn=!roomOn; renderRoom(); };
+
 function closeElement(){ N.stop(2500); N.setTimer(0); mirror.stop(); endSession(); N.keepAwake(false); openEl=null; openElements(); }
 $("#element").onclick=closeElement;
 
