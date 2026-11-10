@@ -24,3 +24,12 @@
   from `studio-api.prod.suno.com/api/feed/v2` with the `__session` cookie, and credits from `/api/billing/info/`.
 - 10.11.2026, Gemini pictures in his Chrome: the tab's viewport was 900 x 735, smaller than the 1024 px image, so the
   picture is captured in two overlapping tiles (overlay at its natural size, then shifted) and stitched with PIL.
+- 10.11.2026: `git add -A` in this folder picked up the task 89 recorder's WAVs in tools/suno/takes (350 MB) and a
+  push started carrying them over the SIM; it was stopped, the commit redone without them, and `tools/suno/takes/*.wav`
+  is now ignored. Add paths by name here; another worker writes into tools/.
+- 10.11.2026: an Android run started by a site-only commit rebuilt the SAME version number and would have replaced the
+  release's APK; cancel such a run, and bump appVersion with every change under android/.
+- 10.11.2026: the Pixel's media volume was found at 25 of 25 once; read it before every test and bring it to 2 with
+  the volume key (`cmd media_session volume --set` did not take).
+- 10.11.2026: headless Chrome cannot render a true 390 px phone (it lays out wider); an HTML page with iframes of 390
+  and 768 px rendered off screen gives the real widths.
