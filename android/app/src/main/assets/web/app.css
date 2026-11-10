@@ -164,3 +164,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .ovRow.small{margin-top:2px}
 #element{transition:background 1.2s}
 .elLabel{background:rgba(0,0,0,.45);border-radius:14px;padding:10px 14px;color:#F2F2F2}
+/* while a song plays the controls come down gently and leave gently (Marko 10.11.2026) */
+.overlay{transition:opacity 1.6s ease!important}
+.modulesBtn{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  width:112px;height:112px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);color:#AEB4BB;font-size:13px;line-height:1.2;text-align:center;padding:10px}
+.modulesBtn .mIcon{width:28px;height:4px;border-radius:2px;background:linear-gradient(90deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#4B0082,#9F7AE0);box-shadow:0 7px 0 rgba(255,255,255,.18),0 -7px 0 rgba(255,255,255,.18)}
+.startLogo{opacity:.9!important;filter:drop-shadow(0 0 26px rgba(127,0,255,.30)) drop-shadow(0 0 50px rgba(212,175,55,.18))!important}
+.startStage{margin-top:-120px}
+.startPlay{padding:3px!important;background:conic-gradient(#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#4B0082,#9F7AE0,#C8102E)!important;opacity:.95}
+.startPlay span{background:rgba(16,18,21,.72)!important}

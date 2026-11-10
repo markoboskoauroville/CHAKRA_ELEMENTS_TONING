@@ -273,7 +273,11 @@ const PATTERNS=[
  {id:"kapal", name:"Kapalabhati", t:[0.4,0,0.6,0], kind:"pranayama", rounds:30, info:"Skull-shining breath: short active exhales, passive inhales, 30 strokes, then rest. Not in pregnancy, with high blood pressure, heart or eye conditions, or after surgery; stop if dizzy."},
  {id:"custom", name:"Custom", t:null, kind:"yours", info:"Your own timing: in, hold, out, hold."},
 ];
-const BREATH_COLOR={coherent:"#8EC9FF",box:"#D4AF37","478":"#9F7AE0",sama:"#FFF1D8",ujjayi:"#5AA2F0",nadi:"#C9D6FF",bhramari:"#FF8A2B",kapal:"#FF5A3C",custom:"#7F00FF"};
+// The ball takes the logotype's colours, violet, white and gold (Marko 10.11.2026), in a different mix for each pattern:
+// [heart, middle, edge] of its glow. Grey when small, the glow grows in with the in-breath.
+const V="#8B2BFF", W="#FFFFFF", G="#D4AF37";
+const BREATH_COLOR={coherent:[W,"#E7D6FF",V], box:[G,W,G], "478":[V,"#E7D6FF",W], sama:[W,"#F2E6C2",G], ujjayi:[G,W,V],
+  nadi:[W,W,"#B17DFF"], bhramari:[G,"#F2E6C2",W], kapal:[G,G,"#B17DFF"], custom:[V,W,G]};
 const breath = { running:false, id:store.get("breathId","coherent"), custom:store.get("breathCustom",[4,2,6,2]), t0:0, raf:0, cue:store.get("breathCue",false), lastPhase:-1, bellDone:false };
 function patNow(){ const P=PATTERNS.find(p=>p.id===breath.id)||PATTERNS[0]; return {...P, t: P.id==="custom" ? breath.custom.map(Number) : P.t}; }
 function renderBreathChoice(){
@@ -287,7 +291,8 @@ function renderBreathChoice(){
   $("#customRow").classList.toggle("hide", breath.id!=="custom");
   ["cIn","cH1","cOut","cH2"].forEach((k,i)=>{ const e=$("#"+k); e.value=breath.custom[i]; e.onchange=()=>{ breath.custom[i]=Math.max(i%2?0:1, +e.value||0); store.set("breathCustom",breath.custom); }; });
   $("#breathInfo").textContent=patNow().info;
-  const c=BREATH_COLOR[breath.id]||"#FFFFFF"; $("#breathGlow").style.background=`radial-gradient(circle,${c}cc,${c}55 45%,${c}10 70%,transparent 74%)`;
+  const [c1,c2,c3]=BREATH_COLOR[breath.id]||[W,W,V];
+  $("#breathGlow").style.background=`radial-gradient(circle,${c1}e6,${c2}aa 38%,${c3}66 58%,${c3}14 70%,transparent 74%)`;
   $("#breathCue").classList.toggle("on", breath.cue);
 }
 $("#breathCue").onclick=()=>{ breath.cue=!breath.cue; store.set("breathCue",breath.cue); renderBreathChoice(); };
@@ -344,7 +349,7 @@ $("#version").textContent = "v"+N.version();
 $("#version").onclick=()=>N.openUrl(RELEASES);
 $("#settingsClose").onclick=()=>show("home");
 $("#journalClose").onclick=()=>show("home");
-$("#philoClose").onclick=()=>show("home");
+$("#philoClose").onclick=()=>show("edu");
 $("#timerClose").onclick=()=>show("home");
 
 // ---------------------------------------------------------------- home, back
@@ -353,11 +358,13 @@ $("#toExplore").onclick=()=>show("home");
 $("#exploreClose").onclick=()=>show("start");
 $("#toGuide").onclick=()=>{ backTo="home"; openGuide(false); };
 $("#toPhilo").onclick=()=>show("philo");
+$("#toEdu").onclick=()=>show("edu");
+$("#eduClose").onclick=()=>show("home");
 $("#toTimer").onclick=()=>{ renderTimer(); show("timer"); };
 $("#toJournal").onclick=openSettings;
 $("#toElements").onclick=openElements;
 $("#toOrder").onclick=()=>show("order");
-$("#orderClose").onclick=()=>show("home");
+$("#orderClose").onclick=()=>show("edu");
 document.querySelectorAll("#pagoda .floor").forEach(g=>g.addEventListener("click",()=>{ const el=ELEMENTS.find(e=>e.id===g.dataset.el); if(el){ openElement(el); } }));
 $("#toBreath").onclick=()=>{ show("breath"); renderBreathChoice(); };
 $("#toSettings").onclick=()=>{ $("#version").textContent="v"+N.version(); show("settings"); };
@@ -366,7 +373,7 @@ window.appBack=()=>{
   if(current==="guide"){ closeGuide(); return true; }
   if(current==="element"){ closeElement(); return true; }
   if(current==="breath"){ closeBreath(); return true; }
-  if(current==="order"){ show("home"); return true; }
+  if(current==="order"||current==="philo"){ show("edu"); return true; }
   if(current==="home"){ show("start"); return true; }
   if(current!=="start"){ show("home"); return true; }
   return false;

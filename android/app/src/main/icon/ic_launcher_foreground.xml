@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Chakra and Elements Toning (Mantra), the launcher icon = the logotype (brand/logo.svg, Marko 10.11.2026): concentric
-     circles in the natural order, indigo ring (Om), gold earth, water white, fire warm light, air white, AUM rainbow.
+     Chakra and Elements Toning (Mantra), the launcher icon = the logotype (brand/logo.svg, Marko 10.11.2026): one disc,
+     gold in the heart, white between, violet outside, a smooth transition.
      THIS IS A TEMPLATE: the build writes the version digits at the VERSION line (version-visible.md).
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
-    <path android:strokeColor="#4B0082" android:strokeWidth="1.14" android:fillColor="#00000000" android:pathData="M40.54,46.50 a13.46,13.46 0 1 0 26.93,0 a13.46,13.46 0 1 0 -26.93,0 Z" />
-    <path android:fillColor="#D4AF37" android:pathData="M41.94,46.50 a12.06,12.06 0 1 0 24.11,0 a12.06,12.06 0 1 0 -24.11,0 Z" />
-    <path android:fillColor="#F4F7F8" android:strokeColor="#14161A" android:strokeWidth="0.62" android:pathData="M44.76,46.50 a9.24,9.24 0 1 0 18.48,0 a9.24,9.24 0 1 0 -18.48,0 Z" />
-    <path android:fillColor="#FFE7BF" android:strokeColor="#14161A" android:strokeWidth="0.62" android:pathData="M47.14,46.50 a6.86,6.86 0 1 0 13.73,0 a6.86,6.86 0 1 0 -13.73,0 Z" />
-    <path android:fillColor="#FFFFFF" android:strokeColor="#14161A" android:strokeWidth="0.62" android:pathData="M49.34,46.50 a4.66,4.66 0 1 0 9.33,0 a4.66,4.66 0 1 0 -9.33,0 Z" />
-    <path android:fillColor="#C8102E" android:pathData="M54,46.5 L54.00,43.77 A2.73,2.73 0 0 1 56.13,44.80 Z" />
-    <path android:fillColor="#FF8A2B" android:pathData="M54,46.5 L56.13,44.80 A2.73,2.73 0 0 1 56.66,47.11 Z" />
-    <path android:fillColor="#E9C84A" android:pathData="M54,46.5 L56.66,47.11 A2.73,2.73 0 0 1 55.18,48.96 Z" />
-    <path android:fillColor="#2FB45A" android:pathData="M54,46.5 L55.18,48.96 A2.73,2.73 0 0 1 52.82,48.96 Z" />
-    <path android:fillColor="#38B6EC" android:pathData="M54,46.5 L52.82,48.96 A2.73,2.73 0 0 1 51.34,47.11 Z" />
-    <path android:fillColor="#5AA2F0" android:pathData="M54,46.5 L51.34,47.11 A2.73,2.73 0 0 1 51.87,44.80 Z" />
-    <path android:fillColor="#9F7AE0" android:pathData="M54,46.5 L51.87,44.80 A2.73,2.73 0 0 1 54.00,43.77 Z" />
+    <path android:pathData="M40.4,46.5 a13.6,13.6 0 1 0 27.2,0 a13.6,13.6 0 1 0 -27.2,0 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="54" android:centerY="46.5" android:gradientRadius="13.6">
+                <item android:offset="0" android:color="#D4AF37" />
+                <item android:offset="0.22" android:color="#D9B74A" />
+                <item android:offset="0.4" android:color="#F2E6C2" />
+                <item android:offset="0.56" android:color="#FFFFFF" />
+                <item android:offset="0.72" android:color="#E7D6FF" />
+                <item android:offset="0.86" android:color="#B17DFF" />
+                <item android:offset="1" android:color="#7F00FF" />
+            </gradient>
+        </aapt:attr>
+    </path>
     <!--VERSION-->
 </vector>

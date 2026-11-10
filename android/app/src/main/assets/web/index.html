@@ -13,35 +13,45 @@
   <div class="spot s1"></div><div class="spot s2"></div><div class="spot s3"></div><div class="spot s4"></div>
   <div class="startStage">
     <svg class="startLogo" viewBox="0 0 64 64" aria-hidden="true">
-      <circle cx="32" cy="32" r="30.6" fill="none" stroke="#4B0082" stroke-width="1.6"/>
-      <circle cx="32" cy="32" r="27.4" fill="#D4AF37"/>
-      <circle cx="32" cy="32" r="21" fill="#F4F7F8" stroke="#14161A" stroke-width="1"/>
-      <circle cx="32" cy="32" r="15.6" fill="#FFE7BF" stroke="#14161A" stroke-width="1"/>
-      <circle cx="32" cy="32" r="10.6" fill="#FFFFFF" stroke="#14161A" stroke-width="1"/>
+      <defs><radialGradient id="cetS" cx="32" cy="32" r="31" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#D4AF37"/><stop offset=".22" stop-color="#D9B74A"/><stop offset=".40" stop-color="#F2E6C2"/>
+        <stop offset=".56" stop-color="#FFFFFF"/><stop offset=".72" stop-color="#E7D6FF"/><stop offset=".86" stop-color="#B17DFF"/>
+        <stop offset="1" stop-color="#7F00FF"/></radialGradient></defs>
+      <circle cx="32" cy="32" r="31" fill="url(#cetS)"/>
     </svg>
     <button class="startPlay" id="startPlay" aria-label="Play the journey"><span></span></button>
   </div>
   <div class="startNow" id="startNow"></div>
-  <button class="explore" id="toExplore">Explore &#8250;</button>
+  <button class="modulesBtn" id="toExplore"><span class="mIcon"></span>Additional modules</button>
 </section>
 
 <!-- EXPLORE: folders, one line each; open one to see its details -->
 <section id="home" class="screen">
   <header class="top">
     <button class="icon" id="exploreClose" aria-label="Back">&#10005;</button>
-    <div class="title small">Explore</div>
+    <div class="title small">Additional modules</div>
     <span class="icon"></span>
   </header>
-  <button class="card folder" id="toGuide"><span class="cardTitle">Guide</span><span class="cardLine">The chakra toning alone, with MilkDrop visions</span></button>
+  <button class="card folder" id="toBreath"><span class="cardTitle">Pranayama</span><span class="cardLine">Breathing with a ball that grows and rests, with a countdown</span></button>
+  <button class="card folder" id="toEdu"><span class="cardTitle">Education</span><span class="cardLine">The philosophy and the natural order of the elements</span></button>
   <button class="card folder" id="toElements">
     <span class="rainbowStripe"></span>
     <span class="cardTitle">Elements</span><span class="cardLine">Six sounds to sing along, one at a time</span></button>
-  <button class="card folder" id="toBreath"><span class="cardTitle">Breath</span><span class="cardLine">Pranayama and calm breathing, with a countdown</span></button>
-  <button class="card folder" id="toOrder"><span class="cardTitle">Natural order</span><span class="cardLine">Earth carries water, water feeds fire, fire lifts air</span></button>
-  <button class="card folder" id="toPhilo"><span class="cardTitle">Philosophy</span><span class="cardLine">The way of the sounds, from vision to voice</span></button>
+  <button class="card folder" id="toGuide"><span class="cardTitle">Guide</span><span class="cardLine">The chakra toning alone, with visualizations</span></button>
   <button class="card folder" id="toTimer"><span class="cardTitle">Timer and bell</span><span class="cardLine">How long a session lasts, a soft bell at the end</span></button>
   <button class="card folder" id="toJournal"><span class="cardTitle">Journal</span><span class="cardLine">Your days of practice, on this phone only</span></button>
   <button class="card folder" id="toSettings"><span class="cardTitle">About</span><span class="cardLine">Credits and the version</span></button>
+</section>
+
+<!-- EDUCATION: a folder of folders -->
+<section id="edu" class="screen">
+  <header class="top">
+    <button class="icon" id="eduClose" aria-label="Back">&#10005;</button>
+    <div class="title small">Education</div>
+    <span class="icon"></span>
+  </header>
+  <button class="card folder" id="toPhilo"><span class="cardTitle">Philosophy</span><span class="cardLine">One white light, the way of the sounds, from vision to voice</span></button>
+  <button class="card folder" id="toOrder"><span class="cardTitle">Natural order</span><span class="cardLine">Earth carries water, water feeds fire, fire lifts air</span></button>
 </section>
 
 <!-- TIMER -->
@@ -105,7 +115,7 @@
 <section id="breath" class="screen">
   <header class="top">
     <button class="icon" id="breathClose" aria-label="Close">&#10005;</button>
-    <div class="title small">Breath</div>
+    <div class="title small">Pranayama</div>
     <button class="icon small" id="breathCue" aria-label="Sound cue">&#9835;</button>
   </header>
   <div class="breathStage">
