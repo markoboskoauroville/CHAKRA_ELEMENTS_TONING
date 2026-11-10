@@ -129,7 +129,7 @@ function yantra(ctx, el, W, H, t){
   else if(el.id==="fire"){ tri(r*0.92,true); ctx.stroke(); }
   else if(el.id==="air"){ tri(r*0.9,false); ctx.stroke(); ctx.beginPath(); tri(r*0.9,true); ctx.stroke(); }
   else if(el.id==="ether"){ ctx.arc(0,0,r*0.72,0,Math.PI*2); ctx.stroke(); }
-  else if(el.id==="aum"){ ctx.arc(0,0,r*0.78,0,Math.PI*2); ctx.stroke();
+  else if(el.id==="aum"){ // Om only, no circle (Marko 10.11.2026: "Aum only")
     ctx.shadowBlur=12*k; ctx.fillStyle=rgba("#D9C4FF",0.55); ctx.textAlign="center"; ctx.textBaseline="middle";
     ctx.font=`${Math.round(r*0.95)}px "Noto Sans Devanagari", sans-serif`; ctx.fillText("ॐ",0,r*0.04); }
   ctx.restore();
