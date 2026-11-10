@@ -115,3 +115,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 22 (10.11.2026): symbols without petals
 
 > Please for our chakra toning app, icons are good for chakras, but remove petals. Keep only symbols inside the petals. That's all.
+
+## Request 23 (10.11.2026): the page icon is the heart chakra circle with the six-pointed star; no rainbow stripe at the top
+
+> please in the page of toning make new icon which is heart chakra circle and inside is the *David*star of David and remove rainbow stripe from the top of the page
