@@ -223,25 +223,69 @@ $("#element").onclick=closeElement;
 $("#elementsClose").onclick=()=>show("home");
 
 // ---------------------------------------------------------------- BREATH
-const breath = { running:false, p:store.get("breathP","4,0,6,0"), t0:0, raf:0 };
-function renderBreathChoice(){ document.querySelectorAll("#breathChoice button").forEach(b=>b.classList.toggle("sel", b.dataset.p===breath.p)); }
-document.querySelectorAll("#breathChoice button").forEach(b=>b.onclick=()=>{ breath.p=b.dataset.p; store.set("breathP",breath.p); renderBreathChoice(); if(breath.running){ breath.t0=performance.now(); } });
+// Patterns: [in, hold, out, hold] in seconds (sources in TAKEOVER "Breath patterns"). kind: pranayama or modern.
+const PATTERNS=[
+ {id:"coherent", name:"Coherent", t:[5.5,0,5.5,0], kind:"modern", info:"Resonance breathing, about 5.5 breaths a minute. Calm, even, no holds."},
+ {id:"box", name:"Box", t:[4,4,4,4], kind:"modern", info:"Four equal sides: in, hold, out, hold."},
+ {id:"478", name:"4·7·8", t:[4,7,8,0], kind:"modern", info:"In through the nose 4, hold 7, out through the mouth 8. Four rounds to begin."},
+ {id:"sama", name:"Sama Vritti", t:[4,0,4,0], kind:"pranayama", info:"Equal breath: the inhale as long as the exhale."},
+ {id:"ujjayi", name:"Ujjayi", t:[4,0,6,0], kind:"pranayama", info:"Ocean breath: a soft sound in the throat, the exhale longer than the inhale."},
+ {id:"nadi", name:"Nadi Shodhana", t:[4,0,4,0], kind:"pranayama", sides:true, info:"Alternate nostril: in left, out right, in right, out left. Thumb and ring finger close the sides."},
+ {id:"bhramari", name:"Bhramari", t:[4,0,8,0], kind:"pranayama", hum:true, info:"Bee breath: in through the nose, out with a soft humming, lips closed."},
+ {id:"kapal", name:"Kapalabhati", t:[0.4,0,0.6,0], kind:"pranayama", rounds:30, info:"Skull-shining breath: short active exhales, passive inhales, 30 strokes, then rest. Not in pregnancy, with high blood pressure, heart or eye conditions, or after surgery; stop if dizzy."},
+ {id:"custom", name:"Custom", t:null, kind:"yours", info:"Your own timing: in, hold, out, hold."},
+];
+const breath = { running:false, id:store.get("breathId","coherent"), custom:store.get("breathCustom",[4,2,6,2]), t0:0, raf:0, cue:store.get("breathCue",false), lastPhase:-1, bellDone:false };
+function patNow(){ const P=PATTERNS.find(p=>p.id===breath.id)||PATTERNS[0]; return {...P, t: P.id==="custom" ? breath.custom.map(Number) : P.t}; }
+function renderBreathChoice(){
+  const L=$("#patternList");
+  if(!L.childElementCount) PATTERNS.forEach(P=>{ const b=document.createElement("button"); b.dataset.id=P.id;
+    const tt=P.t?P.t.filter((x,i)=>x||i%2===0).join("·"):"in · hold · out · hold";
+    b.innerHTML=`${P.name}<small>${P.id==="kapal"?"30 strokes, then rest":tt} · ${P.kind}</small>`;
+    b.onclick=()=>{ breath.id=P.id; store.set("breathId",P.id); renderBreathChoice(); if(breath.running){ breath.t0=performance.now(); breath.lastPhase=-1; } }; L.appendChild(b); });
+  L.querySelectorAll("button").forEach(b=>b.classList.toggle("sel", b.dataset.id===breath.id));
+  $("#customRow").classList.toggle("hide", breath.id!=="custom");
+  ["cIn","cH1","cOut","cH2"].forEach((k,i)=>{ const e=$("#"+k); e.value=breath.custom[i]; e.onchange=()=>{ breath.custom[i]=Math.max(i%2?0:1, +e.value||0); store.set("breathCustom",breath.custom); }; });
+  $("#breathInfo").textContent=patNow().info;
+  $("#breathCue").classList.toggle("on", breath.cue);
+}
+$("#breathCue").onclick=()=>{ breath.cue=!breath.cue; store.set("breathCue",breath.cue); renderBreathChoice(); };
+let cueCtx=null;
+function cue(freq){ // a soft, short sine tone at each new phase, only when asked for
+  if(!breath.cue) return;
+  try{ cueCtx=cueCtx||new (window.AudioContext||window.webkitAudioContext)(); const o=cueCtx.createOscillator(), g=cueCtx.createGain(), n=cueCtx.currentTime;
+    o.frequency.value=freq; g.gain.setValueAtTime(0,n); g.gain.linearRampToValueAtTime(0.08,n+0.05); g.gain.exponentialRampToValueAtTime(0.0001,n+0.9);
+    o.connect(g); g.connect(cueCtx.destination); o.start(n); o.stop(n+1); }catch(e){}
+}
+const NADI=["left","right","right","left"];
 function breathLoop(now){
   if(current!=="breath" || !breath.running) return;
-  const [i,h1,o,h2]=breath.p.split(",").map(Number), cyc=i+h1+o+h2, t=((now-breath.t0)/1000)%cyc;
-  let s, w;
-  if(t<i){ s=0.55+0.45*Math.sin(t/i*Math.PI/2); w="Breathe in"; }
-  else if(t<i+h1){ s=1; w="Hold"; }
-  else if(t<i+h1+o){ s=0.55+0.45*Math.cos((t-i-h1)/o*Math.PI/2); w="Breathe out"; }
-  else { s=0.55; w="Hold"; }
+  const P=patNow(), [i,h1,o,h2]=P.t, cyc=i+h1+o+h2, el=(now-breath.t0)/1000;
+  let s, w, left, ph;
+  if(P.rounds){ // Kapalabhati: 30 strokes, then 30 s of natural breath
+    const work=P.rounds*cyc, round=work+30, tr=el%round;
+    if(tr<work){ const k=Math.floor(tr/cyc), t=tr%cyc; ph=t<i?0:2; s=ph===0?0.62:0.5; w=ph===0?"In":"Out, sharp"; left=P.rounds-k; }
+    else { ph=4; s=0.5+0.06*Math.sin(tr); w="Rest, breathe freely"; left=Math.ceil(round-tr); }
+  } else {
+    const t=el%cyc, k=Math.floor(el/cyc);
+    if(t<i){ ph=0; s=0.5+0.5*Math.sin(t/i*Math.PI/2); w="Breathe in"; left=Math.ceil(i-t); }
+    else if(t<i+h1){ ph=1; s=1; w="Hold"; left=Math.ceil(i+h1-t); }
+    else if(t<i+h1+o){ ph=2; s=0.5+0.5*Math.cos((t-i-h1)/o*Math.PI/2); w=P.hum?"Breathe out, humming":"Breathe out"; left=Math.ceil(i+h1+o-t); }
+    else { ph=3; s=0.5; w="Hold"; left=Math.ceil(cyc-t); }
+    if(P.sides && ph!==1 && ph!==3){ w += " · " + NADI[(k%2)*2 + (ph===0?0:1)]; }
+  }
+  if(ph!==breath.lastPhase){ breath.lastPhase=ph; if(!P.rounds) cue([396,0,264,0,330][ph]||0); }
   $("#breathCircle").style.transform=`scale(${s})`; $("#breathWord").textContent=w;
-  $("#breathClock").textContent=fmt(now-breath.t0);
+  $("#breathNum").textContent = P.rounds ? (ph===4?left:left) : left;
+  $("#breathClock").textContent = timerMin ? `${fmt(now-breath.t0)} / ${timerMin}:00` : fmt(now-breath.t0);
+  if(timerMin && !breath.bellDone && el>=timerMin*60){ breath.bellDone=true; N.bell(); stopBreath(); return; }
   breath.raf=requestAnimationFrame(breathLoop);
 }
+function stopBreath(){ breath.running=false; endSession(); N.keepAwake(false); $("#breathWord").textContent="Tap to begin"; $("#breathNum").textContent=""; $("#breathCircle").style.transform="scale(.5)"; }
 $("#breath .breathStage").onclick=()=>{
-  if(breath.running){ breath.running=false; endSession(); N.keepAwake(false); $("#breathWord").textContent="Tap to begin"; $("#breathCircle").style.transform="scale(.55)"; return; }
-  breath.running=true; breath.t0=performance.now(); startSession("breath"); N.keepAwake(true); breath.raf=requestAnimationFrame(breathLoop); };
-function closeBreath(){ if(breath.running){ breath.running=false; endSession(); N.keepAwake(false); } show("home"); }
+  if(breath.running){ stopBreath(); return; }
+  breath.running=true; breath.bellDone=false; breath.lastPhase=-1; breath.t0=performance.now(); startSession("breath"); N.keepAwake(true); breath.raf=requestAnimationFrame(breathLoop); };
+function closeBreath(){ if(breath.running){ stopBreath(); } show("home"); }
 $("#breathClose").onclick=closeBreath;
 
 // ---------------------------------------------------------------- SETTINGS / ABOUT

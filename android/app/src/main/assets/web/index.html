@@ -83,17 +83,25 @@
   <div class="elLabel" id="elLabel"></div>
 </section>
 
-<!-- BREATH -->
+<!-- BREATH (Marko 10.11.2026: pranayama and the popular patterns, a countdown for each phase, the circle breathing) -->
 <section id="breath" class="screen">
   <header class="top">
     <button class="icon" id="breathClose" aria-label="Close">&#10005;</button>
     <div class="title small">Breath</div>
-    <span class="icon"></span>
+    <button class="icon small" id="breathCue" aria-label="Sound cue">&#9835;</button>
   </header>
-  <div class="breathStage"><div class="breathCircle" id="breathCircle"></div><div class="breathWord" id="breathWord">Tap to begin</div></div>
+  <div class="breathStage">
+    <div class="breathCircle" id="breathCircle"></div>
+    <div class="breathCount"><div class="breathNum" id="breathNum"></div><div class="breathWord" id="breathWord">Tap to begin</div></div>
+  </div>
+  <div class="breathInfo" id="breathInfo"></div>
   <div class="breathClock" id="breathClock">0:00</div>
-  <div class="choice" id="breathChoice">
-    <button data-p="4,0,6,0">Calm 4·6</button><button data-p="4,4,4,4">Box 4·4</button><button data-p="4,7,8,0">4·7·8</button>
+  <div class="patternList" id="patternList"></div>
+  <div class="customRow hide" id="customRow">
+    <label>In<input type="number" min="1" max="20" step="0.5" id="cIn"></label>
+    <label>Hold<input type="number" min="0" max="30" step="0.5" id="cH1"></label>
+    <label>Out<input type="number" min="1" max="30" step="0.5" id="cOut"></label>
+    <label>Hold<input type="number" min="0" max="30" step="0.5" id="cH2"></label>
   </div>
 </section>
 
