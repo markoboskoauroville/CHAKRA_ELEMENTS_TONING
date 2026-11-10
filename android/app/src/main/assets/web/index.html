@@ -49,7 +49,7 @@
   </header>
   <div class="mockBadge">MOCK-UP &#183; nothing is sent, no Bluetooth is used yet</div>
   <div class="label">In the Mantra Room the app waits for you. You choose your sound, and the lights (Aputure) take its colour and breathe with it over Bluetooth.</div>
-  <div class="roomPreview" id="roomPreview"><div class="roomBall" id="roomBall"></div></div>
+  <div class="roomPreview" id="roomPreview"><canvas class="roomBall" id="roomBall"></canvas></div>
   <div class="roomState" id="roomState">Not connected</div>
   <div class="choice" id="roomLights"></div>
   <button class="card folder" id="roomConnect"><span class="cardTitle">Connect to the room</span><span class="cardLine">Pretends to find four Aputure lights; the preview above is what they would show</span></button>
@@ -111,6 +111,7 @@
 <!-- ONE ELEMENT, FULL SCREEN -->
 <section id="element" class="screen black">
   <canvas id="elCanvas"></canvas>
+  <div class="fpsLine" id="fpsLine"></div>
   <div class="elLabel" id="elLabel"></div>
 </section>
 

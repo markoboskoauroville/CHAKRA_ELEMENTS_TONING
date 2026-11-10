@@ -43,6 +43,24 @@ class MainActivity : AppCompatActivity() {
     /** Updated on the main thread every 250 ms; the page reads it from its own thread. */
     @Volatile private var snapshot: String = "{}"
 
+    /** What this phone can do: the display's modes (Display.getSupportedModes). 60 Hz is ideal for the pulse (smooth, light on
+     *  the battery); a phone that has no 60 Hz mode gets its highest. A 90/120 Hz panel is asked for its 60 Hz mode. */
+    @Volatile private var displayInfo = "{}"
+    @Suppress("DEPRECATION")
+    private fun pickRefreshRate() {
+        try {
+            val d = windowManager.defaultDisplay
+            val cur = d.mode
+            val same = d.supportedModes.filter { it.physicalWidth == cur.physicalWidth && it.physicalHeight == cur.physicalHeight }
+            val best = same.filter { it.refreshRate >= 59.0f }.minByOrNull { it.refreshRate } ?: same.maxByOrNull { it.refreshRate } ?: cur
+            val lp = window.attributes
+            lp.preferredDisplayModeId = best.modeId
+            window.attributes = lp
+            displayInfo = JSONObject().put("rates", org.json.JSONArray(same.map { Math.round(it.refreshRate) }.distinct()))
+                .put("chosen", Math.round(best.refreshRate)).put("model", android.os.Build.MODEL).toString()
+        } catch (e: Exception) { displayInfo = "{}" }
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         web = WebView(this)
         root.addView(web, FrameLayout.LayoutParams(-1, -1))
         setContentView(root)
+        pickRefreshRate()
 
         ViewCompat.setOnApplyWindowInsetsListener(root) { v, insets ->
             val i = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
@@ -148,6 +167,7 @@ class MainActivity : AppCompatActivity() {
         private fun ui(block: () -> Unit) = main.post(block)
         private fun svc(block: (PlaybackService) -> Unit) = ui { PlaybackService.instance?.let(block) }
 
+        @JavascriptInterface fun display(): String = displayInfo
         @JavascriptInterface fun play(id: String, loop: Boolean, title: String) = svc { it.play(id, loop, title) }
         @JavascriptInterface fun pause() = svc { it.pause() }
         @JavascriptInterface fun resume() = svc { it.resume() }

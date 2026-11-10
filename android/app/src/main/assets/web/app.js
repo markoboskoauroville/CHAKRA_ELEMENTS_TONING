@@ -4,7 +4,7 @@
 "use strict";
 const N = window.Native || { // a stub so the page also opens in a desktop browser
   play(){}, pause(){}, resume(){}, stop(){}, seek(){}, setTimer(){}, bell(){}, immersive(){}, keepAwake(){}, openUrl(u){ window.open(u); },
-  state(){ return JSON.stringify({id:"",playing:false,pos:0,dur:0,timerLeft:0}); }, version(){ return "dev"; } };
+  display(){ return "{}"; }, state(){ return JSON.stringify({id:"",playing:false,pos:0,dur:0,timerLeft:0}); }, version(){ return "dev"; } };
 const RELEASES = "https://github.com/markoboskoauroville/MANTRA_ROOM/releases/latest";
 const $ = s => document.querySelector(s);
 const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
@@ -248,25 +248,63 @@ function openElement(el, style){
   style = style || (HAS_RAGA.has(el.id)?"raga":"voice"); const sid=songId(el.id,style);
   mirror.ensure(); openEl=el; show("element"); N.immersive(true); N.keepAwake(true);
   const c=$("#elCanvas"); const k=Math.min(2, window.devicePixelRatio||1); c.width=c.clientWidth*k; c.height=c.clientHeight*k;
-  const x=c.getContext("2d"); x.fillStyle="#000"; x.fillRect(0,0,c.width,c.height);
   N.play(sid, true, el.title+(style==="raga"?" · Indian Raga":" · Mantra Voice")); N.setTimer(timerMin); startSession(el.id); mirror.load(sid, true);
   const lab=$("#elLabel"); lab.innerHTML = `Sing ${el.vowel} with the melody<small>tap to return</small>`; lab.classList.remove("hide");
   clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
   // ONE design for every sound (Marko 10.11.2026): a dark glowing ball, the colour in the centre fading to black at the
-  // edges; only its BRIGHTNESS breathes, between 0% and PULSE_MAX of the colour, very slowly (pranayama tempo); the hue
-  // never changes. The rainbow is a radial gradient: the first colour (root) in the centre, the rest as rings outward.
+  // edges; only its BRIGHTNESS breathes, between 0% and PULSE_MAX, very slowly (pranayama tempo); the hue never changes.
+  // The rainbow is a radial gradient: the root colour in the centre, the rest as rings outward. Drawn by a fragment
+  // shader on the GPU (WebGL), time and brightness are uniforms; temporal dithering keeps the 0-20% range free of steps.
   cancelAnimationFrame(elRaf); const t0=performance.now();
+  ballGL=ballGL||new BallGL(c, 0.48, 0.62); ballGL.set(el);
+  fps.reset();
   const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000;
-    const W=c.width, H=c.height, b=breathLevel(t)*PULSE_MAX, R=Math.max(W,H)*0.62;
-    x.fillStyle="#000"; x.fillRect(0,0,W,H);
-    const g=x.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,R);
-    if(el.rainbow){ RAINBOW7.forEach((col,i)=>g.addColorStop(i/7*0.85, dim(col,b)));
-      g.addColorStop(1,"#000"); }
-    else { g.addColorStop(0,dim(el.ball||el.color,b)); g.addColorStop(0.35,dim(el.ball||el.color,b*0.55));
-      g.addColorStop(0.7,dim(el.ball||el.color,b*0.12)); g.addColorStop(1,"#000"); }
-    x.fillStyle=g; x.fillRect(0,0,W,H);
+    ballGL.draw(breathLevel(t)*PULSE_MAX, t); fps.tick(now);
     elRaf=requestAnimationFrame(loop); };
   elRaf=requestAnimationFrame(loop);
+}
+let ballGL=null;
+// measured frames per second, shown for a few seconds under the label and written to the log (adb logcat, "MRFPS")
+const fps={n:0,t:0,v:0,reset(){this.n=0;this.t=0;this.v=0;},
+  tick(now){ if(!this.t) this.t=now; this.n++; if(now-this.t>=1000){ this.v=Math.round(this.n*1000/(now-this.t)); this.n=0; this.t=now;
+    let d={}; try{ d=JSON.parse(N.display()); }catch(e){}
+    const txt=`${this.v} fps · display ${(d.rates||[]).join("/")} Hz, asked ${d.chosen||"?"} Hz · ${d.model||""}`;
+    const el=$("#fpsLine"); if(el) el.textContent=txt; console.log("MRFPS "+txt); } } };
+class BallGL{
+  constructor(canvas, cy, rad){
+    this.c=canvas; const gl=this.gl=canvas.getContext("webgl",{antialias:false,alpha:false,preserveDrawingBuffer:false}); this.cy=cy; this.rad=rad;
+    const vs="attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
+    const fs=`precision highp float;
+uniform vec2 res; uniform float lvl; uniform float time; uniform vec3 col; uniform float rainbow; uniform vec3 rb[7]; uniform float cy; uniform float rad;
+float hash(vec2 q){ return fract(sin(dot(q,vec2(12.9898,78.233))+time*1.7)*43758.5453); }
+void main(){
+  vec2 f=gl_FragCoord.xy; f.y=res.y-f.y;
+  float d=length(f-vec2(res.x*.5,res.y*cy))/(max(res.x,res.y)*rad);
+  vec3 c;
+  if(rainbow>.5){
+    float k=clamp(d/.85,0.,1.)*6.; int i=int(floor(min(k,5.999))); float m=smoothstep(0.,1.,fract(min(k,5.999)));
+    vec3 a=rb[0],b=rb[1]; for(int j=0;j<6;j++){ if(j==i){ a=rb[j]; b=rb[j+1]; } }
+    c=mix(a,b,m)*smoothstep(1.,.85,d);
+  } else {
+    float w = d<.35 ? mix(1.,.55,d/.35) : d<.7 ? mix(.55,.12,(d-.35)/.35) : mix(.12,0.,clamp((d-.7)/.3,0.,1.));
+    c=col*w;
+  }
+  c*=lvl;
+  c+= (hash(f)+hash(f+7.3)-1.)/255.;
+  gl_FragColor=vec4(max(c,0.),1.);
+}`;
+    const mk=(t,src)=>{ const sh=gl.createShader(t); gl.shaderSource(sh,src); gl.compileShader(sh); return sh; };
+    const pr=this.pr=gl.createProgram(); gl.attachShader(pr,mk(gl.VERTEX_SHADER,vs)); gl.attachShader(pr,mk(gl.FRAGMENT_SHADER,fs)); gl.linkProgram(pr); gl.useProgram(pr);
+    const buf=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER,buf); gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+    const loc=gl.getAttribLocation(pr,"p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+    this.u=n=>gl.getUniformLocation(pr,n);
+    const rgb=h=>{ const n=parseInt(h.slice(1),16); return [(n>>16)/255,((n>>8)&255)/255,(n&255)/255]; };
+    this.rgb=rgb; gl.uniform3fv(this.u("rb[0]"),new Float32Array(RAINBOW7.flatMap(rgb)));
+    gl.uniform1f(this.u("cy"),cy); gl.uniform1f(this.u("rad"),rad);
+    this.uRes=this.u("res"); this.uLvl=this.u("lvl"); this.uTime=this.u("time");
+  }
+  set(el){ const gl=this.gl; gl.uniform3fv(this.u("col"),this.rgb(el.ball||el.color)); gl.uniform1f(this.u("rainbow"),el.rainbow?1:0); }
+  draw(lvl,t){ const gl=this.gl; gl.viewport(0,0,this.c.width,this.c.height); gl.uniform2f(this.uRes,this.c.width,this.c.height); gl.uniform1f(this.uLvl,lvl); gl.uniform1f(this.uTime,t%1000); gl.drawArrays(gl.TRIANGLE_STRIP,0,4); }
 }
 // breathing light: in 6 s, hold 2 s, out 6 s, hold 2 s (a 16 s cycle), eased; returns 0..1
 const PULSE_MAX=0.20, BREATH_IN=6, BREATH_HOLD=2, BREATH_OUT=6;
@@ -282,11 +320,7 @@ function dim(hex,f){ const n=parseInt(hex.slice(1),16); return `rgb(${Math.round
 // ---------------------------------------------------------------- ROOM LIGHTS (mock-up, no Bluetooth)
 let roomEl=ELEMENTS[0], roomOn=false, roomRaf=0;
 const ROOM_LIGHTS=["Aputure 1 · north wall","Aputure 2 · east wall","Aputure 3 · south wall","Aputure 4 · west wall"];
-function ballColor(el){ return el.ball||el.color; }
-function paintBall(node, el, b){
-  if(el.rainbow){ node.style.background=`radial-gradient(circle, ${RAINBOW7.map((c,i)=>dim(c,b)+" "+Math.round(i/7*85)+"%").join(",")}, #000 100%)`; }
-  else { const c=ballColor(el); node.style.background=`radial-gradient(circle, ${dim(c,b)} 0%, ${dim(c,b*0.55)} 35%, ${dim(c,b*0.12)} 70%, #000 100%)`; }
-}
+let roomGL=null;
 function renderRoom(){
   $("#roomState").textContent = roomOn ? "Connected (mock-up): 4 lights follow the preview" : "Not connected";
   $("#roomConnect .cardTitle").textContent = roomOn ? "Disconnect" : "Connect to the room";
@@ -295,7 +329,9 @@ function renderRoom(){
   ELEMENTS.forEach(el=>{ const b=document.createElement("button"); b.textContent=el.vowel; if(el===roomEl) b.className="sel"; b.onclick=()=>{ roomEl=el; renderRoom(); }; rs.appendChild(b); });
 }
 function openRoom(){ show("room"); renderRoom(); cancelAnimationFrame(roomRaf); const t0=performance.now();
-  const loop=now=>{ if(current!=="room") return; paintBall($("#roomBall"), roomEl, breathLevel((now-t0)/1000)*PULSE_MAX); roomRaf=requestAnimationFrame(loop); };
+  const cv=$("#roomBall"); cv.width=300; cv.height=300; let shown=null;
+  const loop=now=>{ if(current!=="room") return; if(!roomGL) roomGL=new BallGL(cv,0.5,0.62); if(shown!==roomEl){ roomGL.set(roomEl); shown=roomEl; }
+    roomGL.draw(breathLevel((now-t0)/1000)*PULSE_MAX,(now-t0)/1000); roomRaf=requestAnimationFrame(loop); };
   roomRaf=requestAnimationFrame(loop); }
 $("#toRoom").onclick=openRoom; $("#roomClose").onclick=()=>show("home");
 $("#roomConnect").onclick=()=>{ roomOn=!roomOn; renderRoom(); };

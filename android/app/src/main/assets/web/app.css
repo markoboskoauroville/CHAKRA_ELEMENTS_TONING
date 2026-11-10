@@ -194,3 +194,4 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .stripe .half .vowel{font-size:34px;font-weight:300;letter-spacing:2px;line-height:1}
 .stripe .half .cap{font-size:13px;opacity:.85;text-align:center}
 .stripe .half.soon{opacity:.4}
+.fpsLine{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 8px);text-align:center;font-size:11px;color:rgba(255,255,255,.35);pointer-events:none}
