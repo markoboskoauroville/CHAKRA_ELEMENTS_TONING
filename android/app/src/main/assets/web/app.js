@@ -209,7 +209,8 @@ function openElement(el){
   cancelAnimationFrame(elRaf); const t0=performance.now();
   const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000, a=mirror.read();
     x.fillStyle="rgba(0,0,0,0.16)"; x.fillRect(0,0,c.width,c.height);   // soft trails
-    x.save(); x.globalCompositeOperation="lighter"; el.draw(x,c.width,c.height,t,{faint:false,level:a.level,bins:a.bins}); x.restore();
+    x.save(); x.globalCompositeOperation = el.rainbow ? "lighter" : "source-over"; // "lighter" turned crimson pink (v1 on the emulator); one colour stays itself
+    el.draw(x,c.width,c.height,t,{faint:false,level:a.level,bins:a.bins}); x.restore();
     elRaf=requestAnimationFrame(loop); };
   elRaf=requestAnimationFrame(loop);
 }

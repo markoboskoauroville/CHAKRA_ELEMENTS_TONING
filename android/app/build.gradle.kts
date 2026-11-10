@@ -85,6 +85,10 @@ android {
                 "$appVersion-chakra-elements-toning-v$appVersion.apk"
         }
     }
+    packaging {
+        // the dex files compressed: v1 stored them raw and the APK was 31.5 MB, over Cloudflare Pages' 25 MB per file
+        dex { useLegacyPackaging = true }
+    }
     buildFeatures {
         buildConfig = true
     }
