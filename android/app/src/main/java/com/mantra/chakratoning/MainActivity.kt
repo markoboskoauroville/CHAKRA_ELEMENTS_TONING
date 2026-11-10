@@ -88,6 +88,24 @@ class MainActivity : AppCompatActivity() {
         controllerFuture = MediaController.Builder(this, token).buildAsync()
 
         main.post(tick)
+        maybePin(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) { super.onNewIntent(intent); maybePin(intent) }
+
+    /** `am start -n com.mantra.chakratoning/.MainActivity --ez pin true` asks the launcher to put the icon on the home
+     *  screen (ShortcutManager.requestPinShortcut; the launcher shows its own Add dialog). Marko 10.11.2026: "leave its
+     *  icon on the desktop". Same as MPA Academy. */
+    private fun maybePin(i: Intent?) {
+        if (i?.getBooleanExtra("pin", false) != true) return
+        val sm = getSystemService(android.content.pm.ShortcutManager::class.java) ?: return
+        if (!sm.isRequestPinShortcutSupported) return
+        val open = Intent(this, MainActivity::class.java).setAction(Intent.ACTION_MAIN)
+        val info = android.content.pm.ShortcutInfo.Builder(this, "toning-home")
+            .setShortLabel(getString(R.string.launcher_name))
+            .setIcon(android.graphics.drawable.Icon.createWithResource(this, R.mipmap.ic_launcher))
+            .setIntent(open).build()
+        sm.requestPinShortcut(info, null)
     }
 
     private val tick = object : Runnable {
