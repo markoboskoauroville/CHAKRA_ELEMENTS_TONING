@@ -261,6 +261,9 @@ $("#settingsClose").onclick=()=>show("home");
 // ---------------------------------------------------------------- home, back
 $("#toGuide").onclick=openGuide;
 $("#toElements").onclick=openElements;
+$("#toOrder").onclick=()=>show("order");
+$("#orderClose").onclick=()=>show("home");
+document.querySelectorAll("#pagoda .floor").forEach(g=>g.addEventListener("click",()=>{ const el=ELEMENTS.find(e=>e.id===g.dataset.el); if(el){ openElement(el); } }));
 $("#toBreath").onclick=()=>{ show("breath"); renderBreathChoice(); };
 $("#toSettings").onclick=openSettings;
 window.appBack=()=>{
@@ -268,6 +271,7 @@ window.appBack=()=>{
   if(current==="guide"){ closeGuide(); return true; }
   if(current==="element"){ closeElement(); return true; }
   if(current==="breath"){ closeBreath(); return true; }
+  if(current==="order"){ show("home"); return true; }
   if(current!=="home"){ show("home"); return true; }
   return false;
 };

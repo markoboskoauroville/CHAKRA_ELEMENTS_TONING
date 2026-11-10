@@ -25,6 +25,10 @@
     <span class="cardTitle">Elements</span>
     <span class="cardLine">Six sounds to sing along: A · U · I · O · A-U-I-O · AUM</span>
   </button>
+  <button class="card" id="toOrder">
+    <span class="cardTitle">Natural order</span>
+    <span class="cardLine">Earth carries water, water feeds fire, fire lifts air: the pagoda of the elements</span>
+  </button>
   <button class="card" id="toBreath">
     <span class="cardTitle">Breath</span>
     <span class="cardLine">A slow circle to breathe with, before or after toning</span>
@@ -93,6 +97,35 @@
   </div>
 </section>
 
+<!-- NATURAL ORDER (Marko 10.11.2026): the elements stacked as in nature, in the body and in the five-ring pagoda -->
+<section id="order" class="screen">
+  <header class="top">
+    <button class="icon" id="orderClose" aria-label="Close">&#10005;</button>
+    <div class="title small">Natural order</div>
+    <span class="icon"></span>
+  </header>
+  <div class="orderIntro">Everything begins with honouring nature: the sun and the moon, the stars, the rivers, the trees. The body is a small universe; what lives outside us lives inside us too.</div>
+  <svg class="pagoda" id="pagoda" viewBox="0 0 200 330" role="img" aria-label="The five floors of the elements, earth at the bottom, air and space at the top">
+    <defs>
+      <linearGradient id="rbw" x1="0" x2="1"><stop offset="0" stop-color="#C8102E"/><stop offset=".17" stop-color="#FF8A2B"/><stop offset=".33" stop-color="#E9C84A"/><stop offset=".5" stop-color="#2FB45A"/><stop offset=".67" stop-color="#38B6EC"/><stop offset=".83" stop-color="#5AA2F0"/><stop offset="1" stop-color="#9F7AE0"/></linearGradient>
+      <radialGradient id="wat" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset=".5" stop-color="#DCE6EA" stop-opacity=".35"/><stop offset="1" stop-color="#DCE6EA" stop-opacity=".12"/></radialGradient>
+      <radialGradient id="fir" cx=".5" cy=".8" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".6" stop-color="#FFF1D8" stop-opacity=".7"/><stop offset="1" stop-color="#FFF1D8" stop-opacity=".15"/></radialGradient>
+      <radialGradient id="om" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#7F00FF" stop-opacity=".55"/><stop offset="1" stop-color="#7F00FF" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="100" cy="30" r="30" fill="url(#om)"/>
+    <g class="floor" data-el="ether"><path d="M100,12 C112,26 112,40 100,48 C88,40 88,26 100,12 Z" fill="url(#rbw)"/></g>
+    <g class="floor" data-el="air"><path d="M58,62 Q100,104 142,62 Q100,82 58,62 Z" fill="#EEF4F1" fill-opacity=".55" stroke="#EEF4F1" stroke-opacity=".8"/></g>
+    <g class="floor" data-el="fire"><path d="M100,92 L146,164 L54,164 Z" fill="url(#fir)"/></g>
+    <g class="floor" data-el="water"><circle cx="100" cy="206" r="40" fill="url(#wat)" stroke="#DCE6EA" stroke-opacity=".7"/></g>
+    <g class="floor" data-el="earth"><rect x="46" y="250" width="108" height="72" rx="3" fill="#D4AF37"/></g>
+  </svg>
+  <div class="orderText">
+    <p><b>Earth</b> at the bottom, the ground that carries everything. <b>On earth comes water.</b> Where there is water, <b>fire</b> can burn; where there is fire, <b>air</b> rises. Above them all, open space, and the sound of Om.</p>
+    <p>This is how the elements sit in nature, in the body, and in the five-ring pagoda of Japan, one element to each floor in the same order. Every element lives in every other, yet this is their natural order: simple enough for a child, deep enough for a lifetime of looking.</p>
+    <p class="dim">Tap a floor to sing its sound.</p>
+  </div>
+</section>
+
 <!-- SETTINGS / ABOUT -->
 <section id="settings" class="screen">
   <header class="top">
@@ -108,6 +141,7 @@
   <div class="panel">
     <div class="pTitle">The way of the sounds</div>
     <div class="aboutText philo">
+      <p>Everything starts with honouring nature: the sun and the moon, the stars, the rivers, the trees and the birds. The body is a yantra, a small universe; the sun, the moon and the river live in us too.</p>
       <p>Everything begins as <b>vision</b>. In the silence of <b>Om</b>, pure violet, a creative seeing is born.</p>
       <p>Vision flows into <b>Water</b>, U. Water has no colour of its own; it reflects. It is creativity, the creative energy of a human being, the mood within us. Yet water needs ground: without earth it has nowhere to land and cannot move.</p>
       <p><b>Earth</b>, A, is the one true colour: grounding gold. Living matter, the body, our daily work, the joy of being here in a body.</p>

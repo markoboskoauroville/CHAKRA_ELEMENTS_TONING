@@ -105,3 +105,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .cardStripes i.c-fire{background:linear-gradient(90deg,rgba(255,241,216,.35),#FFF1D8,rgba(255,241,216,.35))!important}
 .cardStripes i.c-air{background:rgba(238,244,241,.35)!important}
 .cardStripes i.c-om{background:var(--om)}
+
+#order{overflow-y:auto}
+.orderIntro{color:var(--dim);font-size:15px;line-height:1.5;margin:4px 0 8px}
+.pagoda{display:block;width:min(62vw,240px);margin:6px auto 4px}
+.pagoda .floor{cursor:pointer}
+.orderText p{color:#D5D8DC;font-size:15px;line-height:1.55;margin:0 0 10px}
+.orderText b{color:var(--text)}
+.orderText .dim{color:var(--dim)}
