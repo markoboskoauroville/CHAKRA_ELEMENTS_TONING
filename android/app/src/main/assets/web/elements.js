@@ -125,13 +125,17 @@ function yantra(ctx, el, W, H, t){
   // the tantric symbols of the elements as drawn by Marin G Vayu, Secret of the 5 Elements: earth a square, water a
   // crescent, fire a downward triangle, wind (air) a six-pointed star, ether a circle
   if(el.id==="earth"){ const s=r*0.70; ctx.rect(-s,-s,2*s,2*s); ctx.stroke(); }
-  else if(el.id==="water"){ ctx.arc(0,-r*0.1,r*0.62,0.08*Math.PI,0.92*Math.PI); ctx.arc(0,-r*0.28,r*0.52,0.86*Math.PI,0.14*Math.PI,true); ctx.closePath(); ctx.stroke(); }
+  else if(el.id==="water"){ // a real crescent moon: two circles, the horns taper to sharp points (Marko 10.11.2026)
+    const Rr=r*0.78, ri=Rr*0.84, d=Rr*0.42, yy=-(Rr*Rr-ri*ri+d*d)/(2*d), xx=Math.sqrt(Rr*Rr-yy*yy);
+    ctx.save(); ctx.translate(0,-(yy+Rr)/2);
+    ctx.beginPath(); ctx.arc(0,0,Rr,Math.atan2(yy,xx),Math.atan2(yy,-xx)+2*Math.PI,false);
+    ctx.arc(0,-d,ri,Math.atan2(yy+d,-xx)+2*Math.PI,Math.atan2(yy+d,xx),true); ctx.closePath(); ctx.stroke(); ctx.restore(); }
   else if(el.id==="fire"){ tri(r*0.92,true); ctx.stroke(); }
   else if(el.id==="air"){ tri(r*0.9,false); ctx.stroke(); ctx.beginPath(); tri(r*0.9,true); ctx.stroke(); }
   else if(el.id==="ether"){ ctx.arc(0,0,r*0.72,0,Math.PI*2); ctx.stroke(); }
   else if(el.id==="aum"){ // Om only, no circle (Marko 10.11.2026: "Aum only")
     ctx.shadowBlur=12*k; ctx.fillStyle=rgba("#D9C4FF",0.55); ctx.textAlign="center"; ctx.textBaseline="middle";
-    ctx.font=`${Math.round(r*0.95)}px "Noto Sans Devanagari", sans-serif`; ctx.fillText("ॐ",0,r*0.04); }
+    ctx.font=`${Math.round(r*1.7)}px "Noto Sans Devanagari", sans-serif`; ctx.fillText("ॐ",0,r*0.08); }
   ctx.restore();
 }
 
