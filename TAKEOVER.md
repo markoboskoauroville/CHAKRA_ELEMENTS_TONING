@@ -78,9 +78,9 @@ Born 10.11.2026 (Master session MAC_SES9_08-NOV, task 75). Requests word for wor
 
 - **Colours** (MANTRA_MANIFEST chakra-colors.md, rewritten 10.11.2026): Earth gold `#D4AF37` is the one true colour;
   Water is reflection (silver glint, `#DCE6EA` at low alpha), Fire is energy (warm white light `#FFF1D8`), Air is
-  connection (a luminous haze `#EEF4F1`); the throat is the rainbow; Om is pure violet `#7F00FF`. The logotype's outer
+  connection (a luminous haze `#EEF4F1`); the throat is the rainbow; OM is pure violet `#7F00FF`. The logotype's outer
   ring is indigo `#4B0082` because he said indigo for it ("an outer circle, which is pure and indigo color").
-- **The flow**: Om (vision) → Water (creativity, mood) → Earth (grounding, so water can land) → Fire (the work of the
+- **The flow**: OM (vision) → Water (creativity, mood) → Earth (grounding, so water can land) → Fire (the work of the
   vision) → Air (connection, serving each other's growth) → the throat (truth on every level). App: About → "The way of
   the sounds"; site: the same, EN and HR.
 - **Nature first** (request 6): the opening paraphrases the Instagram video on his Nothing Phone (the lady, 3:29,
@@ -127,3 +127,21 @@ out-breath (sine easing); the home timer ends the session with the bowl bell; th
 7. No render-blocking script: the counter and speechify-keys are `defer`; styles inline.
 8. robots.txt allows everything and names the sitemap; the logotype (`logo.svg`) is also the SVG favicon.
 9. After a deploy: curl 200 for /, /hr/, /sitemap.xml; a Lighthouse run; look at the page at phone and desktop width.
+
+## The shape of the app since v9 (Marko 10.11.2026, requests 9 to 16)
+
+- **First screen = the six stripes** (A Earth, U Water, I Fire, O Air, A-U-I-O the throat, OM). Tap one: it plays full
+  screen on its own colour (earth gold, OM violet, throat rainbow; water, fire, air black with drifting mist). One quiet
+  entry, three lines top right, opens **Additional modules**: Journey (the guide, then each element once, natural order),
+  Pranayama, Education (Philosophy, Natural order), Elements, Guide, Timer and bell, Journal, About.
+- **The symbols behind the stripes** are the chakra yantras of the *Sat-chakra-nirupana* as published by Arthur Avalon
+  (John Woodroffe), *The Serpent Power* (1919): Muladhara 4 petals + square (earth); Svadhisthana 6 petals + crescent
+  moon (water); Manipura 10 petals + triangle pointing down (fire); Anahata 12 petals + six-pointed star (air);
+  Vishuddha 16 petals + full moon (space) in a triangle; Ajna 2 petals + OM. Note: the tattva card of fire (Tejas, as in
+  the Hermetic tattva cards) is a triangle pointing UP; the app follows the chakra yantra (down) because the stripes are
+  chakras. Overview: https://en.wikipedia.org/wiki/Chakra (the table of yantras) and the Woodroffe text
+  (https://www.sacred-texts.com/tantra/sp/). Drawn as our own geometry (elements.js `yantra()`), not copied images.
+- **The rainbow principle**: one white light through a prism (our own drawing, not any album art); labels in a row in
+  rainbow order left to right; a title gets one rainbow stripe. **OM, never AUM.**
+- **The logotype** (concentric circles, then the smooth violet-white-gold disc) was rejected for the app on 10.11.2026
+  ("very ugly"); the launcher icon still uses the disc until a new mark is chosen; the site keeps it until he decides.
