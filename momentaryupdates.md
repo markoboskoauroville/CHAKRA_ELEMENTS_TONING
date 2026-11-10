@@ -75,3 +75,9 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 13 (10.11.2026): leave the icon on the Pixel
 
 > please any you are testing on Pixel 7 leave its icon on the desktop
+
+## Request 14 (10.11.2026): the stripes are the first screen; the logotype goes; better symbols
+
+> This should be the first screen actually, instead of play, so user can play any chakra. And remove this, logotype doesn't look good, it's very ugly. And for this, colors are good, and you have some animation, that's very nice. Please find the chakra's symbols, put them behind in better quality.
+
+(His photo of the Pixel: the six stripes screen, A Earth, U Water, I Fire, O Air, A-U-I-O, AUM.)
