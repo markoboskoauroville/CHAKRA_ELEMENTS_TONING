@@ -57,6 +57,9 @@ Born 10.11.2026 (Master session MAC_SES9_08-NOV, task 75). Requests word for wor
   male choir; eight sung sections with instrumental interludes, about eight minutes). `tools/suno/fill.py <key>` fills
   the form in his Firefox, `click_create.py` presses Create with a real BiDi click, an hCaptcha then needs Marko.
   One attempt per song; he hears both clips before any regeneration.
+  Made 10.11.2026 (60 credits, 11,945 → 11,885; Fire twice): Earth 5:35/5:08, Water 5:23/5:39, Fire 6:04/5:34 and
+  6:04/5:43, Air 5:39/5:29, Ether 6:03/6:30. Suno's API answers "forbidden" for the audio files on this account:
+  the chosen clip per element comes by his Download or a BlackHole recording, then `tools/song_loops.py`.
   When they exist: replace `assets/web/audio/<element>.ogg`, keep the names, raise appVersion.
 
 ## Where it stands (10.11.2026)
@@ -64,8 +67,8 @@ Born 10.11.2026 (Master session MAC_SES9_08-NOV, task 75). Requests word for wor
 - Public repository (Marko's yes). Release **v2** Latest, workflow green. v1 tested on the Pixel 7 emulator
   (Pixel_7_API_35): home, Guide with MilkDrop and its controls, Elements (five stripes), Fire full screen looping,
   Breath, playback going on with the screen locked (foreground media service). v2 = colours kept true + smaller APK.
-- Website chakra-and-elements-toning.pages.dev, folder `site/`, deployed by `.github/workflows/site.yml` (Cloudflare
-  Pages) once the secret CLOUDFLARE_API_TOKEN is on the repo (Marko's paste). Pictures: hero and lifestyle by Gemini
+- Website **https://chakra-and-elements-toning.pages.dev** LIVE since 10.11.2026, folder `site/`, deployed by
+  `.github/workflows/site.yml` (Cloudflare Pages; CLOUDFLARE_API_TOKEN pasted by Marko). Pictures: hero and lifestyle by Gemini
   (Nano Banana) in his Chrome; the three cards are the app's own emulator screenshots. Donation bowl, SEO, counter
   `data-dl-app="chakratoning"` on both buttons, which open GitHub releases/latest. Card 22 on markobosko.pages.dev #/kod.
 - Not tested by a hand: how loud the guide and loops are on a real phone, the feel of the taps, the lock screen
