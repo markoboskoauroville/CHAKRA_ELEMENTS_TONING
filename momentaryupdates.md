@@ -85,3 +85,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 15 (10.11.2026): dark mode, black with faint white mist instead of white
 
 > and instead of white, because it's very disturbing, it needs to be basically dark mode black with faint white kind of clouds or mist over it
+
+## Request 16 (10.11.2026): OM, never AUM; one letter per box, then its explanation
+
+> On website there is a problem of chakra and elements toning. The squares with letters are AUM, OM. Please don't write it anywhere OM with three letters. With two only. OM, that's all. I don't want AUM anymore. OM. And then make it different. Put each letter in its own box, filling the whole letter. Everything align vertically and then another box next to it explaining again with the same principle. First simple explanation, then expanding.
