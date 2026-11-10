@@ -51,10 +51,22 @@ Born 10.11.2026 (Master session MAC_SES9_08-NOV, task 75). Requests word for wor
   `tools/toning/suno/takes/v8`, Covers of Marko's own vowels with a quiet Tibetan choir, no lyrics; the takes he kept:
   A take 2, U 1, I 1, O 1, A-U-I-O 1). `tools/loops.py` trims the silence and folds the last 4 s over the first so
   each loops without a seam (23–63 s each, volume untouched), Opus 128 kbps.
-- **Waiting: five LONG songs from Suno** (one per element, same family as the raga, vocal only). The spend gate said
-  `CHEAPER: one attempt, show Marko, wait` (10.11.2026) and Suno needs Marko's browser: not generated yet.
+- **Five LONG songs from Suno** (one per element, same family as the raga, no spoken guide): Marko said yes on
+  10.11.2026 ("Yes, about 50 credits"). Specs in `tools/suno/songs.py` (style ≤ 1000 characters, the raga's sitar,
+  tanpura, shruti box on D and soft tabla; A on F, U on G, I on A, O on C, A-U-I-O improvised over F G A C D with the
+  male choir; eight sung sections with instrumental interludes, about eight minutes). `tools/suno/fill.py <key>` fills
+  the form in his Firefox, `click_create.py` presses Create with a real BiDi click, an hCaptcha then needs Marko.
+  One attempt per song; he hears both clips before any regeneration.
   When they exist: replace `assets/web/audio/<element>.ogg`, keep the names, raise appVersion.
 
-## Where it stands
+## Where it stands (10.11.2026)
 
-See LESSONS.md and the release page. Website (request 2): chakra-and-elements-toning.pages.dev, folder `site/`.
+- Public repository (Marko's yes). Release **v2** Latest, workflow green. v1 tested on the Pixel 7 emulator
+  (Pixel_7_API_35): home, Guide with MilkDrop and its controls, Elements (five stripes), Fire full screen looping,
+  Breath, playback going on with the screen locked (foreground media service). v2 = colours kept true + smaller APK.
+- Website chakra-and-elements-toning.pages.dev, folder `site/`, deployed by `.github/workflows/site.yml` (Cloudflare
+  Pages) once the secret CLOUDFLARE_API_TOKEN is on the repo (Marko's paste). Pictures: hero and lifestyle by Gemini
+  (Nano Banana) in his Chrome; the three cards are the app's own emulator screenshots. Donation bowl, SEO, counter
+  `data-dl-app="chakratoning"` on both buttons, which open GitHub releases/latest. Card 22 on markobosko.pages.dev #/kod.
+- Not tested by a hand: how loud the guide and loops are on a real phone, the feel of the taps, the lock screen
+  controls pressed by a finger.
