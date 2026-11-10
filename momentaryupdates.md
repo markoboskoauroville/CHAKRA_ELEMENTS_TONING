@@ -13,3 +13,9 @@ Every request saved word for word, first, before any code.
 > After you create application for meditation, created My Style uh page, call it uh Chakra and Elements toning.pages.dev and uh make as we always do, you know how we do lifestyle images and donation box, etc. So, make it available for public.
 
 (Meaning: chakra-and-elements-toning.pages.dev in his house style: lifestyle images, donation bowl, SEO, download counter, a card on the bio.)
+
+## Request 3 (10.11.2026): public repo, five long Suno songs
+
+> So answer to question number one, public repo or GitHub billing? We going to go for public repo. Question number two, uh five new long Suno songs, one per element. Yes, of course. As soon as sign in, we're going to do on this computer, actually. We're doing Suno ...
+
+(The repo was made public by the master session the same day. Suno runs on this Mac, in Firefox; one attempt per song, shown to Marko before any regeneration.)
