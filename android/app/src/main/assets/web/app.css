@@ -4,7 +4,8 @@
 :root{
   --ground:#14161A; --panel:#1C2026; --raised:#2C323A; --line:#2A2F36; --text:#E6E8EA; --dim:#8A9199;
   --amber:#E8A64B;
-  --earth:#D4AF37; --water:#F3EEE2; --fire:#C8102E; --air:#2FB45A;
+  --earth:#D4AF37; --water:#DCE6EA; --fire:#FFF1D8; --air:#EEF4F1; --om:#7F00FF;
+  /* Marko 10.11.2026: only Earth (gold) and Om (violet) are colours; water reflects, fire is light, air is a haze */
   --rainbow:linear-gradient(90deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#5AA2F0,#9F7AE0);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -81,6 +82,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .floatClose{position:absolute;right:12px;top:12px;background:rgba(0,0,0,.4)}
 .elLabel{position:absolute;left:16px;right:16px;bottom:24px;text-align:center;font-size:15px;color:#DDD;transition:opacity 1.5s}
 .elLabel.hide{opacity:0}
+.elLabel small{display:block;font-size:13px;color:#AAA;margin-top:6px;line-height:1.45}
+.philo p{margin:0 0 10px}
+.philo b{color:var(--text);font-weight:600}
 
 /* breath */
 .breathStage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:280px}
@@ -96,3 +100,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .logList{margin-top:8px;font-size:13px;color:var(--dim);max-height:180px;overflow-y:auto}
 .logList div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
 .version{color:#4A5058;font-size:12px;text-align:center;padding:12px}
+
+.cardStripes i.c-water{background:linear-gradient(90deg,rgba(220,230,234,.25),rgba(220,230,234,.85),rgba(220,230,234,.25))!important}
+.cardStripes i.c-fire{background:linear-gradient(90deg,rgba(255,241,216,.35),#FFF1D8,rgba(255,241,216,.35))!important}
+.cardStripes i.c-air{background:rgba(238,244,241,.35)!important}
+.cardStripes i.c-om{background:var(--om)}

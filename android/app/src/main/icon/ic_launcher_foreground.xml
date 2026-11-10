@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Chakra and Elements Toning (Mantra), the launcher icon: the five element stripes in Marko's chakra colours
-     (MANTRA_MANIFEST chakra-colors.md): earth gold, water milky white, fire crimson, air green, ether the rainbow.
+     Chakra and Elements Toning (Mantra), the launcher icon: the six stripes in Marko's colours of 10.11.2026
+     (MANTRA_MANIFEST chakra-colors.md): earth gold, water a reflection, fire white light, air a haze, ether the rainbow, Om violet.
      THIS IS A TEMPLATE: the build writes the version digits at the VERSION line (version-visible.md).
 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp" android:height="108dp"
     android:viewportWidth="108" android:viewportHeight="108">
-    <path android:fillColor="#D4AF37" android:pathData="M38.8,35 H69.2 a1.8,1.8 0 0 1 0,3.6 H38.8 a1.8,1.8 0 0 1 0,-3.6 Z" />
-    <path android:fillColor="#F3EEE2" android:pathData="M38.8,40.4 H69.2 a1.8,1.8 0 0 1 0,3.6 H38.8 a1.8,1.8 0 0 1 0,-3.6 Z" />
-    <path android:fillColor="#C8102E" android:pathData="M38.8,45.8 H69.2 a1.8,1.8 0 0 1 0,3.6 H38.8 a1.8,1.8 0 0 1 0,-3.6 Z" />
-    <path android:fillColor="#2FB45A" android:pathData="M38.8,51.2 H69.2 a1.8,1.8 0 0 1 0,3.6 H38.8 a1.8,1.8 0 0 1 0,-3.6 Z" />
-    <path android:pathData="M38.8,56.6 H69.2 a1.8,1.8 0 0 1 0,3.6 H38.8 a1.8,1.8 0 0 1 0,-3.6 Z">
+    <path android:fillColor="#D4AF37" android:pathData="M38.8,35.00 H69.2 a1.5,1.5 0 0 1 0,3.0 H38.8 a1.5,1.5 0 0 1 0,-3.0 Z" />
+    <path android:fillColor="#B3DCE6EA" android:pathData="M38.8,39.30 H69.2 a1.5,1.5 0 0 1 0,3.0 H38.8 a1.5,1.5 0 0 1 0,-3.0 Z" />
+    <path android:fillColor="#FFF1D8" android:pathData="M38.8,43.60 H69.2 a1.5,1.5 0 0 1 0,3.0 H38.8 a1.5,1.5 0 0 1 0,-3.0 Z" />
+    <path android:fillColor="#73EEF4F1" android:pathData="M38.8,47.90 H69.2 a1.5,1.5 0 0 1 0,3.0 H38.8 a1.5,1.5 0 0 1 0,-3.0 Z" />
+    <path android:pathData="M38.8,52.20 H69.2 a1.5,1.5 0 0 1 0,3.0 H38.8 a1.5,1.5 0 0 1 0,-3.0 Z">
         <aapt:attr name="android:fillColor">
-            <gradient android:type="linear" android:startX="37" android:startY="58" android:endX="71" android:endY="58">
+            <gradient android:type="linear" android:startX="37" android:startY="53.70" android:endX="71" android:endY="53.70">
                 <item android:offset="0" android:color="#C8102E" />
                 <item android:offset="0.17" android:color="#FF8A2B" />
                 <item android:offset="0.33" android:color="#E9C84A" />
@@ -25,5 +25,6 @@
             </gradient>
         </aapt:attr>
     </path>
+    <path android:fillColor="#7F00FF" android:pathData="M38.8,56.50 H69.2 a1.5,1.5 0 0 1 0,3.0 H38.8 a1.5,1.5 0 0 1 0,-3.0 Z" />
     <!--VERSION-->
 </vector>

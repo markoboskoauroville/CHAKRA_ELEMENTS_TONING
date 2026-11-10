@@ -1,4 +1,6 @@
-// The five elements: their vowel, chakra, colour (MANTRA_MANIFEST chakra-colors.md) and a symbolic drawing.
+// The five elements and AUM: their vowel, chakra, colour (MANTRA_MANIFEST chakra-colors.md, Marko 10.11.2026: only
+// Earth has a true colour, gold; Water is reflection, Fire is energy, Air is connection, none of them a hue; the throat
+// is every colour; Om is pure violet) and a symbolic drawing. `line` is the philosophy, one sentence.
 // draw(ctx, w, h, t, a): a.faint = the stripe background (no audio, very faint); otherwise the full-screen view,
 // a.level 0..1 and a.bins (frequency bytes) from the analyser. Everything is drawn in the element's colour.
 const RAINBOW = ["#C8102E","#FF8A2B","#E9C84A","#2FB45A","#38B6EC","#5AA2F0","#9F7AE0"];
@@ -21,7 +23,8 @@ function ring(ctx, cx, cy, r, a, colorAt, t){
 }
 
 const ELEMENTS = [
- { id:"earth", vowel:"A", name:"Earth", chakra:"Root · grounding", color:"#D4AF37", title:"Earth · A · the root",
+ { id:"earth", vowel:"A", name:"Earth", chakra:"Grounding · gold", color:"#D4AF37", title:"Earth · A · the root",
+   line:"Grounding. The gold of living matter: the body, our work, the joy of being here.",
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h/2, base=Math.min(w,h)*(a.faint?0.9:0.32), al=a.faint?0.10:0.8, L=a.level||0;
      ctx.lineWidth=a.faint?1.2:2;
@@ -33,7 +36,8 @@ const ELEMENTS = [
      if(!a.faint){ ring(ctx,cx,cy,base*0.62,a,(x,o)=>rgba(this.color,o),t);
        for(let i=0;i<40;i++){ const y=((i*97+t*12)%h), x=(i*233)%w; ctx.fillStyle=rgba(this.color,0.25); ctx.fillRect(x,h-y,2,2); } }
    }},
- { id:"water", vowel:"U", name:"Water", chakra:"Sacral · creativity", color:"#F3EEE2", title:"Water · U · below the navel",
+ { id:"water", vowel:"U", name:"Water", chakra:"Creativity · reflection", color:"#DCE6EA", nohue:true, title:"Water · U · below the navel",
+   line:"Creativity. Creative energy takes the shape of what holds it, the mood within us; without ground it has nowhere to land.",
    draw(ctx,w,h,t,a){
      const L=a.level||0, lines=a.faint?6:14, al=a.faint?0.09:0.55;
      ctx.lineWidth=a.faint?1.2:1.8;
@@ -48,7 +52,8 @@ const ELEMENTS = [
        ctx.strokeStyle=rgba(this.color,0.7); ctx.lineWidth=3; ctx.beginPath(); ctx.arc(cx,cy,r*(1+L*0.3),0.15*Math.PI,0.85*Math.PI); ctx.stroke();
        ring(ctx,cx,cy,r*1.5,a,(x,o)=>rgba(this.color,o*0.8),t); }
    }},
- { id:"fire", vowel:"I", name:"Fire", chakra:"Navel · energy", color:"#C8102E", title:"Fire · I · the navel",
+ { id:"fire", vowel:"I", name:"Fire", chakra:"Strength · pure energy", color:"#FFF1D8", nohue:true, title:"Fire · I · the navel",
+   line:"Strength. The pure energy of the body, kindled to do the work the vision asks for.",
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h*(a.faint?0.5:0.52), s=Math.min(w,h)*(a.faint?0.75:0.42), L=a.level||0, al=a.faint?0.13:0.85;
      ctx.lineWidth=a.faint?1.4:3; // the downward triangle of the navel chakra
@@ -58,10 +63,11 @@ const ELEMENTS = [
      const n=a.faint?24:120; // rising sparks
      for(let i=0;i<n;i++){ const sp=0.3+((i*37)%10)/10, life=((t*sp*0.25+i*0.137)%1);
        const x=cx+Math.sin(i*12.9+t*0.7)*s*0.6*(1-life), y=h*(1-life)-(a.faint?0:L*40);
-       ctx.fillStyle=rgba(i%3?this.color:"#FF8A2B",(a.faint?0.12:0.6)*(1-life)); ctx.beginPath(); ctx.arc(x,y,(a.faint?1.5:2.5+L*4)*(1-life),0,7); ctx.fill(); }
+       ctx.fillStyle=rgba(i%3?this.color:"#FFFFFF",(a.faint?0.12:0.6)*(1-life)); ctx.beginPath(); ctx.arc(x,y,(a.faint?1.5:2.5+L*4)*(1-life),0,7); ctx.fill(); }
      if(!a.faint) ring(ctx,cx,cy,s*0.36,a,(x,o)=>rgba(this.color,o),t);
    }},
- { id:"air", vowel:"O", name:"Air", chakra:"Heart · love", color:"#2FB45A", title:"Air · O · the heart",
+ { id:"air", vowel:"O", name:"Air", chakra:"Connection · beyond sight", color:"#EEF4F1", nohue:true, title:"Air · O · the heart",
+   line:"Connection. Beyond sight we feel one another; all work ends in serving each other's growth.",
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h/2, r=Math.min(w,h)*(a.faint?0.42:0.26)*(1+(a.level||0)*0.2), al=a.faint?0.11:0.8;
      ctx.lineWidth=a.faint?1.2:2.5; ctx.strokeStyle=rgba(this.color,al);
@@ -72,7 +78,8 @@ const ELEMENTS = [
        for(let x=0;x<=w;x+=10){ const y=h*(k+0.5)/n+Math.sin(x/w*4+t*0.4+k)*h*0.03+Math.cos(x/w*2-t*0.25+k*2)*h*0.02; x?ctx.lineTo(x,y):ctx.moveTo(x,y);} ctx.stroke(); }
      if(!a.faint) ring(ctx,cx,cy,r*1.15,a,(x,o)=>rgba(this.color,o),t);
    }},
- { id:"ether", vowel:"A-U-I-O", name:"Ether", chakra:"Throat · truth", color:"#5AA2F0", rainbow:true, title:"Ether · A-U-I-O · the throat",
+ { id:"ether", vowel:"A-U-I-O", name:"Ether", chakra:"Expression · every colour", color:"#5AA2F0", rainbow:true, title:"Ether · A-U-I-O · the throat",
+   line:"Expression. Your truth in every colour: simple enough for a child, deep enough for a philosopher.",
    draw(ctx,w,h,t,a){
      const cx=w/2, cy=h/2, r=Math.min(w,h)*(a.faint?0.40:0.24)*(1+(a.level||0)*0.2), al=a.faint?0.13:0.8;
      ctx.lineWidth=a.faint?1.3:2.5; // the sixteen petals of the throat, every colour, turning slowly
@@ -81,5 +88,17 @@ const ELEMENTS = [
        ctx.beginPath(); ctx.ellipse(cx+Math.cos(g)*r*0.62,cy+Math.sin(g)*r*0.62,r*0.38,r*0.12,g,0,Math.PI*2); ctx.stroke(); }
      ctx.strokeStyle=rgba("#FFFFFF",a.faint?0.08:0.4); ctx.beginPath(); ctx.arc(cx,cy,r*0.25,0,7); ctx.stroke();
      if(!a.faint) ring(ctx,cx,cy,r*1.12,a,(x,o)=>rgba(rainbowAt(x+t*0.02),o),t);
+   }},
+ { id:"aum", vowel:"AUM", name:"Om", chakra:"Vision · violet", color:"#7F00FF", title:"AUM · the third eye",
+   line:"Vision. The creative seeing from which everything begins.",
+   // rung 6 of the DJ Mantra toning ladder (djmantra.pages.dev): AUM (OM), from yoga; pure violet, vision (Marko 10.11.2026)
+   draw(ctx,w,h,t,a){
+     const cx=w/2, cy=h/2, r=Math.min(w,h)*(a.faint?0.30:0.20)*(1+(a.level||0)*0.2), al=a.faint?0.10:0.75;
+     ctx.lineWidth=a.faint?1.2:2.5; ctx.strokeStyle=rgba(this.color,al);
+     ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.stroke();               // the circle of the third eye
+     for(const s of [-1,1]){ ctx.beginPath();                                      // its two petals, left and right
+       ctx.ellipse(cx+s*r*1.55,cy,r*0.62,r*0.36*(1+0.05*Math.sin(t*0.4)),0,0,Math.PI*2); ctx.stroke(); }
+     ctx.fillStyle=rgba(this.color,a.faint?0.12:0.8); ctx.beginPath(); ctx.arc(cx,cy,r*0.12*(1+(a.level||0)),0,Math.PI*2); ctx.fill(); // the point
+     if(!a.faint) ring(ctx,cx,cy,r*1.25,a,(x,o)=>rgba(this.color,o*0.7),t);
    }},
 ];

@@ -169,7 +169,7 @@ $("#guideTimer").onclick=()=>{ // one tap cycles the timer of this session
   const opts=[0,5,10,20,30,45]; timerMin=opts[(opts.indexOf(timerMin)+1)%opts.length]; store.set("timer",timerMin); renderTimer();
   N.setTimer(timerMin); pokeOverlay(); };
 
-// ---------------------------------------------------------------- ELEMENTS: five stripes
+// ---------------------------------------------------------------- ELEMENTS: the stripes (five elements and AUM)
 const stripeCanvases=[]; let stripesRaf=0;
 function buildStripes(){
   const box=$("#stripes"); box.innerHTML="";
@@ -177,7 +177,11 @@ function buildStripes(){
     const d=document.createElement("button"); d.className="stripe"; d.setAttribute("aria-label", el.name);
     d.style.background = el.rainbow
       ? "linear-gradient(90deg,rgba(200,16,46,.22),rgba(255,138,43,.22),rgba(233,200,74,.22),rgba(47,180,90,.22),rgba(56,182,236,.22),rgba(90,162,240,.22),rgba(159,122,224,.22))"
-      : rgba(el.color, el.id==="water"?0.16:0.22);
+      : el.nohue   // no hue of their own (Marko 10.11.2026): water a reflection, fire a light, air a haze
+        ? ({water:"linear-gradient(180deg,rgba(220,230,234,.13),rgba(220,230,234,.03) 55%,rgba(220,230,234,.10))",
+            fire:"radial-gradient(ellipse at 50% 120%,rgba(255,241,216,.20),rgba(255,241,216,.02) 70%)",
+            air:"radial-gradient(ellipse at 50% 50%,rgba(238,244,241,.12),rgba(238,244,241,.02) 75%)"})[el.id]
+        : rgba(el.color, 0.22);
     const c=document.createElement("canvas"); d.appendChild(c);
     const lab=document.createElement("div"); lab.className="sLabel";
     lab.innerHTML=`<span class="vowel"></span><span class="name"></span>`;
@@ -204,8 +208,8 @@ function openElement(el){
   const c=$("#elCanvas"); const k=Math.min(2, window.devicePixelRatio||1); c.width=c.clientWidth*k; c.height=c.clientHeight*k;
   const x=c.getContext("2d"); x.fillStyle="#000"; x.fillRect(0,0,c.width,c.height);
   N.play(el.id, true, el.title); N.setTimer(timerMin); startSession(el.id); mirror.load(el.id, true);
-  const lab=$("#elLabel"); lab.textContent = `${el.name} · sing ${el.vowel} · tap to return`; lab.classList.remove("hide");
-  clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 4000);
+  const lab=$("#elLabel"); lab.innerHTML = `${el.name} · sing ${el.vowel}<small>${el.line}</small><small>tap to return</small>`; lab.classList.remove("hide");
+  clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
   cancelAnimationFrame(elRaf); const t0=performance.now();
   const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000, a=mirror.read();
     x.fillStyle="rgba(0,0,0,0.16)"; x.fillRect(0,0,c.width,c.height);   // soft trails
