@@ -117,22 +117,10 @@ function yantra(ctx, el, W, H, t){
   const P=YANTRA[el.id]; if(!P) return;
   ctx.save(); ctx.translate(cx,cy); ctx.lineWidth=lw; ctx.lineJoin="round"; ctx.shadowBlur=9*k;
   const stroke=(c,a)=>{ ctx.strokeStyle=rgba(c,a); ctx.shadowColor=rgba(c,a*0.9); };
-  // the lotus: N petals around the circle
-  const n=P.petals, r0=R*0.62, r1=R*(n===2?1.0:0.98);
-  ctx.save(); ctx.rotate(rot);
-  for(let i=0;i<n;i++){
-    const a=i/n*Math.PI*2-Math.PI/2, w=Math.PI/n*(n===2?0.55:0.92);
-    stroke(el.rainbow?rainbowAt(i/n):col, 0.30);
-    ctx.beginPath();
-    ctx.moveTo(Math.cos(a-w)*r0, Math.sin(a-w)*r0);
-    ctx.quadraticCurveTo(Math.cos(a-w*0.55)*r1*1.02, Math.sin(a-w*0.55)*r1*1.02, Math.cos(a)*r1, Math.sin(a)*r1);
-    ctx.quadraticCurveTo(Math.cos(a+w*0.55)*r1*1.02, Math.sin(a+w*0.55)*r1*1.02, Math.cos(a+w)*r0, Math.sin(a+w)*r0);
-    ctx.stroke();
-  }
-  ctx.restore();
-  stroke(el.rainbow?"#FFFFFF":col, 0.34); ctx.beginPath(); ctx.arc(0,0,r0,0,Math.PI*2); ctx.stroke();
+  // no petals (Marko 10.11.2026: "remove petals. Keep only symbols inside the petals"): the symbol alone
+  const r0=R*0.92;
   // the yantra of the element inside
-  const r=r0*0.86; stroke(el.rainbow?"#FFFFFF":col, 0.46); ctx.beginPath();
+  const r=r0*0.86; stroke(el.rainbow?"#FFFFFF":col, 0.55); ctx.beginPath();
   const tri=(rr,down)=>{ for(let i=0;i<3;i++){ const a=(down?Math.PI/2:-Math.PI/2)+i*Math.PI*2/3; i?ctx.lineTo(Math.cos(a)*rr,Math.sin(a)*rr):ctx.moveTo(Math.cos(a)*rr,Math.sin(a)*rr); } ctx.closePath(); };
   if(el.id==="earth"){ const s=r*0.70; ctx.rect(-s,-s,2*s,2*s); ctx.stroke(); ctx.beginPath(); tri(s*0.62,true); ctx.stroke(); }
   else if(el.id==="water"){ ctx.arc(0,0,r*0.82,0,Math.PI*2); ctx.stroke(); ctx.beginPath(); // the crescent, horns up

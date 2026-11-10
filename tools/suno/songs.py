@@ -18,12 +18,14 @@ SONGS = [
   "male baritone holds the vowel O on ONE constant note C, monotone, sustained single held notes with breath pauses between, open and warm like the heart"),
  ("ether", "Chakra Toning · Ether (A-U-I-O)", "F G A C D", None,
   "solo male baritone with male choir support, free slow improvisation across the five notes F G A C D on all the vowels A U I O, the choir sustaining chords underneath with layered octave doubles"),
+ ("om", "Chakra Toning · OM", "D", "Ooooooooooommmmmmmmmmmmm",
+  "a classical OM chant: male baritone sings OM very long on the note D, the O open and full, closing slowly into a long humming M, with a quiet male choir doubling it an octave below"),
 ]
 def lyrics(key, note, line):
     out = ["[Intro, no voice: tanpura and shruti box on D, sitar softly]", ""]
     for k in range(8):
         if line:
-            out.append(f"[Solo male voice, sung ONE constant held note {note}, monotone, no melody, no vibrato, steady like a drone, tabla soft]")
+            out.append(f"[Solo male voice with a quiet male choir, OM sung very long on the note {note}, the M hummed with closed lips, tabla soft]" if key=="om" else f"[Solo male voice, sung ONE constant held note {note}, monotone, no melody, no vibrato, steady like a drone, tabla soft]")
             out += [line] * 6
         else:
             out.append("[Solo male voice with male choir support, free slow improvisation across F G A C D, all the vowels, choir sustaining chords]")

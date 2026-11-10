@@ -6,20 +6,20 @@ root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "site")
 s = open(os.path.join(root, "index.html")).read()
 R = [
  ('<html lang="en" data-lang="en">', '<html lang="hr" data-lang="hr">'),
- ('<title>Chakra and Elements Toning: free chakra toning meditation app for Android</title>',
-  '<title>Chakra and Elements Toning: besplatna aplikacija za chakra toning meditaciju za Android</title>'),
- ('<meta name="description" content="Sing the five elements and OM with DJ Mantra\'s chakra toning: a guided toning with MilkDrop visuals, element sounds to sing along, a breath circle and a soft bell. Free, offline, no account.">',
-  '<meta name="description" content="Pjevaj pet elemenata i OM uz chakra toning DJ Mantre: vođeni toning s MilkDrop slikama, zvukovi elemenata za pjevanje, krug za disanje i nježno zvono. Besplatno, bez interneta, bez računa.">'),
+ ('<title>Chakra and Elements Toning: a sing-along meditation app for Android</title>',
+  '<title>Chakra and Elements Toning: aplikacija za meditaciju pjevanjem za Android</title>'),
+ ('<meta name="description" content="Sing along and meditate in sound: six songs, one vowel each (A, U, I, O, A-U-I-O, OM). Follow the melody with your voice. Free for Android, offline, no account.">',
+  '<meta name="description" content="Pjevaj i meditiraj u zvuku: šest pjesama, svaka sa svojim vokalom (A, U, I, O, A-U-I-O, OM). Prati melodiju svojim glasom. Besplatno za Android, bez interneta, bez računa.">'),
  (f'<link rel="canonical" href="{U}">', f'<link rel="canonical" href="{U}hr/">'),
  (f'<meta property="og:url" content="{U}">', f'<meta property="og:url" content="{U}hr/">'),
  ('<meta property="og:locale" content="en_US">\n<meta property="og:locale:alternate" content="hr_HR">',
   '<meta property="og:locale" content="hr_HR">\n<meta property="og:locale:alternate" content="en_US">'),
- ('<meta property="og:title" content="Chakra and Elements Toning: sing the five elements and OM">',
-  '<meta property="og:title" content="Chakra and Elements Toning: pjevaj pet elemenata i OM">'),
- ('<meta property="og:description" content="A free meditation app for Android on DJ Mantra\'s chakra toning. Offline, no account.">',
-  '<meta property="og:description" content="Besplatna aplikacija za meditaciju za Android na chakra toningu DJ Mantre. Bez interneta, bez računa.">'),
- ('<meta name="twitter:description" content="A free meditation app for Android on DJ Mantra\'s chakra toning. Offline, no account.">',
-  '<meta name="twitter:description" content="Besplatna aplikacija za meditaciju za Android na chakra toningu DJ Mantre. Bez interneta, bez računa.">'),
+ ('<meta property="og:title" content="Chakra and Elements Toning: sing along, one vowel, one song">',
+  '<meta property="og:title" content="Chakra and Elements Toning: pjevaj, jedan vokal, jedna pjesma">'),
+ ('<meta property="og:description" content="Six songs, one vowel each: sing along with the melody and meditate in the sound. Free, offline, no account.">',
+  '<meta property="og:description" content="Šest pjesama, svaka sa svojim vokalom: pjevaj s melodijom i meditiraj u zvuku. Besplatno, bez interneta, bez računa.">'),
+ ('<meta name="twitter:description" content="Six songs, one vowel each: sing along with the melody and meditate in the sound. Free, offline, no account.">',
+  '<meta name="twitter:description" content="Šest pjesama, svaka sa svojim vokalom: pjevaj s melodijom i meditiraj u zvuku. Besplatno, bez interneta, bez računa.">'),
 ]
 for a, b in R:
     assert a in s, a[:70]

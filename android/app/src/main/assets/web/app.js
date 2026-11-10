@@ -219,7 +219,7 @@ function buildStripes(){
     lab.innerHTML=`<span class="vowel"></span><span class="name"></span>`;
     lab.querySelector(".vowel").textContent=el.vowel;
     lab.querySelector(".vowel").style.color = el.rainbow ? "#FFFFFF" : el.color;
-    lab.querySelector(".name").innerHTML = `${el.name}<small>${el.chakra}</small>`;
+    lab.querySelector(".name").textContent = `Sing ${el.vowel} with the melody`;   // a sing-along (Marko 10.11.2026): the vowel and one cue
     d.appendChild(lab); d.onclick=()=>openElement(el);
     box.appendChild(d); stripeCanvases.push({c,el});
   });
@@ -241,7 +241,7 @@ function openElement(el){
   const c=$("#elCanvas"); const k=Math.min(2, window.devicePixelRatio||1); c.width=c.clientWidth*k; c.height=c.clientHeight*k;
   const x=c.getContext("2d"); x.fillStyle="#000"; x.fillRect(0,0,c.width,c.height);
   N.play(el.id, true, el.title); N.setTimer(timerMin); startSession(el.id); mirror.load(el.id, true);
-  const lab=$("#elLabel"); lab.innerHTML = `${el.name} · sing ${el.vowel}<small>${el.line}</small><small>tap to return</small>`; lab.classList.remove("hide");
+  const lab=$("#elLabel"); lab.innerHTML = `Sing ${el.vowel} with the melody<small>tap to return</small>`; lab.classList.remove("hide");
   clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
   // the element's own colour (or light) fills the screen, and breathes a little with the voice; nothing else
   const BG={earth:["#D4AF37","#8A6E16"], aum:["#8B2BFF","#3A0070"]};
