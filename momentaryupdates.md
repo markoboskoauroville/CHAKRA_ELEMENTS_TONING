@@ -61,3 +61,13 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 11 (10.11.2026): the logotype, violet outside, gold inside, white between, smooth
 
 > please for chakra and element toning outer ring should be violet color and inside ring should be gold color and then in between is a white color and make this transition very smooth
+
+## Request 12 (10.11.2026): the breathing ball, the Pixel, simple first with Additional modules
+
+> and these should be the colors of the breeding bowl for pranayamas
+
+(Then "ball": the breathing ball of the pranayamas takes the logotype's colours, violet, white, gold.)
+
+> just a reminder, Pixel phone is on the cable, please use it to test all these apps we are building now
+
+> Basically for this additional app, I mean for meditation, chakra and elements toning pages app, we need to make every other options. So simplify option is the main thing. And then when it's playing each song, then so there is the complication come down. But very gently, rainbow colors of buttons to change visualization. and in the main screen below the play button at the bottom there will be one square button called additional modules and then you can get your pranayama, you can get your education
