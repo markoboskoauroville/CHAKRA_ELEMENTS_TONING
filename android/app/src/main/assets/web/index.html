@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=contain">
+<title>Chakra and Elements Toning</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- HOME -->
+<section id="home" class="screen on">
+  <header class="top">
+    <div class="title">Chakra and Elements<br>Toning</div>
+    <button class="icon" id="toSettings" aria-label="Settings">&#9881;</button>
+  </header>
+  <div class="streak" id="streak"></div>
+
+  <button class="card action" id="toGuide">
+    <span class="cardTitle">Guide</span>
+    <span class="cardLine">The chakra toning, 5 minutes, with MilkDrop visions</span>
+  </button>
+  <button class="card" id="toElements">
+    <span class="cardStripes"><i class="c-earth"></i><i class="c-water"></i><i class="c-fire"></i><i class="c-air"></i><i class="c-ether"></i></span>
+    <span class="cardTitle">Elements</span>
+    <span class="cardLine">Five sounds to sing along: A · U · I · O · A-U-I-O</span>
+  </button>
+  <button class="card" id="toBreath">
+    <span class="cardTitle">Breath</span>
+    <span class="cardLine">A slow circle to breathe with, before or after toning</span>
+  </button>
+
+  <div class="label">Session timer, a soft bell at the end</div>
+  <div class="choice" id="timerChoice">
+    <button data-min="0">Off</button><button data-min="5">5</button><button data-min="10">10</button>
+    <button data-min="20">20</button><button data-min="30">30</button><button data-min="45">45</button>
+  </div>
+  <div class="hint">Plays with the screen off. No account, no internet, nothing leaves the phone.</div>
+</section>
+
+<!-- GUIDE -->
+<section id="guide" class="screen black">
+  <canvas id="milk"></canvas>
+  <div class="overlay" id="guideOverlay">
+    <div class="ovTop">
+      <button class="icon" id="guideClose" aria-label="Close">&#10005;</button>
+      <div class="ovTitle" id="presetName"></div>
+      <button class="icon small" id="guideTimer" aria-label="Timer"></button>
+    </div>
+    <div class="ovBottom">
+      <div class="progress" id="guideProgress"><div id="guideBar"></div></div>
+      <div class="ovRow">
+        <span class="time" id="guideTime">0:00</span>
+        <button class="play" id="guidePlay" aria-label="Play">Play</button>
+        <span class="time" id="guideDur">0:00</span>
+      </div>
+      <div class="ovRow">
+        <button class="quiet" id="stylePrev" aria-label="Previous style">&#8249; Style</button>
+        <label class="toggle"><input type="checkbox" id="autoStyle" checked><span></span>Auto</label>
+        <button class="quiet" id="styleOpen" aria-label="All styles">Styles &#8250;</button>
+      </div>
+    </div>
+  </div>
+  <div class="sheet" id="styleSheet">
+    <div class="sheetHead"><span>Visual style</span><button class="icon" id="styleClose" aria-label="Close">&#10005;</button></div>
+    <div class="sheetList" id="styleList"></div>
+  </div>
+</section>
+
+<!-- ELEMENTS -->
+<section id="elements" class="screen black">
+  <div class="stripes" id="stripes"></div>
+  <button class="icon floatClose" id="elementsClose" aria-label="Close">&#10005;</button>
+</section>
+
+<!-- ONE ELEMENT, FULL SCREEN -->
+<section id="element" class="screen black">
+  <canvas id="elCanvas"></canvas>
+  <div class="elLabel" id="elLabel"></div>
+</section>
+
+<!-- BREATH -->
+<section id="breath" class="screen">
+  <header class="top">
+    <button class="icon" id="breathClose" aria-label="Close">&#10005;</button>
+    <div class="title small">Breath</div>
+    <span class="icon"></span>
+  </header>
+  <div class="breathStage"><div class="breathCircle" id="breathCircle"></div><div class="breathWord" id="breathWord">Tap to begin</div></div>
+  <div class="breathClock" id="breathClock">0:00</div>
+  <div class="choice" id="breathChoice">
+    <button data-p="4,0,6,0">Calm 4·6</button><button data-p="4,4,4,4">Box 4·4</button><button data-p="4,7,8,0">4·7·8</button>
+  </div>
+</section>
+
+<!-- SETTINGS / ABOUT -->
+<section id="settings" class="screen">
+  <header class="top">
+    <button class="icon" id="settingsClose" aria-label="Close">&#10005;</button>
+    <div class="title small">About</div>
+    <span class="icon"></span>
+  </header>
+  <div class="panel">
+    <div class="pTitle">Your practice</div>
+    <div id="logSummary"></div>
+    <div class="logList" id="logList"></div>
+  </div>
+  <div class="panel">
+    <div class="pTitle">The five elements</div>
+    <div class="aboutText">Earth, A, the root, gold. Water, U, below the navel, milky white. Fire, I, the navel, crimson.
+      Air, O, the heart, green. Ether, A-U-I-O, the throat, all colours. Sing the vowel with the voice, on one breath,
+      and let the next breath come by itself.</div>
+  </div>
+  <div class="panel">
+    <div class="pTitle">Credits</div>
+    <div class="aboutText">Chakra toning (raga, held notes) and the element songs: DJ Mantra.
+      Visuals: butterchurn (MIT, Jordan Berg), a WebGL MilkDrop engine, with the butterchurn-presets collection
+      (MIT; the presets are by the MilkDrop community, their authors in each name).</div>
+  </div>
+  <div class="version" id="version"></div>
+</section>
+
+<script src="vendor/butterchurn.min.js"></script>
+<script src="vendor/butterchurnPresets.min.js"></script>
+<script src="elements.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

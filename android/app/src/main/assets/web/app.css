@@ -1,0 +1,98 @@
+/* Chakra and Elements Toning (Mantra). TRAIL language (MANTRA_MANIFEST language-trail.md): one solid amber action per
+   screen, choices as one bar with the chosen part raised, quiet actions as amber words. Chakra colours from
+   chakra-colors.md. Margins 16 px on every side inside the system bars (the activity pads by the bars). */
+:root{
+  --ground:#14161A; --panel:#1C2026; --raised:#2C323A; --line:#2A2F36; --text:#E6E8EA; --dim:#8A9199;
+  --amber:#E8A64B;
+  --earth:#D4AF37; --water:#F3EEE2; --fire:#C8102E; --air:#2FB45A;
+  --rainbow:linear-gradient(90deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#5AA2F0,#9F7AE0);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--ground);color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden;user-select:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;padding:16px;overflow-y:auto}
+.screen.on{display:flex}
+.screen.black{background:#000;padding:0;overflow:hidden}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.title{font-size:26px;font-weight:600;line-height:1.15;letter-spacing:.2px}
+.title.small{font-size:20px}
+.icon{width:44px;height:44px;border-radius:22px;font-size:22px;display:flex;align-items:center;justify-content:center;color:var(--dim)}
+.icon.small{width:auto;padding:0 10px;font-size:14px}
+.streak{color:var(--dim);font-size:14px;min-height:20px;margin:4px 0 16px}
+.card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;width:100%;text-align:left;
+  background:var(--panel);border-radius:16px;padding:18px 18px;margin-bottom:12px;border:1px solid var(--line)}
+.card.action{background:var(--amber);color:#14161A;border-color:var(--amber)}
+.card.action .cardLine{color:#3A2A10}
+.cardTitle{font-size:22px;font-weight:600}
+.cardLine{font-size:14px;color:var(--dim)}
+.cardStripes{display:flex;gap:4px;width:100%}
+.cardStripes i{flex:1;height:6px;border-radius:3px}
+.c-earth{background:var(--earth)} .c-water{background:var(--water)} .c-fire{background:var(--fire)}
+.c-air{background:var(--air)} .c-ether{background:var(--rainbow)}
+.label{color:var(--dim);font-size:13px;margin:12px 2px 8px}
+.choice{display:flex;background:var(--panel);border-radius:12px;padding:3px;gap:3px;border:1px solid var(--line)}
+.choice button{flex:1;padding:11px 0;border-radius:9px;color:var(--dim);font-size:15px;min-height:44px}
+.choice button.sel{background:var(--raised);color:var(--text);font-weight:600}
+.hint{color:var(--dim);font-size:12px;margin:16px 2px 0;line-height:1.4}
+.quiet{color:var(--amber);font-size:15px;padding:10px 6px;min-height:44px}
+
+/* guide */
+#milk,#elCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:16px;
+  transition:opacity .8s;pointer-events:none}
+.overlay.hide{opacity:0}
+.overlay>*{pointer-events:auto}
+.overlay.hide>*{pointer-events:none}
+.ovTop{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.45);border-radius:22px}
+.ovTitle{flex:1;font-size:13px;color:#CCD;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.ovBottom{background:rgba(0,0,0,.55);border-radius:16px;padding:12px 12px 6px}
+.progress{height:18px;display:flex;align-items:center}
+.progress div{height:3px;background:var(--amber);border-radius:2px;width:0}
+.progress{background:linear-gradient(var(--raised),var(--raised)) center/100% 3px no-repeat}
+.ovRow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.time{font-size:13px;color:var(--dim);min-width:44px;font-variant-numeric:tabular-nums}
+.time:last-child{text-align:right}
+.play{background:var(--amber);color:#14161A;font-weight:600;border-radius:12px;padding:12px 34px;min-height:48px;font-size:17px}
+.toggle{display:flex;align-items:center;gap:8px;color:var(--text);font-size:15px}
+.toggle input{display:none}
+.toggle span{width:38px;height:22px;border-radius:11px;border:2px solid var(--dim);position:relative}
+.toggle span:after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:7px;background:var(--dim);transition:left .2s}
+.toggle input:checked+span{background:var(--amber);border-color:var(--amber)}
+.toggle input:checked+span:after{left:18px;background:#14161A}
+.sheet{position:absolute;left:16px;right:16px;bottom:16px;top:30%;background:var(--panel);border-radius:16px;
+  display:none;flex-direction:column;border:1px solid var(--line)}
+.sheet.on{display:flex}
+.sheetHead{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 6px 16px;font-weight:600}
+.sheetList{overflow-y:auto;padding:0 8px 8px}
+.sheetList button{display:flex;justify-content:space-between;width:100%;text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);font-size:15px}
+.sheetList button small{color:var(--dim);font-size:12px}
+.sheetList button.sel:after{content:"\2713";color:var(--amber)}
+.sheetList .group{color:var(--dim);font-size:12px;padding:12px 10px 4px}
+
+/* elements */
+.stripes{position:absolute;inset:0;display:flex;flex-direction:column}
+.stripe{flex:1;position:relative;overflow:hidden;border-bottom:1px solid #000}
+.stripe canvas{position:absolute;inset:0;width:100%;height:100%}
+.stripe .sLabel{position:absolute;left:20px;top:50%;transform:translateY(-50%);display:flex;align-items:baseline;gap:14px}
+.stripe .vowel{font-size:40px;font-weight:300;letter-spacing:2px}
+.stripe .name{font-size:15px;opacity:.85}
+.stripe .name small{display:block;font-size:12px;opacity:.7}
+.floatClose{position:absolute;right:12px;top:12px;background:rgba(0,0,0,.4)}
+.elLabel{position:absolute;left:16px;right:16px;bottom:24px;text-align:center;font-size:15px;color:#DDD;transition:opacity 1.5s}
+.elLabel.hide{opacity:0}
+
+/* breath */
+.breathStage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:280px}
+.breathCircle{width:46vw;height:46vw;max-width:260px;max-height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,166,75,.55),rgba(232,166,75,.08) 70%);transform:scale(.55)}
+.breathWord{position:absolute;font-size:20px;color:var(--text)}
+.breathClock{text-align:center;color:var(--dim);margin:8px 0 14px;font-variant-numeric:tabular-nums}
+
+/* settings */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.pTitle{font-weight:600;margin-bottom:8px}
+.aboutText{color:var(--dim);font-size:14px;line-height:1.5}
+.logList{margin-top:8px;font-size:13px;color:var(--dim);max-height:180px;overflow-y:auto}
+.logList div{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--line)}
+.version{color:#4A5058;font-size:12px;text-align:center;padding:12px}
