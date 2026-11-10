@@ -192,3 +192,19 @@ out-breath (sine easing); the home timer ends the session with the bowl bell; th
   The Philosophy screen has his correspondence table as five cards (chakra, level, sense, output, virtue, India colour,
   numbers). His senses: smell = earth, taste = water, sight = fire, touch = WIND, hearing = ether (not "touch = earth"; he
   notes the wind/earth swap is possible by another logic). The table is a short summary in our own words, credited.
+
+## The room pictures and the site, 10.11.2026 (Request 31/32 on the site)
+
+- **Pictures** (free Gemini on chromium-vm, account marko.bosko@gmail.com; auroville.community was at its limit): batch
+  `mantra-room-v2` (Drive Gemini/mantra-room: room-v2, room-sit-v2, ceiling-lights, home-phone-v2, home-sofa-v2). Prompts drafted
+  by Groq openai/gpt-oss-120b from Marko's words, corrected by Opus: Groq put the room's panels and wall symbol into the home
+  pictures and did not forbid extra symbols. The room shows the air/heart symbol (hexagram in a circle) on every wall and green
+  ceiling lights. home-phone/home-sofa were remade once: the first try drew a gold ring (an eclipse), now a filled glow (_wrong/ kept).
+  The movement-with-mario batch is parked as `_batch/batch-movement-with-mario.json` (4 of 10 made): put it back as batch.json.
+- **Screenshots** from the Nothing (v25): start.jpg (two column titles, coloured symbols), playing.jpg (earth gold ball),
+  rainbow.jpg (A-U-I-O radial); status bar, nav bar and the fps line cropped.
+- **Five elements boxes** draw the app's symbols in the app's colours (inline SVG, CSS --c per box).
+- **Gear section `#gear` is HIDDEN** (affiliate, tag markomantresh-21): mantraroom.pages.dev is not yet in PartnerNet. It uses
+  amazon.de SEARCH links because amazon.de refused automated fetches (no ASIN or Amazon's Choice badge could be seen).
+  To publish: Marko registers the site (or `partnernet-add https://mantraroom.pages.dev`), then swap each link for /dp/ASIN?tag=,
+  check the badge on amazon.de that day, remove `hidden`, run tools/build_site.py.

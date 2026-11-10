@@ -35,7 +35,7 @@
 <link rel="apple-touch-icon" href="/icon-180.png?v=6">
 <link rel="preload" as="image" href="/img/hero.webp" type="image/webp" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
- {"@type":"MobileApplication","@id":"https://mantraroom.pages.dev/#app","name":"Mantra Room","alternateName":"Mantra Meditation Room","url":"https://mantraroom.pages.dev/","description":"A sing-along meditation app for Android: six songs by DJ Mantra, one vowel each (A, U, I, O, A-U-I-O, OM). You follow the melody with that vowel and meditate in the sound. Pranayama and the philosophy of the elements inside.","applicationCategory":"HealthApplication","applicationSubCategory":"Meditation","operatingSystem":"Android 10+","inLanguage":["en","hr"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://github.com/markoboskoauroville/MANTRA_ROOM/releases/latest","installUrl":"https://github.com/markoboskoauroville/MANTRA_ROOM/releases/latest","image":"https://mantraroom.pages.dev/img/og.jpg","screenshot":["https://mantraroom.pages.dev/img/start.webp","https://mantraroom.pages.dev/img/journey.webp","https://mantraroom.pages.dev/img/modules.webp"],"author":{"@id":"https://mantraroom.pages.dev/#marko"},"publisher":{"@id":"https://mantraroom.pages.dev/#org"}},
+ {"@type":"MobileApplication","@id":"https://mantraroom.pages.dev/#app","name":"Mantra Room","alternateName":"Mantra Meditation Room","url":"https://mantraroom.pages.dev/","description":"A sing-along meditation app for Android: six songs by DJ Mantra, one vowel each (A, U, I, O, A-U-I-O, OM). You follow the melody with that vowel and meditate in the sound. Pranayama and the philosophy of the elements inside.","applicationCategory":"HealthApplication","applicationSubCategory":"Meditation","operatingSystem":"Android 10+","inLanguage":["en","hr"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://github.com/markoboskoauroville/MANTRA_ROOM/releases/latest","installUrl":"https://github.com/markoboskoauroville/MANTRA_ROOM/releases/latest","image":"https://mantraroom.pages.dev/img/og.jpg","screenshot":["https://mantraroom.pages.dev/img/start.webp","https://mantraroom.pages.dev/img/playing.webp","https://mantraroom.pages.dev/img/rainbow.webp"],"author":{"@id":"https://mantraroom.pages.dev/#marko"},"publisher":{"@id":"https://mantraroom.pages.dev/#org"}},
  {"@type":"Organization","@id":"https://mantraroom.pages.dev/#org","name":"Mantra Productions","url":"https://markobosko.pages.dev","logo":"https://mantraroom.pages.dev/icon-512.png","founder":{"@id":"https://mantraroom.pages.dev/#marko"}},
  {"@type":"Person","@id":"https://mantraroom.pages.dev/#marko","name":"Marko Bosko","alternateName":"DJ Mantra","url":"https://markobosko.pages.dev"},
  {"@type":"WebSite","@id":"https://mantraroom.pages.dev/#site","url":"https://mantraroom.pages.dev/","name":"Mantra Room","inLanguage":["en","hr"],"potentialAction":{"@type":"DonateAction","name":"Put something in the bowl","target":"https://revolut.me/mbosko0612"}}
@@ -66,6 +66,8 @@ section{padding:64px 0;border-top:1px solid var(--line)}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .card img{aspect-ratio:3/4;width:100%;object-fit:cover;object-position:top}
 .card .txt{padding:18px}
+.gear{padding-left:20px}.gear li{margin:8px 0}.gear a{color:var(--amber)}
+.wide .card img{aspect-ratio:16/9;object-position:center}
 .card h3{margin:0 0 6px;font-size:20px}
 .card p{margin:0;color:var(--dim)}
 .el{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
@@ -102,18 +104,23 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
 
 .letters{display:flex;flex-direction:column;gap:12px;max-width:760px}
 .lrow{display:flex;gap:12px;align-items:stretch}
-.lbox{flex:none;width:120px;height:120px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:300;font-size:104px;line-height:1;overflow:hidden;position:relative}
-.lbox .l4{font-size:40px;line-height:1.05;text-align:center;letter-spacing:4px}
-.b-earth{background:#D4AF37;color:#1A1405}
-.b-mist{background:radial-gradient(ellipse at 30% 35%,rgba(255,255,255,.10),transparent 60%),radial-gradient(ellipse at 75% 70%,rgba(255,255,255,.07),transparent 55%),#000;color:rgba(240,240,245,.82)}
-.b-rainbow{background:linear-gradient(180deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#4B0082,#9F7AE0);color:#fff}
-.b-om{background:#7F00FF;color:#fff;font-size:64px}
+.lbox{flex:none;width:120px;height:120px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;line-height:1;overflow:hidden;position:relative;color:var(--c)}
+.lbox svg{width:52px;height:52px;fill:none;stroke:currentColor;stroke-width:4;stroke-linejoin:round;filter:drop-shadow(0 0 4px currentColor)}
+.lbox b{font-weight:300;font-size:22px;letter-spacing:2px}
+.lbox .om{font-size:50px;height:52px;line-height:52px;text-shadow:0 0 6px currentColor}
+.b-earth{--c:#D4AF37;background:radial-gradient(circle at 50% 45%,rgba(212,175,55,.38),#0b0904 78%)}
+.b-water{--c:#4C9AD4;background:radial-gradient(circle at 50% 45%,rgba(46,127,184,.40),#03070b 78%)}
+.b-fire{--c:#E0303C;background:radial-gradient(circle at 50% 45%,rgba(216,35,47,.38),#0b0304 78%)}
+.b-air{--c:#3CC468;background:radial-gradient(circle at 50% 45%,rgba(47,180,90,.36),#030a05 78%)}
+.b-rainbow{--c:#fff;background:radial-gradient(circle at 50% 50%,#C8102E 0,#FF8A2B 16%,#E9C84A 30%,#2FB45A 45%,#38B6EC 60%,#4B0082 78%,#9F7AE0 100%)}
+.b-rainbow b{font-size:16px;letter-spacing:1px}
+.b-om{--c:#C9A2FF;background:radial-gradient(circle at 50% 45%,rgba(127,0,255,.55),#0a0214 80%)}
 .lexp{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
 .lexp h3{margin:0 0 4px;font-size:18px}
 .lexp p{margin:0;color:#D5D8DC}
 .lexp details{margin-top:6px} .lexp summary{color:var(--dim);cursor:pointer;font-size:14px}
 .lexp details p{margin-top:6px;color:var(--dim)}
-@media (max-width:480px){.lbox{width:84px;height:84px;font-size:72px}.lbox .l4{font-size:28px}.b-om{font-size:44px}}
+@media (max-width:480px){.lbox{width:84px;height:84px;gap:4px}.lbox svg{width:38px;height:38px}.lbox .om{font-size:36px;height:38px;line-height:38px}.lbox b{font-size:16px}.b-rainbow b{font-size:12px}}
 
 /* the icon on the title's first line, centred on its middle; same left margin as the page (Marko 10.11.2026) */
 .titleRow{display:flex;align-items:flex-start;gap:14px;margin:0 0 14px}
@@ -138,13 +145,14 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
 <main>
 <section id="room"><div class="wrap">
   <h2><span lang="en">The Mantra Meditation Room</span><span lang="hr">Mantra meditacijska soba</span></h2>
-  <picture><source srcset="/img/room.webp" type="image/webp"><img src="/img/room.jpg" width="1024" height="572" loading="lazy" decoding="async" alt="The Mantra Room: one colour, one deep armchair in the middle, dark-yellow line-art chakra symbols drawn by laser projectors on all four walls" style="border-radius:16px;height:auto;width:100%"></picture>
-  <p><span lang="en">The room is a single colour and almost silent. One very comfortable armchair stands in the middle, for one person. On all four walls, laser projectors draw the chakra symbols in perfect dark-yellow line art, like yantras. You come in, sit down, and the app is already waiting for you.</span><span lang="hr">Soba je jedne boje i gotovo tiha. U sredini stoji jedna vrlo udobna fotelja, za jednu osobu. Na sva četiri zida laserski projektori crtaju simbole čakri u savršenom tamnožutom linijskom crtežu, poput jantri. Uđeš, sjedneš, a aplikacija te već čeka.</span></p>
-  <p><span lang="en">You choose your sound, and the app, over Bluetooth, tells the lights (Aputure) to take the colour of that sound and to breathe with it: a dark ball of colour whose brightness rises and falls very slowly, at the pace of pranayama. The Bluetooth link is a mock-up for now; the room is being built.</span><span lang="hr">Izabereš zvuk, a aplikacija preko Bluetootha govori svjetlima (Aputure) da preuzmu boju tog zvuka i da dišu s njim: tamna kugla boje čija se svjetlina vrlo polako diže i spušta, u tempu pranayame. Bluetooth veza je za sada maketa; soba se tek gradi.</span></p>
-  <div class="grid">
-    <div class="card"><picture><source srcset="/img/room-sit.webp" type="image/webp"><img src="/img/room-sit.jpg" alt="A person meditating in the armchair, the walls glowing with dark-yellow chakra line art" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
-    <div class="card"><picture><source srcset="/img/home-phone.webp" type="image/webp"><img src="/img/home-phone.jpg" alt="At home: a phone showing a dark glowing ball of colour beside a candle" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
-    <div class="card"><picture><source srcset="/img/home-sofa.webp" type="image/webp"><img src="/img/home-sofa.jpg" alt="Someone resting on a sofa at home with the app playing" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
+  <picture><source srcset="/img/room.webp" type="image/webp"><img src="/img/room.jpg" width="1024" height="572" loading="lazy" decoding="async" alt="The Mantra Room: one colour, one deep armchair in the middle, the same single dark-yellow chakra symbol drawn by a laser in the centre of each wall, a row of small square lights glowing green along the ceiling edges" style="border-radius:16px;height:auto;width:100%"></picture>
+  <p><span lang="en">The room is a single colour and almost silent. One very comfortable armchair stands in the middle, for one person. In the centre of each of the four walls a laser projector draws one symbol in perfect dark-yellow line art: the symbol of the chakra that is playing, the same on every wall. When the sound changes, the symbol changes with it. One symbol at a time, never many.</span><span lang="hr">Soba je jedne boje i gotovo tiha. U sredini stoji jedna vrlo udobna fotelja, za jednu osobu. U sredini svakog od četiri zida laserski projektor crta jedan simbol u savršenom tamnožutom linijskom crtežu: simbol čakre koja svira, isti na svakom zidu. Kad se zvuk promijeni, mijenja se i simbol. Jedan simbol u isto vrijeme, nikad više njih.</span></p>
+  <p><span lang="en">Along the edges of the ceiling runs a row of small square Aputure lights, held by magnets. They all pulse together in the colour of the sound, rising and falling very slowly, at the pace of pranayama. In the future the app will control them over Bluetooth; for now that link is a mock-up, and the room is being built.</span><span lang="hr">Uz rubove stropa ide niz malih kvadratnih Aputure svjetala, pričvršćenih magnetima. Sva pulsiraju zajedno u boji zvuka, dižu se i spuštaju vrlo polako, u tempu pranayame. U budućnosti će ih aplikacija upravljati preko Bluetootha; za sada je ta veza maketa, a soba se tek gradi.</span></p>
+  <div class="grid wide">
+    <div class="card"><picture><source srcset="/img/room-sit.webp" type="image/webp"><img src="/img/room-sit.jpg" alt="A person resting in the armchair, eyes closed, facing one dark-yellow chakra symbol on the wall" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
+    <div class="card"><picture><source srcset="/img/ceiling-lights.webp" type="image/webp"><img src="/img/ceiling-lights.jpg" alt="Small square lights held by magnets in a row along the ceiling edge, all glowing the same green" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
+    <div class="card"><picture><source srcset="/img/home-phone.webp" type="image/webp"><img src="/img/home-phone.jpg" alt="At home: a phone showing the dark glowing gold ball beside a candle and tea" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
+    <div class="card"><picture><source srcset="/img/home-sofa.webp" type="image/webp"><img src="/img/home-sofa.jpg" alt="Someone resting on a sofa at home, eyes closed, the phone showing the dark glowing ball" width="1024" height="572" loading="lazy" decoding="async"></picture></div>
   </div>
   <p class="small"><span lang="en">Use it at home too: the phone alone shows the same breathing light.</span><span lang="hr">Možeš ga koristiti i kod kuće: sam telefon prikazuje isto svjetlo koje diše.</span></p>
 </div></section>
@@ -161,9 +169,9 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
   </svg>
   <h2 style="text-align:center"><span lang="en">One white light, every colour</span><span lang="hr">Jedno bijelo svjetlo, sve boje</span></h2>
   <div class="grid">
-    <div class="card"><picture><source srcset="/img/start.webp" type="image/webp"><img src="/img/start.jpg" alt="The first screen: six stripes with the chakra symbols" width="600" height="1180" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Tap a sound</span><span lang="hr">Dodirni zvuk</span></h3><p><span lang="en">Six stripes, six sounds, each with its chakra symbol. Tap one and sing along.</span><span lang="hr">Šest pruga, šest zvukova, svaki sa svojim simbolom čakre. Dodirni jedan i pjevaj.</span></p></div></div>
-    <div class="card"><picture><source srcset="/img/journey.webp" type="image/webp"><img src="/img/journey.jpg" alt="Water playing: black with drifting mist" width="600" height="1180" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Let it play</span><span lang="hr">Pusti da svira</span></h3><p><span lang="en">The sound fills the screen in its own light: gold earth, violet OM, water, fire and air as mist on black.</span><span lang="hr">Zvuk ispuni ekran svojim svjetlom: zlatna zemlja, ljubičasti OM, voda, vatra i zrak kao magla na crnom.</span></p></div></div>
-    <div class="card"><picture><source srcset="/img/modules.webp" type="image/webp"><img src="/img/modules.jpg" alt="The additional modules: journey, pranayama, education" width="600" height="1180" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Go deeper when you wish</span><span lang="hr">Idi dublje kad želiš</span></h3><p><span lang="en">One quiet button opens the additional modules: the journey, pranayama with a breathing ball, and education.</span><span lang="hr">Jedan tihi gumb otvara dodatne module: putovanje, pranayamu s loptom koja diše i učenje.</span></p></div></div>
+    <div class="card"><picture><source srcset="/img/start.webp" type="image/webp"><img src="/img/start.jpg" alt="The first screen: two columns, Mantra Voice and Indian Raga, six sounds with their symbols in colour" width="600" height="1193" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Tap a sound</span><span lang="hr">Dodirni zvuk</span></h3><p><span lang="en">Six sounds, each with its symbol in its own colour. Left half Mantra Voice, right half Indian Raga: tap one and sing along.</span><span lang="hr">Šest zvukova, svaki sa svojim simbolom u svojoj boji. Lijeva polovica Mantra Voice, desna Indian Raga: dodirni jednu i pjevaj.</span></p></div></div>
+    <div class="card"><picture><source srcset="/img/playing.webp" type="image/webp"><img src="/img/playing.jpg" alt="Earth playing: a dark glowing gold ball that breathes slowly" width="600" height="1216" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Let it play</span><span lang="hr">Pusti da svira</span></h3><p><span lang="en">The sound fills the screen with a dark glowing ball in its colour, brightening and fading at the pace of the breath: gold earth, blue water, red fire, green air, violet OM.</span><span lang="hr">Zvuk ispuni ekran tamnom svjetlećom kuglom u svojoj boji, koja se pali i gasi u ritmu daha: zlatna zemlja, plava voda, crvena vatra, zeleni zrak, ljubičasti OM.</span></p></div></div>
+    <div class="card"><picture><source srcset="/img/rainbow.webp" type="image/webp"><img src="/img/rainbow.jpg" alt="A-U-I-O playing: a radial rainbow, red in the centre, violet at the edge" width="600" height="1216" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">The throat in every colour</span><span lang="hr">Grlo u svim bojama</span></h3><p><span lang="en">A-U-I-O sings all the vowels, so its light is the whole rainbow, from red in the centre to violet at the edge. One quiet button opens pranayama, the journey and education.</span><span lang="hr">A-U-I-O pjeva sve vokale, pa je njegovo svjetlo cijela duga, od crvene u sredini do ljubičaste na rubu. Jedan tihi gumb otvara pranayamu, putovanje i učenje.</span></p></div></div>
   </div>
 </div></section>
 
@@ -206,32 +214,32 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
   <h2><span lang="en">Five elements and OM</span><span lang="hr">Pet elemenata i OM</span></h2>
   <div class="letters">
     <div class="lrow">
-      <div class="lbox b-earth" aria-hidden="true">A</div>
+      <div class="lbox b-earth" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><rect x="22" y="22" width="56" height="56"/></svg><b>A</b></div>
       <div class="lexp"><h3><span lang="en">Earth</span><span lang="hr">Zemlja</span></h3><p><span lang="en">Grounding: the body, our work, the joy of being here.</span><span lang="hr">Uzemljenje: tijelo, naš rad, radost što smo ovdje.</span></p>
         <details><summary><span lang="en">more</span><span lang="hr">više</span></summary><p><span lang="en">Gold, the one true colour. Living matter carries everything else; without ground, water has nowhere to land.</span><span lang="hr">Zlato, jedina prava boja. Živa materija nosi sve ostalo; bez tla voda nema gdje sletjeti.</span></p></details></div>
     </div>
     <div class="lrow">
-      <div class="lbox b-mist" aria-hidden="true">U</div>
+      <div class="lbox b-water" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,18 86,80 14,80"/></svg><b>U</b></div>
       <div class="lexp"><h3><span lang="en">Water</span><span lang="hr">Voda</span></h3><p><span lang="en">Creativity: creative energy, the mood within us.</span><span lang="hr">Kreativnost: stvaralačka energija, raspoloženje u nama.</span></p>
         <details><summary><span lang="en">more</span><span lang="hr">više</span></summary><p><span lang="en">No colour of its own, only reflection. It takes the shape of what holds it, and flows when it has ground to move on.</span><span lang="hr">Bez svoje boje, samo odraz. Poprima oblik onoga što je drži i teče kad ima tlo po kojem se kreće.</span></p></details></div>
     </div>
     <div class="lrow">
-      <div class="lbox b-mist" aria-hidden="true">I</div>
+      <div class="lbox b-fire" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="14,20 86,20 50,82"/></svg><b>I</b></div>
       <div class="lexp"><h3><span lang="en">Fire</span><span lang="hr">Vatra</span></h3><p><span lang="en">Strength: the pure energy of the body.</span><span lang="hr">Snaga: čista energija tijela.</span></p>
         <details><summary><span lang="en">more</span><span lang="hr">više</span></summary><p><span lang="en">Not a colour but energy, kindled to do the work the vision asks for.</span><span lang="hr">Nije boja nego energija, upaljena da obavi posao koji vizija traži.</span></p></details></div>
     </div>
     <div class="lrow">
-      <div class="lbox b-mist" aria-hidden="true">O</div>
+      <div class="lbox b-air" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,12 83,69 17,69"/><polygon points="50,88 17,31 83,31"/></svg><b>O</b></div>
       <div class="lexp"><h3><span lang="en">Air</span><span lang="hr">Zrak</span></h3><p><span lang="en">Connection: beyond sight we feel one another.</span><span lang="hr">Povezanost: iza vida osjećamo jedni druge.</span></p>
         <details><summary><span lang="en">more</span><span lang="hr">više</span></summary><p><span lang="en">No colour, only connection. The fruit of all work: we serve each other's growth.</span><span lang="hr">Bez boje, samo povezanost. Plod svakog rada: služimo rastu jedni drugih.</span></p></details></div>
     </div>
     <div class="lrow">
-      <div class="lbox b-rainbow" aria-hidden="true"><span class="l4">A U<br>I O</span></div>
+      <div class="lbox b-rainbow" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="34"/></svg><b>A-U-I-O</b></div>
       <div class="lexp"><h3><span lang="en">The throat</span><span lang="hr">Grlo</span></h3><p><span lang="en">Expression: your truth in every colour.</span><span lang="hr">Izražavanje: tvoja istina u svim bojama.</span></p>
         <details><summary><span lang="en">more</span><span lang="hr">više</span></summary><p><span lang="en">Yoga knows four levels of speech, Vaikhari, Madhyama, Pashyanti and Para: a truth simple enough for a child of four and deep enough for a philosopher.</span><span lang="hr">Joga poznaje četiri razine govora, Vaikhari, Madhyama, Pashyanti i Para: istina dovoljno jednostavna za dijete od četiri godine i dovoljno duboka za filozofa.</span></p></details></div>
     </div>
     <div class="lrow">
-      <div class="lbox b-om" aria-hidden="true">OM</div>
+      <div class="lbox b-om" aria-hidden="true"><span class="om">ॐ</span><b>OM</b></div>
       <div class="lexp"><h3><span lang="en">OM</span><span lang="hr">OM</span></h3><p><span lang="en">Vision: the creative seeing where everything begins.</span><span lang="hr">Vizija: stvaralačko viđenje gdje sve počinje.</span></p>
         <details><summary><span lang="en">more</span><span lang="hr">više</span></summary><p><span lang="en">Pure violet. From vision flows water, earth carries it, fire does the work, air connects, the throat speaks.</span><span lang="hr">Čista ljubičasta. Iz vizije teče voda, zemlja je nosi, vatra radi, zrak povezuje, grlo govori.</span></p></details></div>
     </div>
@@ -270,6 +278,19 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
   </div>
 </div></section>
 
+<!-- GEAR (affiliate, amazon.de, tag markomantresh-21): HIDDEN until Marko registers https://mantraroom.pages.dev in PartnerNet (MANTRA_MANIFEST payment-links.md).
+     Before removing "hidden": swap the search links for each product's /dp/ASIN?tag= link, check Amazon's Choice on amazon.de that day and show the badge only where seen. -->
+<section id="gear" hidden><div class="wrap">
+  <h2><span lang="en">Build the room at home</span><span lang="hr">Napravi sobu kod kuće</span></h2>
+  <ul class="gear">
+    <li><a href="https://www.amazon.de/s?k=Laserworld+CS-500RGB+KeyTEX&amp;tag=markomantresh-21" rel="sponsored noopener" target="_blank"><span lang="en">Laser projector (ILDA, DMX): Laserworld CS-500RGB KeyTEX</span><span lang="hr">Laserprojektor (ILDA, DMX): Laserworld CS-500RGB KeyTEX</span></a> <span class="small"><span lang="en">draws the one symbol on the wall</span><span lang="hr">crta jedan simbol na zidu</span></span></li>
+    <li><a href="https://www.amazon.de/s?k=Aputure+MC+Pro&amp;tag=markomantresh-21" rel="sponsored noopener" target="_blank"><span lang="en">Aputure MC Pro, one small square light with a magnetic back</span><span lang="hr">Aputure MC Pro, jedno malo kvadratno svjetlo s magnetom</span></a> <span class="small"><span lang="en">for the ceiling edge</span><span lang="hr">za rub stropa</span></span></li>
+    <li><a href="https://www.amazon.de/s?k=Aputure+MC+Pro+8-Light+Kit&amp;tag=markomantresh-21" rel="sponsored noopener" target="_blank"><span lang="en">Aputure MC Pro 8-Light Kit, in the case that charges them</span><span lang="hr">Aputure MC Pro 8-Light Kit, u kutiji koja ih puni</span></a> <span class="small"><span lang="en">the whole row at once</span><span lang="hr">cijeli niz odjednom</span></span></li>
+    <li><a href="https://www.amazon.de/s?k=Aputure+Accent+B7c&amp;tag=markomantresh-21" rel="sponsored noopener" target="_blank"><span lang="en">Aputure Accent B7c, a Bluetooth bulb for a normal socket</span><span lang="hr">Aputure Accent B7c, Bluetooth žarulja za običnu utičnicu</span></a> <span class="small"><span lang="en">the room's own lamps take the colour</span><span lang="hr">obične lampe preuzimaju boju</span></span></li>
+    <li><a href="https://www.amazon.de/s?k=Aputure+Accent+B7c+8-Light+Kit&amp;tag=markomantresh-21" rel="sponsored noopener" target="_blank"><span lang="en">Aputure Accent B7c 8-Light Kit</span><span lang="hr">Aputure Accent B7c 8-Light Kit</span></a> <span class="small"><span lang="en">a bulb for every lamp</span><span lang="hr">žarulja za svaku lampu</span></span></li>
+  </ul>
+  <p class="small"><span lang="en">As an Amazon Associate I earn from qualifying purchases.</span><span lang="hr">Kao Amazon partner zarađujem od kvalificiranih kupnji.</span></p>
+</div></section>
 <!-- THE MANTRA PAYMENT GATEWAY, the donation bowl (MANTRA_MANIFEST modules/donation-bowl.md, payment-links.md).
      Step 1, on the page: only the title and the Tibetan bowl (a photoreal Nano Banana Pro render).
      Step 2, after a tap: the bowl rings (a singing bowl synthesised in the browser, nothing downloaded), fades away, and
