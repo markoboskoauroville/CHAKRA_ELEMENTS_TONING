@@ -1,14 +1,12 @@
-# Site: https://chakra-and-elements-toning.pages.dev on Cloudflare Pages. TEMPLATE cloudflare-pages-with-download.yml
-# from MANTRA_MANIFEST/workflows. Runs when site/ changes, when a release is published, or by hand. The newest
-# release's APK is put next to the page under one fixed name (download/chakra-elements-toning-latest.apk,
-# download-always-latest.md). Secrets: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID.
+# Site: https://chakra-and-elements-toning.pages.dev on Cloudflare Pages. TEMPLATE cloudflare-pages.yml from
+# MANTRA_MANIFEST/workflows. Runs when site/ changes or by hand. The download button opens the public repository's
+# releases/latest (version-visible.md): the APK with the long element songs is over Pages' 25 MB per file.
+# Secrets: CLOUDFLARE_API_TOKEN (Marko's paste), CLOUDFLARE_ACCOUNT_ID.
 name: Site
 on:
   push:
     branches: [main]
     paths: [site/**, .github/workflows/site.yml]
-  release:
-    types: [published]
   workflow_dispatch:
 permissions:
   contents: read
@@ -17,18 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: The newest release behind the fixed address
-        env: { GH_TOKEN: "${{ github.token }}" }
-        run: |
-          set -euo pipefail
-          TAG=$(gh release view --json tagName --jq .tagName)
-          echo "newest release: $TAG"
-          rm -rf rel site/download && mkdir -p rel site/download
-          gh release download "$TAG" --pattern '*.apk' -D rel
-          [ "$(ls rel/*.apk | wc -l)" = 1 ] || { echo "::error::$TAG needs one .apk"; exit 1; }
-          cp rel/*.apk site/download/chakra-elements-toning-latest.apk
-          BYTES=$(stat -c %s site/download/chakra-elements-toning-latest.apk)
-          [ "$BYTES" -le 26214400 ] || { echo "::error::the APK is over Cloudflare Pages' 25 MB"; exit 1; }
       - name: The Pages project (made the first time, then it already exists)
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
