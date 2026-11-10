@@ -107,3 +107,11 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 20 (10.11.2026): copyright at the bottom of settings
 
 > please also at the bottom of every of my app which is published on the website put copyright Mantra Productions at the bottom of settings
+
+## Request 21 (10.11.2026): the OM song
+
+> om song we need to generate same as other songs we are missing om song
+
+## Request 22 (10.11.2026): symbols without petals
+
+> Please for our chakra toning app, icons are good for chakras, but remove petals. Keep only symbols inside the petals. That's all.
