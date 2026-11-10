@@ -34,7 +34,7 @@
   </header>
   <button class="card folder" id="toGuide"><span class="cardTitle">Guide</span><span class="cardLine">The chakra toning alone, with MilkDrop visions</span></button>
   <button class="card folder" id="toElements">
-    <span class="cardStripes"><i class="c-earth"></i><i class="c-water"></i><i class="c-fire"></i><i class="c-air"></i><i class="c-ether"></i><i class="c-om"></i></span>
+    <span class="rainbowStripe"></span>
     <span class="cardTitle">Elements</span><span class="cardLine">Six sounds to sing along, one at a time</span></button>
   <button class="card folder" id="toBreath"><span class="cardTitle">Breath</span><span class="cardLine">Pranayama and calm breathing, with a countdown</span></button>
   <button class="card folder" id="toOrder"><span class="cardTitle">Natural order</span><span class="cardLine">Earth carries water, water feeds fire, fire lifts air</span></button>
@@ -75,10 +75,11 @@
         <button class="play" id="guidePlay" aria-label="Play">Play</button>
         <span class="time" id="guideDur">0:00</span>
       </div>
-      <div class="ovRow">
-        <button class="quiet" id="stylePrev" aria-label="Previous style">&#8249; Style</button>
+      <div class="vizBar"><span class="vizLabel">Visualization</span><div class="vizList" id="vizList"></div></div>
+      <div class="ovRow small">
+        <button class="quiet" id="stylePrev" aria-label="Previous style">&#8249;</button>
         <label class="toggle"><input type="checkbox" id="autoStyle" checked><span></span>Auto</label>
-        <button class="quiet" id="styleOpen" aria-label="All styles">Styles &#8250;</button>
+        <button class="quiet" id="styleOpen" aria-label="All styles">All &#8250;</button>
       </div>
     </div>
   </div>
@@ -158,6 +159,16 @@
     <div class="title small">Philosophy</div>
     <span class="icon"></span>
   </header>
+  <svg class="prism" viewBox="0 0 320 140" role="img" aria-label="One white light enters a prism and leaves as a rainbow">
+    <line x1="0" y1="78" x2="128" y2="66" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity=".95"/>
+    <polygon points="160,14 212,110 108,110" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
+    <g stroke-width="5" stroke-linecap="round" opacity=".9">
+      <line x1="186" y1="66" x2="320" y2="40" stroke="#C8102E"/><line x1="186" y1="68" x2="320" y2="52" stroke="#FF8A2B"/>
+      <line x1="186" y1="70" x2="320" y2="64" stroke="#E9C84A"/><line x1="186" y1="72" x2="320" y2="76" stroke="#2FB45A"/>
+      <line x1="186" y1="74" x2="320" y2="88" stroke="#38B6EC"/><line x1="186" y1="76" x2="320" y2="100" stroke="#4B0082"/>
+      <line x1="186" y1="78" x2="320" y2="112" stroke="#9F7AE0"/>
+    </g>
+  </svg>
   <div class="panel">
     <div class="pTitle">The way of the sounds</div>
     <div class="aboutText philo">

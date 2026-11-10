@@ -108,6 +108,10 @@ function journeyTick(){
 function startJourney(){ journey.on=true; openGuide(true); journeyPlay(0); }
 function endJourney(){ journey.on=false; closeGuide(); }
 
+// The rainbow, left to right: every row of labels takes these colours in order (Marko 10.11.2026).
+const RAINBOW7=["#E8364F","#FF8A2B","#E9C84A","#2FB45A","#38B6EC","#7B6CF0","#B58CF0"];
+function rainbowRow(container, selector){ [...container.querySelectorAll(selector)].forEach((b,i)=>{ b.style.color=RAINBOW7[i%7]; }); }
+
 // ---------------------------------------------------------------- GUIDE: MilkDrop
 const BC = window.butterchurn && (window.butterchurn.default || window.butterchurn);
 const BP = window.butterchurnPresets && (window.butterchurnPresets.default || window.butterchurnPresets);
@@ -142,7 +146,14 @@ function setStyle(ix, blend){
   styleIx = (ix+STYLES.length)%STYLES.length; store.set("style", styleIx);
   if(viz) viz.loadPreset(ALL[STYLES[styleIx].key], blend==null?3:blend);
   if(!journey.on) $("#presetName").textContent = STYLES[styleIx].name;
-  renderStyleList();
+  renderStyleList(); renderVizBar();
+}
+function renderVizBar(){
+  const L=$("#vizList"); if(!L) return;
+  if(!L.childElementCount){ CALM.forEach(([n],i)=>{ const b=document.createElement("button"); b.textContent=n; b.onclick=()=>{ setStyle(i,2); pokeOverlay(); }; L.appendChild(b); });
+    rainbowRow(L,"button"); }
+  [...L.children].forEach((b,i)=>b.classList.toggle("sel", i===styleIx));
+  const sel=L.children[styleIx]; if(sel) sel.scrollIntoView({inline:"center",block:"nearest"});
 }
 function renderStyleList(){
   const L=$("#styleList"); L.innerHTML="";
@@ -233,11 +244,15 @@ function openElement(el){
   N.play(el.id, true, el.title); N.setTimer(timerMin); startSession(el.id); mirror.load(el.id, true);
   const lab=$("#elLabel"); lab.innerHTML = `${el.name} · sing ${el.vowel}<small>${el.line}</small><small>tap to return</small>`; lab.classList.remove("hide");
   clearTimeout(elLabelTimer); elLabelTimer=setTimeout(()=>lab.classList.add("hide"), 7000);
-  cancelAnimationFrame(elRaf); const t0=performance.now();
-  const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000, a=mirror.read();
-    x.fillStyle="rgba(0,0,0,0.16)"; x.fillRect(0,0,c.width,c.height);   // soft trails
-    x.save(); x.globalCompositeOperation = el.rainbow ? "lighter" : "source-over"; // "lighter" turned crimson pink (v1 on the emulator); one colour stays itself
-    el.draw(x,c.width,c.height,t,{faint:false,level:a.level,bins:a.bins}); x.restore();
+  // the element's own colour (or light) fills the screen, and breathes a little with the voice; nothing else
+  const BG={earth:["#D4AF37","#8A6E16"], water:["#E9EFF2","#7E8C93"], fire:["#FFF6E6","#E8C890"], air:["#F2F6F4","#AEB8B3"], aum:["#8B2BFF","#3A0070"]};
+  cancelAnimationFrame(elRaf); const t0=performance.now(); let lv=0;
+  const loop=now=>{ if(current!=="element") return; const t=(now-t0)/1000, a=mirror.read(); lv=lv*0.9+a.level*0.1;
+    const W=c.width, H=c.height;
+    if(el.rainbow){ const g=x.createLinearGradient(0,0,0,H); RAINBOW7.forEach((col,i)=>g.addColorStop(i/6,col)); x.fillStyle=g; x.fillRect(0,0,W,H); }
+    else { const [c1,c2]=BG[el.id]||["#333","#111"]; const r=Math.max(W,H)*(0.55+0.08*Math.sin(t*0.4)+lv*0.25);
+      const g=x.createRadialGradient(W/2,H*0.48,0,W/2,H*0.48,r); g.addColorStop(0,c1); g.addColorStop(1,c2); x.fillStyle=g; x.fillRect(0,0,W,H);
+      if(el.id==="water"){ x.fillStyle=`rgba(255,255,255,${0.10+lv*0.2})`; for(let k=0;k<6;k++){ x.fillRect(0,H*(0.2+k*0.12)+Math.sin(t*0.6+k)*8,W,2); } } }
     elRaf=requestAnimationFrame(loop); };
   elRaf=requestAnimationFrame(loop);
 }
@@ -268,6 +283,7 @@ function renderBreathChoice(){
     b.innerHTML=`${P.name}<small>${P.id==="kapal"?"30 strokes, then rest":tt} · ${P.kind}</small>`;
     b.onclick=()=>{ breath.id=P.id; store.set("breathId",P.id); renderBreathChoice(); if(breath.running){ breath.t0=performance.now(); breath.lastPhase=-1; } }; L.appendChild(b); });
   L.querySelectorAll("button").forEach(b=>b.classList.toggle("sel", b.dataset.id===breath.id));
+  rainbowRow(L,"button");
   $("#customRow").classList.toggle("hide", breath.id!=="custom");
   ["cIn","cH1","cOut","cH2"].forEach((k,i)=>{ const e=$("#"+k); e.value=breath.custom[i]; e.onchange=()=>{ breath.custom[i]=Math.max(i%2?0:1, +e.value||0); store.set("breathCustom",breath.custom); }; });
   $("#breathInfo").textContent=patNow().info;
@@ -357,3 +373,4 @@ window.appBack=()=>{
 };
 window.addEventListener("resize", ()=>{ if(current==="guide") sizeMilk(); });
 buildStripes(); renderTimer(); renderStreak();
+rainbowRow($("#timerChoice"),"button");

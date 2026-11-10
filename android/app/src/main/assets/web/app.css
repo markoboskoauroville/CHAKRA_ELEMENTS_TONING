@@ -150,3 +150,17 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 /* breath: grey when small, the pattern's own soft glowing colour as it grows */
 .breathCircle{background:radial-gradient(circle,rgba(170,175,180,.55),rgba(150,155,160,.16) 55%,rgba(150,155,160,.02) 72%)!important}
 .breathGlow{position:absolute;width:62vw;height:62vw;max-width:280px;max-height:280px;border-radius:50%;opacity:0;transform:scale(.5);filter:blur(6px);pointer-events:none}
+
+/* the rainbow principle (Marko 10.11.2026): one white light breaks into the rainbow; labels in a row take the rainbow
+   from left to right; a title gets one continuous rainbow stripe, never colours per word */
+.rainbowStripe{display:block;width:100%;height:6px;border-radius:3px;background:linear-gradient(90deg,#C8102E,#FF8A2B,#E9C84A,#2FB45A,#38B6EC,#4B0082,#9F7AE0)}
+.prism{display:block;width:100%;max-width:420px;margin:4px auto 14px}
+.vizBar{display:flex;align-items:center;gap:10px;margin:6px 0 2px;min-width:0}
+.vizLabel{color:#9AA1A9;font-size:13px;flex:none}
+.vizList{display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:8px 2px;min-width:0}
+.vizList::-webkit-scrollbar{display:none}
+.vizList button{flex:none;font-size:15px;white-space:nowrap;opacity:.75;padding:4px 0;border-bottom:2px solid transparent}
+.vizList button.sel{opacity:1;border-bottom-color:currentColor;font-weight:600}
+.ovRow.small{margin-top:2px}
+#element{transition:background 1.2s}
+.elLabel{background:rgba(0,0,0,.45);border-radius:14px;padding:10px 14px;color:#F2F2F2}
