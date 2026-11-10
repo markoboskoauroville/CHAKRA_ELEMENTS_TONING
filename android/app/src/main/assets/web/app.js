@@ -12,7 +12,7 @@ const store = { get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d
 const fmt = ms => { const s=Math.max(0,Math.floor(ms/1000)); return Math.floor(s/60)+":"+String(s%60).padStart(2,"0"); };
 
 // ---------------------------------------------------------------- screens
-let current = "home";
+let current = "start";
 function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on", s.id===id)); current=id; }
 
 // ---------------------------------------------------------------- the silent mirror
@@ -65,6 +65,7 @@ setInterval(()=>{
     const want = st.pos/1000;
     if(st.playing && isFinite(el.duration) && Math.abs(el.currentTime-want) > 0.3 && want < el.duration) el.currentTime = want;
   }
+  if(journey.on) journeyTick();
   if(current==="guide") guideUi();
 }, 500);
 document.addEventListener("visibilitychange", ()=>{ if(document.hidden && mirror.el) mirror.el.pause(); });
@@ -86,6 +87,26 @@ function renderStreak(){
 let timerMin = store.get("timer", 10);
 function renderTimer(){ document.querySelectorAll("#timerChoice button").forEach(b=>b.classList.toggle("sel", +b.dataset.min===timerMin)); }
 document.querySelectorAll("#timerChoice button").forEach(b=>b.onclick=()=>{ timerMin=+b.dataset.min; store.set("timer",timerMin); renderTimer(); });
+
+// ---------------------------------------------------------------- THE JOURNEY (Play on the start screen)
+// The guide that explains everything, then each element song once, in the natural order (earth at the bottom up to
+// the throat, then Om), then back to the start screen. Visuals: the MilkDrop screen.
+const JOURNEY=[["guide","The guide"],["earth","Earth · A"],["water","Water · U"],["fire","Fire · I"],["air","Air · O"],["ether","Ether · A-U-I-O"],["aum","Om · AUM"]];
+const journey={on:false, ix:0, t0:0};
+function journeyPlay(ix){
+  journey.ix=ix; journey.t0=Date.now();
+  const [id,name]=JOURNEY[ix];
+  N.play(id, false, id==="guide" ? "Chakra toning · the guide" : name); mirror.load(id, false);
+  $("#presetName").textContent = `${ix+1} / ${JOURNEY.length} · ${name}`;
+}
+function journeyTick(){
+  const [id]=JOURNEY[journey.ix];
+  if(Date.now()-journey.t0 < 4000 || st.id!==id || st.playing || !st.dur) return;
+  if(st.pos < st.dur-1500) return;                       // paused by hand or by the timer: wait
+  if(journey.ix+1 < JOURNEY.length) journeyPlay(journey.ix+1); else endJourney();
+}
+function startJourney(){ journey.on=true; openGuide(true); journeyPlay(0); }
+function endJourney(){ journey.on=false; closeGuide(); }
 
 // ---------------------------------------------------------------- GUIDE: MilkDrop
 const BC = window.butterchurn && (window.butterchurn.default || window.butterchurn);
@@ -120,7 +141,7 @@ function setStyle(ix, blend){
   if(!STYLES.length) return;
   styleIx = (ix+STYLES.length)%STYLES.length; store.set("style", styleIx);
   if(viz) viz.loadPreset(ALL[STYLES[styleIx].key], blend==null?3:blend);
-  $("#presetName").textContent = STYLES[styleIx].name;
+  if(!journey.on) $("#presetName").textContent = STYLES[styleIx].name;
   renderStyleList();
 }
 function renderStyleList(){
@@ -134,21 +155,22 @@ function autoStyles(){ clearInterval(autoTimer); if($("#autoStyle").checked) aut
 function pokeOverlay(){ const o=$("#guideOverlay"); o.classList.remove("hide"); clearTimeout(overlayTimer);
   overlayTimer=setTimeout(()=>{ if(st.playing && !$("#styleSheet").classList.contains("on")) o.classList.add("hide"); }, 5000); }
 
-async function openGuide(){
+async function openGuide(forJourney){
   mirror.ensure(); show("guide"); N.immersive(true); N.keepAwake(true);
   sizeMilk();
   if(!viz && BC){ const c=$("#milk");
     viz = BC.createVisualizer(mirror.ctx, c, {width:c.width, height:c.height, pixelRatio:1, textureRatio:1});
     viz.connectAudio(mirror.src); }
   setStyle(styleIx, 0); autoStyles();
-  N.play("guide", false, "Chakra toning · the guide"); N.setTimer(timerMin);
-  startSession("guide");
-  mirror.load("guide", false);
+  if(!forJourney){ journey.on=false; N.play("guide", false, "Chakra toning · the guide"); mirror.load("guide", false); }
+  N.setTimer(timerMin); startSession(forJourney ? "journey" : "guide");
   cancelAnimationFrame(vizRaf); const loop=()=>{ if(current!=="guide") return; if(viz) viz.render(); vizRaf=requestAnimationFrame(loop); }; loop();
   pokeOverlay();
 }
-function closeGuide(){ N.stop(1500); N.setTimer(0); mirror.stop(); clearInterval(autoTimer); endSession();
-  N.immersive(false); N.keepAwake(false); $("#styleSheet").classList.remove("on"); show("home"); }
+function closeGuide(){ if(journey.on) backTo="start"; N.stop(1500); N.setTimer(0); mirror.stop(); clearInterval(autoTimer); endSession();
+  N.immersive(false); N.keepAwake(false); $("#styleSheet").classList.remove("on");
+  const wasJourney=journey.on; journey.on=false; show(wasJourney || backTo==="start" ? "start" : "home"); }
+let backTo="home";
 function guideUi(){
   $("#guidePlay").textContent = st.playing ? "Pause" : "Play";
   $("#guideTime").textContent = fmt(st.pos); $("#guideDur").textContent = fmt(st.dur);
@@ -156,7 +178,8 @@ function guideUi(){
   $("#guideTimer").textContent = st.timerLeft>0 ? "◷ "+fmt(st.timerLeft) : (timerMin? "◷ off" : "");
 }
 $("#guidePlay").onclick=()=>{ pokeOverlay();
-  if(st.playing) N.pause(); else if(st.id==="guide") N.resume(); else { N.play("guide",false,"Chakra toning · the guide"); N.setTimer(timerMin); mirror.load("guide",false); } };
+  if(st.playing) N.pause(); else if(st.id && st.id===mirror.id) N.resume();
+  else if(journey.on) journeyPlay(journey.ix); else { N.play("guide",false,"Chakra toning · the guide"); N.setTimer(timerMin); mirror.load("guide",false); } };
 $("#guideProgress").onclick=e=>{ const r=e.currentTarget.getBoundingClientRect(); N.seek((e.clientX-r.left)/r.width*st.dur); pokeOverlay(); };
 $("#milk").onclick=pokeOverlay;
 $("#stylePrev").onclick=()=>{ setStyle(styleIx-1,2); pokeOverlay(); };
@@ -235,6 +258,7 @@ const PATTERNS=[
  {id:"kapal", name:"Kapalabhati", t:[0.4,0,0.6,0], kind:"pranayama", rounds:30, info:"Skull-shining breath: short active exhales, passive inhales, 30 strokes, then rest. Not in pregnancy, with high blood pressure, heart or eye conditions, or after surgery; stop if dizzy."},
  {id:"custom", name:"Custom", t:null, kind:"yours", info:"Your own timing: in, hold, out, hold."},
 ];
+const BREATH_COLOR={coherent:"#8EC9FF",box:"#D4AF37","478":"#9F7AE0",sama:"#FFF1D8",ujjayi:"#5AA2F0",nadi:"#C9D6FF",bhramari:"#FF8A2B",kapal:"#FF5A3C",custom:"#7F00FF"};
 const breath = { running:false, id:store.get("breathId","coherent"), custom:store.get("breathCustom",[4,2,6,2]), t0:0, raf:0, cue:store.get("breathCue",false), lastPhase:-1, bellDone:false };
 function patNow(){ const P=PATTERNS.find(p=>p.id===breath.id)||PATTERNS[0]; return {...P, t: P.id==="custom" ? breath.custom.map(Number) : P.t}; }
 function renderBreathChoice(){
@@ -247,6 +271,7 @@ function renderBreathChoice(){
   $("#customRow").classList.toggle("hide", breath.id!=="custom");
   ["cIn","cH1","cOut","cH2"].forEach((k,i)=>{ const e=$("#"+k); e.value=breath.custom[i]; e.onchange=()=>{ breath.custom[i]=Math.max(i%2?0:1, +e.value||0); store.set("breathCustom",breath.custom); }; });
   $("#breathInfo").textContent=patNow().info;
+  const c=BREATH_COLOR[breath.id]||"#FFFFFF"; $("#breathGlow").style.background=`radial-gradient(circle,${c}cc,${c}55 45%,${c}10 70%,transparent 74%)`;
   $("#breathCue").classList.toggle("on", breath.cue);
 }
 $("#breathCue").onclick=()=>{ breath.cue=!breath.cue; store.set("breathCue",breath.cue); renderBreathChoice(); };
@@ -276,12 +301,13 @@ function breathLoop(now){
   }
   if(ph!==breath.lastPhase){ breath.lastPhase=ph; if(!P.rounds) cue([396,0,264,0,330][ph]||0); }
   $("#breathCircle").style.transform=`scale(${s})`; $("#breathWord").textContent=w;
+  const g=$("#breathGlow"); g.style.transform=`scale(${s})`; g.style.opacity=Math.max(0,(s-0.5)/0.5).toFixed(3);
   $("#breathNum").textContent = P.rounds ? (ph===4?left:left) : left;
   $("#breathClock").textContent = timerMin ? `${fmt(now-breath.t0)} / ${timerMin}:00` : fmt(now-breath.t0);
   if(timerMin && !breath.bellDone && el>=timerMin*60){ breath.bellDone=true; N.bell(); stopBreath(); return; }
   breath.raf=requestAnimationFrame(breathLoop);
 }
-function stopBreath(){ breath.running=false; endSession(); N.keepAwake(false); $("#breathWord").textContent="Tap to begin"; $("#breathNum").textContent=""; $("#breathCircle").style.transform="scale(.5)"; }
+function stopBreath(){ breath.running=false; endSession(); N.keepAwake(false); $("#breathGlow").style.opacity=0; $("#breathWord").textContent="Tap to begin"; $("#breathNum").textContent=""; $("#breathCircle").style.transform="scale(.5)"; }
 $("#breath .breathStage").onclick=()=>{
   if(breath.running){ stopBreath(); return; }
   breath.running=true; breath.bellDone=false; breath.lastPhase=-1; breath.t0=performance.now(); startSession("breath"); N.keepAwake(true); breath.raf=requestAnimationFrame(breathLoop); };
@@ -289,34 +315,44 @@ function closeBreath(){ if(breath.running){ stopBreath(); } show("home"); }
 $("#breathClose").onclick=closeBreath;
 
 // ---------------------------------------------------------------- SETTINGS / ABOUT
-const MODE_NAMES={guide:"Guide",breath:"Breath",earth:"Earth",water:"Water",fire:"Fire",air:"Air",ether:"Ether"};
+const MODE_NAMES={journey:"Journey",aum:"Om",guide:"Guide",breath:"Breath",earth:"Earth",water:"Water",fire:"Fire",air:"Air",ether:"Ether"};
 function openSettings(){
   const log=store.get("log",[]); const total=log.reduce((a,x)=>a+x.s,0);
   $("#logSummary").textContent = log.length ? `${log.length} sessions, ${Math.round(total/60)} minutes in all.` : "No sessions yet. Every session of a minute or more is written here, on this phone only.";
   const L=$("#logList"); L.innerHTML="";
   log.slice(-60).reverse().forEach(x=>{ const r=document.createElement("div"); r.innerHTML="<span></span><span></span>";
     r.children[0].textContent=`${x.d.split("-").reverse().map(Number).join(".")}  ${MODE_NAMES[x.m]||x.m}`; r.children[1].textContent=`${Math.round(x.s/60)} min`; L.appendChild(r); });
-  show("settings");
+  show("journal"); renderStreak();
 }
 $("#version").textContent = "v"+N.version();
 $("#version").onclick=()=>N.openUrl(RELEASES);
 $("#settingsClose").onclick=()=>show("home");
+$("#journalClose").onclick=()=>show("home");
+$("#philoClose").onclick=()=>show("home");
+$("#timerClose").onclick=()=>show("home");
 
 // ---------------------------------------------------------------- home, back
-$("#toGuide").onclick=openGuide;
+$("#startPlay").onclick=startJourney;
+$("#toExplore").onclick=()=>show("home");
+$("#exploreClose").onclick=()=>show("start");
+$("#toGuide").onclick=()=>{ backTo="home"; openGuide(false); };
+$("#toPhilo").onclick=()=>show("philo");
+$("#toTimer").onclick=()=>{ renderTimer(); show("timer"); };
+$("#toJournal").onclick=openSettings;
 $("#toElements").onclick=openElements;
 $("#toOrder").onclick=()=>show("order");
 $("#orderClose").onclick=()=>show("home");
 document.querySelectorAll("#pagoda .floor").forEach(g=>g.addEventListener("click",()=>{ const el=ELEMENTS.find(e=>e.id===g.dataset.el); if(el){ openElement(el); } }));
 $("#toBreath").onclick=()=>{ show("breath"); renderBreathChoice(); };
-$("#toSettings").onclick=openSettings;
+$("#toSettings").onclick=()=>{ $("#version").textContent="v"+N.version(); show("settings"); };
 window.appBack=()=>{
   if($("#styleSheet").classList.contains("on")){ $("#styleSheet").classList.remove("on"); return true; }
   if(current==="guide"){ closeGuide(); return true; }
   if(current==="element"){ closeElement(); return true; }
   if(current==="breath"){ closeBreath(); return true; }
   if(current==="order"){ show("home"); return true; }
-  if(current!=="home"){ show("home"); return true; }
+  if(current==="home"){ show("start"); return true; }
+  if(current!=="start"){ show("home"); return true; }
   return false;
 };
 window.addEventListener("resize", ()=>{ if(current==="guide") sizeMilk(); });

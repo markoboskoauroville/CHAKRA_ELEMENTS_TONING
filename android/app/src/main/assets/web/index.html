@@ -8,33 +8,50 @@
 </head>
 <body>
 
-<!-- HOME -->
-<section id="home" class="screen on">
+<!-- START (Marko 10.11.2026: "from simplicity to complexity"): only the logotype and Play; Explore at the bottom -->
+<section id="start" class="screen on">
+  <div class="spot s1"></div><div class="spot s2"></div><div class="spot s3"></div><div class="spot s4"></div>
+  <div class="startStage">
+    <svg class="startLogo" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="30.6" fill="none" stroke="#4B0082" stroke-width="1.6"/>
+      <circle cx="32" cy="32" r="27.4" fill="#D4AF37"/>
+      <circle cx="32" cy="32" r="21" fill="#F4F7F8" stroke="#14161A" stroke-width="1"/>
+      <circle cx="32" cy="32" r="15.6" fill="#FFE7BF" stroke="#14161A" stroke-width="1"/>
+      <circle cx="32" cy="32" r="10.6" fill="#FFFFFF" stroke="#14161A" stroke-width="1"/>
+    </svg>
+    <button class="startPlay" id="startPlay" aria-label="Play the journey"><span></span></button>
+  </div>
+  <div class="startNow" id="startNow"></div>
+  <button class="explore" id="toExplore">Explore &#8250;</button>
+</section>
+
+<!-- EXPLORE: folders, one line each; open one to see its details -->
+<section id="home" class="screen">
   <header class="top">
-    <div class="title">Chakra and Elements<br>Toning</div>
-    <button class="icon" id="toSettings" aria-label="Settings">&#9881;</button>
+    <button class="icon" id="exploreClose" aria-label="Back">&#10005;</button>
+    <div class="title small">Explore</div>
+    <span class="icon"></span>
   </header>
-  <div class="streak" id="streak"></div>
-
-  <button class="card action" id="toGuide">
-    <span class="cardTitle">Guide</span>
-    <span class="cardLine">The chakra toning, 5 minutes, with MilkDrop visions</span>
-  </button>
-  <button class="card" id="toElements">
+  <button class="card folder" id="toGuide"><span class="cardTitle">Guide</span><span class="cardLine">The chakra toning alone, with MilkDrop visions</span></button>
+  <button class="card folder" id="toElements">
     <span class="cardStripes"><i class="c-earth"></i><i class="c-water"></i><i class="c-fire"></i><i class="c-air"></i><i class="c-ether"></i><i class="c-om"></i></span>
-    <span class="cardTitle">Elements</span>
-    <span class="cardLine">Six sounds to sing along: A · U · I · O · A-U-I-O · AUM</span>
-  </button>
-  <button class="card" id="toOrder">
-    <span class="cardTitle">Natural order</span>
-    <span class="cardLine">Earth carries water, water feeds fire, fire lifts air: the pagoda of the elements</span>
-  </button>
-  <button class="card" id="toBreath">
-    <span class="cardTitle">Breath</span>
-    <span class="cardLine">A slow circle to breathe with, before or after toning</span>
-  </button>
+    <span class="cardTitle">Elements</span><span class="cardLine">Six sounds to sing along, one at a time</span></button>
+  <button class="card folder" id="toBreath"><span class="cardTitle">Breath</span><span class="cardLine">Pranayama and calm breathing, with a countdown</span></button>
+  <button class="card folder" id="toOrder"><span class="cardTitle">Natural order</span><span class="cardLine">Earth carries water, water feeds fire, fire lifts air</span></button>
+  <button class="card folder" id="toPhilo"><span class="cardTitle">Philosophy</span><span class="cardLine">The way of the sounds, from vision to voice</span></button>
+  <button class="card folder" id="toTimer"><span class="cardTitle">Timer and bell</span><span class="cardLine">How long a session lasts, a soft bell at the end</span></button>
+  <button class="card folder" id="toJournal"><span class="cardTitle">Journal</span><span class="cardLine">Your days of practice, on this phone only</span></button>
+  <button class="card folder" id="toSettings"><span class="cardTitle">About</span><span class="cardLine">Credits and the version</span></button>
+</section>
 
-  <div class="label">Session timer, a soft bell at the end</div>
+<!-- TIMER -->
+<section id="timer" class="screen">
+  <header class="top">
+    <button class="icon" id="timerClose" aria-label="Back">&#10005;</button>
+    <div class="title small">Timer and bell</div>
+    <span class="icon"></span>
+  </header>
+  <div class="label">Session length; the sound fades and a soft bowl rings at the end</div>
   <div class="choice" id="timerChoice">
     <button data-min="0">Off</button><button data-min="5">5</button><button data-min="10">10</button>
     <button data-min="20">20</button><button data-min="30">30</button><button data-min="45">45</button>
@@ -91,7 +108,7 @@
     <button class="icon small" id="breathCue" aria-label="Sound cue">&#9835;</button>
   </header>
   <div class="breathStage">
-    <div class="breathCircle" id="breathCircle"></div>
+    <div class="breathCircle" id="breathCircle"></div><div class="breathGlow" id="breathGlow"></div>
     <div class="breathCount"><div class="breathNum" id="breathNum"></div><div class="breathWord" id="breathWord">Tap to begin</div></div>
   </div>
   <div class="breathInfo" id="breathInfo"></div>
@@ -134,18 +151,13 @@
   </div>
 </section>
 
-<!-- SETTINGS / ABOUT -->
-<section id="settings" class="screen">
+<!-- PHILOSOPHY -->
+<section id="philo" class="screen">
   <header class="top">
-    <button class="icon" id="settingsClose" aria-label="Close">&#10005;</button>
-    <div class="title small">About</div>
+    <button class="icon" id="philoClose" aria-label="Back">&#10005;</button>
+    <div class="title small">Philosophy</div>
     <span class="icon"></span>
   </header>
-  <div class="panel">
-    <div class="pTitle">Your practice</div>
-    <div id="logSummary"></div>
-    <div class="logList" id="logList"></div>
-  </div>
   <div class="panel">
     <div class="pTitle">The way of the sounds</div>
     <div class="aboutText philo">
@@ -159,6 +171,30 @@
       <p>Sing each vowel on one breath, plainly, and let the next breath come by itself.</p>
     </div>
   </div>
+</section>
+
+<!-- JOURNAL -->
+<section id="journal" class="screen">
+  <header class="top">
+    <button class="icon" id="journalClose" aria-label="Back">&#10005;</button>
+    <div class="title small">Journal</div>
+    <span class="icon"></span>
+  </header>
+  <div class="streak" id="streak"></div>
+  <div class="panel">
+    <div class="pTitle">Your practice</div>
+    <div id="logSummary"></div>
+    <div class="logList" id="logList"></div>
+  </div>
+</section>
+
+<!-- SETTINGS / ABOUT -->
+<section id="settings" class="screen">
+  <header class="top">
+    <button class="icon" id="settingsClose" aria-label="Close">&#10005;</button>
+    <div class="title small">About</div>
+    <span class="icon"></span>
+  </header>
   <div class="panel">
     <div class="pTitle">Credits</div>
     <div class="aboutText">Chakra toning (raga, held notes) and the element songs: DJ Mantra.
