@@ -81,3 +81,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 > This should be the first screen actually, instead of play, so user can play any chakra. And remove this, logotype doesn't look good, it's very ugly. And for this, colors are good, and you have some animation, that's very nice. Please find the chakra's symbols, put them behind in better quality.
 
 (His photo of the Pixel: the six stripes screen, A Earth, U Water, I Fire, O Air, A-U-I-O, AUM.)
+
+## Request 15 (10.11.2026): dark mode, black with faint white mist instead of white
+
+> and instead of white, because it's very disturbing, it needs to be basically dark mode black with faint white kind of clouds or mist over it
