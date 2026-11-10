@@ -89,3 +89,9 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 16 (10.11.2026): OM, never AUM; one letter per box, then its explanation
 
 > On website there is a problem of chakra and elements toning. The squares with letters are AUM, OM. Please don't write it anywhere OM with three letters. With two only. OM, that's all. I don't want AUM anymore. OM. And then make it different. Put each letter in its own box, filling the whole letter. Everything align vertically and then another box next to it explaining again with the same principle. First simple explanation, then expanding.
+
+## Request 17 (10.11.2026): leave the icon on the emulator too
+
+> Same for Android emulator. When you test something on the Android emulator, leave its icon living in the desktop, please.
+
+(The emulator was started with -no-snapshot-save, which keeps the AVD's data: the app stays installed there.)
