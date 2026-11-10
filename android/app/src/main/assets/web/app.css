@@ -202,3 +202,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .elName{font-size:18px}
 .elCard dl{grid-column:1 / -1;margin:8px 0 0;display:grid;grid-template-columns:minmax(0,40%) minmax(0,60%);gap:4px 10px;font-size:14px}
 .elCard dt{opacity:.65}.elCard dd{margin:0;overflow-wrap:anywhere}
+
+/* column titles once at the top; one letter per row under its symbol (Marko 10.11.2026: no echoed text) */
+.colHead{flex:0 0 auto;display:flex;background:#000;border-bottom:1px solid #000}
+.colHead span{flex:1 1 50%;text-align:center;padding:12px 0 10px;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(240,240,245,.75)}
+.colHead span:last-child{background:rgba(255,255,255,.04)}
+.stripe .half.voice,.stripe .half.raga{padding:0}
+.stripe .rowVowel{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);font-size:26px;font-weight:300;letter-spacing:2px;line-height:1;pointer-events:none}

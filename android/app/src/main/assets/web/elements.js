@@ -111,16 +111,18 @@ const ELEMENTS = [
 // air; Vishuddha 16 petals and the full moon of space in a triangle; Ajna 2 petals and the syllable OM.
 // Fine lines, a soft glow, a slow breath and turn; sharp at any size (the canvas is drawn at the screen's pixel density).
 const YANTRA={ earth:{petals:4}, water:{petals:6}, fire:{petals:10}, air:{petals:12}, ether:{petals:16}, aum:{petals:2} };
+// the symbol takes the colour of its chakra (Marko 10.11.2026: "the triangle should be red")
+function symbolColor(el){ return el.id==="aum" ? "#B58CF0" : (el.ball || el.color); }
 function yantra(ctx, el, W, H, t){
-  const k=W/ctx.canvas.clientWidth||1, cx=W*0.5, cy=H*0.5, R=Math.min(H*0.40, W*0.085)*(1+0.025*Math.sin(t*0.5));
-  const col=el.id==="aum"?"#B58CF0":(el.rainbow?"#FFFFFF":el.color), lw=1.3*k, rot=t*0.02;
+  const k=W/ctx.canvas.clientWidth||1, cx=W*0.5, cy=H*0.42, R=Math.min(H*0.40, W*0.085)*(1+0.025*Math.sin(t*0.5));
+  const col=el.rainbow?"#FFFFFF":symbolColor(el), lw=1.3*k, rot=t*0.02;
   const P=YANTRA[el.id]; if(!P) return;
   ctx.save(); ctx.translate(cx,cy); ctx.lineWidth=lw; ctx.lineJoin="round"; ctx.shadowBlur=9*k;
   const stroke=(c,a)=>{ ctx.strokeStyle=rgba(c,a); ctx.shadowColor=rgba(c,a*0.9); };
   // no petals (Marko 10.11.2026: "remove petals. Keep only symbols inside the petals"): the symbol alone
   const r0=R*0.92;
   // the yantra of the element inside
-  const r=r0*0.86; stroke(el.rainbow?"#FFFFFF":col, 0.55); ctx.beginPath();
+  const r=r0*0.86; stroke(col, 0.8); ctx.beginPath();
   const tri=(rr,down)=>{ for(let i=0;i<3;i++){ const a=(down?Math.PI/2:-Math.PI/2)+i*Math.PI*2/3; i?ctx.lineTo(Math.cos(a)*rr,Math.sin(a)*rr):ctx.moveTo(Math.cos(a)*rr,Math.sin(a)*rr); } ctx.closePath(); };
   // the tantric symbols of the elements as drawn by Marin G Vayu, Secret of the 5 Elements: earth a square, water a
   // crescent, fire a downward triangle, wind (air) a six-pointed star, ether a circle

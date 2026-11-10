@@ -210,6 +210,10 @@ $("#guideTimer").onclick=()=>{ // one tap cycles the timer of this session
 const stripeCanvases=[]; let stripesRaf=0;
 function buildStripes(){
   const box=$("#stripes"); box.innerHTML="";
+  // the two columns are named once, at the top (Marko 10.11.2026: "give title to the column ... You don't echo text
+  // anymore anywhere in my app"); every row shows its letter once, under its symbol, on the seam
+  const head=document.createElement("div"); head.className="colHead";
+  head.innerHTML='<span>Mantra Voice</span><span>Indian Raga</span>'; box.appendChild(head);
   ELEMENTS.forEach(el=>{
     // one stripe = two halves with no gap: Mantra Voice (left) and Indian Raga (right); the chakra symbol, without
     // petals, sits exactly on the seam between them (Marko 10.11.2026), everything centred
@@ -222,13 +226,12 @@ function buildStripes(){
       const h=document.createElement("button"); h.className="half "+style;
       const ok = style==="voice" || HAS_RAGA.has(el.id);
       h.setAttribute("aria-label", `${el.name} ${cap}`+(ok?"":" (not recorded yet)"));
-      h.innerHTML=`<span class="vowel"></span><span class="cap"></span>`;
-      h.querySelector(".vowel").textContent=el.vowel;
-      h.querySelector(".vowel").style.color = el.rainbow ? "#FFFFFF" : el.color;
-      h.querySelector(".cap").textContent = ok ? cap : cap+" · soon";
-      if(ok) h.onclick=()=>openElement(el,style); else h.classList.add("soon");
+      if(!ok){ h.innerHTML='<span class="cap">soon</span>'; h.classList.add("soon"); }
+      if(ok) h.onclick=()=>openElement(el,style);
       d.appendChild(h);
     });
+    const v=document.createElement("span"); v.className="rowVowel"; v.textContent=el.vowel;
+    v.style.color = el.rainbow ? "#FFFFFF" : symbolColor(el); d.appendChild(v);
     box.appendChild(d); stripeCanvases.push({c,el});
   });
 }
