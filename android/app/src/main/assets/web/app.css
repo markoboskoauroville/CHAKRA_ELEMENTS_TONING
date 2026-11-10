@@ -209,3 +209,5 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .colHead span:last-child{background:rgba(255,255,255,.04)}
 .stripe .half.voice,.stripe .half.raga{padding:0}
 .stripe .rowVowel{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);font-size:26px;font-weight:300;letter-spacing:2px;line-height:1;pointer-events:none}
+
+.webLink{color:#B58CF0;text-decoration:underline;text-underline-offset:3px;padding:6px 0;display:inline-block}

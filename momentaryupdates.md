@@ -159,3 +159,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 > Please update user interface. You are repeating under every song, mantra voice, raga. Just you need to give title to the column and that's one text and that's all. You don't echo text anymore anywhere in my app. Don't be stupid, please.
 
 > Also symbols, colors on the main page. The eye, the third chakra, the triangle should be red.
+
+## Request 33 (10.11.2026): web page link at the end of About
+
+> please in about page of my Chantra Mantra Om Tantra or Chantra Tantra or Toning the Chakras or Mantra Room at the end of about, please put the link to web page of this application

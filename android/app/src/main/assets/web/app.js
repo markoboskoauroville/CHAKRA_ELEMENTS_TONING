@@ -430,6 +430,7 @@ function openSettings(){
 }
 $("#version").textContent = "v"+N.version();
 $("#version").onclick=()=>N.openUrl(RELEASES);
+$("#webLink").onclick=e=>{ e.preventDefault(); N.openUrl("https://mantraroom.pages.dev"); };   // Marko 10.11.2026: the link to the app's web page at the end of About
 $("#settingsClose").onclick=()=>show("home");
 $("#journalClose").onclick=()=>show("home");
 $("#philoClose").onclick=()=>show("edu");
