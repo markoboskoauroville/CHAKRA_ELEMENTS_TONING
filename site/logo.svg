@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Chakra and Elements Toning">
+  <!-- Marko 10.11.2026: concentric circles in the natural order. Outer thin ring pure indigo (Om); the biggest, solid
+       circle gold (Earth); inwards Water (U) white, Fire (I) energy as warm light, Air (O) white; AUM the rainbow centre. -->
+  <circle cx="32" cy="32" r="30.6" fill="none" stroke="#4B0082" stroke-width="2.6"/>
+  <circle cx="32" cy="32" r="27.4" fill="#D4AF37"/>
+  <circle cx="32" cy="32" r="21" fill="#F4F7F8" stroke="#14161A" stroke-width="1.4"/>
+  <circle cx="32" cy="32" r="15.6" fill="#FFE7BF" stroke="#14161A" stroke-width="1.4"/>
+  <circle cx="32" cy="32" r="10.6" fill="#FFFFFF" stroke="#14161A" stroke-width="1.4"/>
+  <path d="M32,32 L32.00,25.80 A6.2,6.2 0 0 1 36.85,28.13 Z" fill="#C8102E"/>
+  <path d="M32,32 L36.85,28.13 A6.2,6.2 0 0 1 38.04,33.38 Z" fill="#FF8A2B"/>
+  <path d="M32,32 L38.04,33.38 A6.2,6.2 0 0 1 34.69,37.59 Z" fill="#E9C84A"/>
+  <path d="M32,32 L34.69,37.59 A6.2,6.2 0 0 1 29.31,37.59 Z" fill="#2FB45A"/>
+  <path d="M32,32 L29.31,37.59 A6.2,6.2 0 0 1 25.96,33.38 Z" fill="#38B6EC"/>
+  <path d="M32,32 L25.96,33.38 A6.2,6.2 0 0 1 27.15,28.13 Z" fill="#5AA2F0"/>
+  <path d="M32,32 L27.15,28.13 A6.2,6.2 0 0 1 32.00,25.80 Z" fill="#9F7AE0"/>
+</svg>

@@ -73,3 +73,57 @@ Born 10.11.2026 (Master session MAC_SES9_08-NOV, task 75). Requests word for wor
   `data-dl-app="chakratoning"` on both buttons, which open GitHub releases/latest. Card 22 on markobosko.pages.dev #/kod.
 - Not tested by a hand: how loud the guide and loops are on a real phone, the feel of the taps, the lock screen
   controls pressed by a finger.
+
+## The philosophy (Marko 10.11.2026, requests 4 to 7): what the app and the site say, and where it comes from
+
+- **Colours** (MANTRA_MANIFEST chakra-colors.md, rewritten 10.11.2026): Earth gold `#D4AF37` is the one true colour;
+  Water is reflection (silver glint, `#DCE6EA` at low alpha), Fire is energy (warm white light `#FFF1D8`), Air is
+  connection (a luminous haze `#EEF4F1`); the throat is the rainbow; Om is pure violet `#7F00FF`. The logotype's outer
+  ring is indigo `#4B0082` because he said indigo for it ("an outer circle, which is pure and indigo color").
+- **The flow**: Om (vision) → Water (creativity, mood) → Earth (grounding, so water can land) → Fire (the work of the
+  vision) → Air (connection, serving each other's growth) → the throat (truth on every level). App: About → "The way of
+  the sounds"; site: the same, EN and HR.
+- **Nature first** (request 6): the opening paraphrases the Instagram video on his Nothing Phone (the lady, 3:29,
+  transcript in tools/sources, gitignored): Sanatana Dharma begins with honouring nature (sun, moon, stars, rivers, trees,
+  birds) and the body is a yantra, a small universe. Paraphrased, no long quotes.
+- **The four levels of speech** for the throat: Vaikhari (spoken), Madhyama (inner, mental), Pashyanti (seeing, the
+  image before words), Para (the silent source). Sources: Bhartrhari, *Vakyapadiya* (5th c.); the Tantric/Kashmir Shaiva
+  tradition; overview: https://en.wikipedia.org/wiki/Vāc and https://en.wikipedia.org/wiki/Parā_vāk
+- **The natural order** (request 5): earth at the bottom, water on earth, fire where there is water, air on top, space
+  above; the Japanese five-ring pagoda, *gorintō*: cube = earth (chi), sphere = water (sui), pyramid = fire (ka),
+  crescent = wind/air (fū), jewel = void/space (kū), stacked bottom to top. Sources:
+  https://en.wikipedia.org/wiki/Gorintō ; https://en.wikipedia.org/wiki/Godai_(Japanese_philosophy) (the five elements,
+  also the order of Musashi's *Book of Five Rings*); the five-storied pagoda (gojū-no-tō) carries the same meaning:
+  https://en.wikipedia.org/wiki/Pagoda . App: "Natural order" screen (tap a floor = that element); site: a section with
+  the same drawing. The pagoda video he first asked for was dropped (his correction: "There is no video").
+
+## Breath patterns (request 8): timings and sources
+
+| Pattern | In · hold · out · hold (s) | Kind | Source |
+|---|---|---|---|
+| Coherent (resonance) | 5.5 · 0 · 5.5 · 0 (about 5.5 breaths a minute) | modern | Brown & Gerbarg, *The Healing Power of the Breath* (2012); Lehrer & Gevirtz, Frontiers in Psychology 5:756 (2014) |
+| Box | 4 · 4 · 4 · 4 | modern | Cleveland Clinic, "Box Breathing" (health.clevelandclinic.org) |
+| 4·7·8 | 4 · 7 · 8 · 0 | modern | Andrew Weil, "Breathing Exercises: 4-7-8 Breath" (drweil.com) |
+| Sama Vritti | 4 · 0 · 4 · 0 | pranayama | equal breath; B.K.S. Iyengar, *Light on Pranayama* (1981) |
+| Ujjayi | 4 · 0 · 6 · 0 | pranayama | *Hatha Yoga Pradipika* 2.51–53; Iyengar, *Light on Pranayama* |
+| Nadi Shodhana | 4 · 0 · 4 · 0, left/right cues | pranayama | *Hatha Yoga Pradipika* 2.7–10 (alternate nostril); Iyengar |
+| Bhramari | 4 · 0 · 8 · 0, humming out | pranayama | *Hatha Yoga Pradipika* 2.68 |
+| Kapalabhati | 0.4 · 0 · 0.6 · 0, 30 strokes, 30 s rest | pranayama (a kriya) | *Hatha Yoga Pradipika* 2.35; safety note in the app (pregnancy, blood pressure, heart, eyes, surgery, dizziness) |
+| Custom | his own | yours | |
+
+The countdown shows the seconds left in each phase; the circle grows on the in-breath, stays on the hold, shrinks on the
+out-breath (sine easing); the home timer ends the session with the bowl bell; the ♫ key turns on a soft tone per phase.
+
+## SEO checklist (request 7: "engine optimized ... as we go, optimize it"); every change to the site keeps all of it
+
+1. One source `site/index.html` (EN); `python3 tools/build_site.py` writes `site/hr/index.html` and `sitemap.xml`. Run it
+   after every change; both pages commit together.
+2. Each page: its own `<title>` (≤ 65 characters) and meta description (≤ 160), canonical, hreflang en / hr / x-default.
+3. Open Graph + Twitter card with `img/og.jpg` 1200 × 630, og:locale and the alternate.
+4. JSON-LD `@graph`: MobileApplication, Organization (Mantra Productions), Person (Marko Bosko, DJ Mantra), WebSite with
+   the DonateAction (the bowl).
+5. One `<h1>`; sections with `<h2>`; every image has an alt that says what is in it; width and height on every image.
+6. Images in WebP inside `<picture>` with the JPEG fallback; the hero preloaded with fetchpriority high; the rest lazy.
+7. No render-blocking script: the counter and speechify-keys are `defer`; styles inline.
+8. robots.txt allows everything and names the sitemap; the logotype (`logo.svg`) is also the SVG favicon.
+9. After a deploy: curl 200 for /, /hr/, /sitemap.xml; a Lighthouse run; look at the page at phone and desktop width.
