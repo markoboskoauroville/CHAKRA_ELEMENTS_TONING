@@ -71,3 +71,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 > just a reminder, Pixel phone is on the cable, please use it to test all these apps we are building now
 
 > Basically for this additional app, I mean for meditation, chakra and elements toning pages app, we need to make every other options. So simplify option is the main thing. And then when it's playing each song, then so there is the complication come down. But very gently, rainbow colors of buttons to change visualization. and in the main screen below the play button at the bottom there will be one square button called additional modules and then you can get your pranayama, you can get your education
+
+## Request 13 (10.11.2026): leave the icon on the Pixel
+
+> please any you are testing on Pixel 7 leave its icon on the desktop
