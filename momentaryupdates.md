@@ -27,3 +27,21 @@ Every request saved word for word, first, before any code.
 (Dictation: "either energy of the throat" = the energy of the throat; "water in in our is mood" = the water in us is mood; "earthing" = grounding.)
 
 Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yoga, goes where the DJ Mantra page places Om (rung 6, AUM).
+
+## Request 5 (10.11.2026): the natural order of the elements
+
+> In chakra and element toning, please add the wisdom from one of my realizations. What is that? That is that element, as they are in the body, they are in nature. This is the natural order of element. It's very simple, and this is the philosophy which everybody understands, but it's at the same time deep and understandable. That is that we have earth on the top. On the top of the earth comes the water. When we have water, we can also have fire, and when we have fire, we can have air. It's kind of how pagodas are in this tradition: each floor represents a different element in the same order, a natural organization. Of course, every element is in every element, but generally, looking at it, air is at the top, then we have fire, then there is water, and earth is at the bottom. As we are looking around us, we see things, and we explain them based on this. In this video, explain the principles of this.
+
+## Request 6 (10.11.2026): everything starts with worshipping nature
+
+> including it in the philosophy of the page and in the app itself everything starts with worshipping nature, coming from the sun and moon, etc
+
+> There is no video. Transcribe this video and learn from its transcription and build this technology, I mean this philosophy, in my app. videos are the top lady talking
+
+(The video: the Instagram video on his Nothing Phone, the lady talking, 3:29; transcript in tools/sources.)
+
+## Request 7 (10.11.2026): the logotype and SEO
+
+> Please fix the logotype on my Chakra and Element Toning page. By the way, make it such as "engine optimized," and as we go, optimize it. The logotype should be a circle, so the earth color. The gold is the biggest circle because it's more solid, and as we go inwards, we change colors. Basically, you have two times white for this example, because U is white and O is white. Then AUM is rainbows. We have an outer circle, which is pure and indigo color.
+
+("engine optimized" = search engine optimized.)
