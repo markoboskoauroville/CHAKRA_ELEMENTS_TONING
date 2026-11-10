@@ -45,3 +45,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 > Please fix the logotype on my Chakra and Element Toning page. By the way, make it such as "engine optimized," and as we go, optimize it. The logotype should be a circle, so the earth color. The gold is the biggest circle because it's more solid, and as we go inwards, we change colors. Basically, you have two times white for this example, because U is white and O is white. Then AUM is rainbows. We have an outer circle, which is pure and indigo color.
 
 ("engine optimized" = search engine optimized.)
+
+## Request 8 (10.11.2026): breath patterns
+
+> This is very good idea with breath. Please put different timings for pranayama and whatever is most popular box, whatever is there. Put stopwatch, so it counts down for each breath and also this circle is also slowly breathing.
