@@ -95,3 +95,11 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 > Same for Android emulator. When you test something on the Android emulator, leave its icon living in the desktop, please.
 
 (The emulator was started with -no-snapshot-save, which keeps the AVD's data: the app stays installed there.)
+
+## Request 18 (10.11.2026): the icon is the stripes screen cut in a circle
+
+> Icon for our chakra and element tonic is not good. So my idea is this startup screen which I told you should be icon but it's cut in a circle. So we see the view of all these slices.
+
+## Request 19 (10.11.2026): the site header, the icon on the title line
+
+> And icon, if there is a title on the page Chakra and Elements Toning, icon should be aligned exactly with that line middle. Because something, yeah, it's, I understand what you are saying, you want to put icon at the same level as HR and EN, which is nice, but in that case you need to push Chakra and Element Toning down, so the lines are not overlapping. So each things has it own line and in that sense HR can go in the same margin as title and the whole page. Chakra and Element Toning has certain width and icon and HR EN should fit. But in that same sense what I think that icon best fits align to the middle and then rest of the page. and that HR and EN can stay where they are because this is kind of setting which is out of the frame.
