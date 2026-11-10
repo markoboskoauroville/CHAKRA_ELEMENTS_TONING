@@ -92,7 +92,7 @@ document.querySelectorAll("#timerChoice button").forEach(b=>b.onclick=()=>{ time
 // The guide that explains everything, then each element song once, in the natural order (earth at the bottom up to
 // the throat, then OM), then back to the start screen. Visuals: the MilkDrop screen.
 // two styles per sound: "voice" = Mantra Voice (his strong toning voice), "raga" = Indian Raga (the long Suno songs)
-const HAS_RAGA=new Set(["earth","water","fire"]);
+const HAS_RAGA=new Set(["earth","water","fire","air","ether"]);
 const songId=(id,style)=>`${id}-${style||(HAS_RAGA.has(id)?"raga":"voice")}`;
 const JOURNEY=[["guide","The guide"],["earth","Earth · A"],["water","Water · U"],["fire","Fire · I"],["air","Air · O"],["ether","Ether · A-U-I-O"],["aum","OM"]];
 const journey={on:false, ix:0, t0:0};

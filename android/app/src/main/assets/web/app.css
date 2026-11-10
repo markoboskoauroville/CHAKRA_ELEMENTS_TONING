@@ -195,3 +195,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .stripe .half .cap{font-size:13px;opacity:.85;text-align:center}
 .stripe .half.soon{opacity:.4}
 .fpsLine{position:absolute;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 8px);text-align:center;font-size:11px;color:rgba(255,255,255,.35);pointer-events:none}
+
+.elCards{display:flex;flex-direction:column;gap:12px;margin:10px 0}
+.elCard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:48px 1fr;column-gap:12px;align-items:center}
+.elSym{width:44px;height:44px;color:#D9C27A}
+.elName{font-size:18px}
+.elCard dl{grid-column:1 / -1;margin:8px 0 0;display:grid;grid-template-columns:minmax(0,40%) minmax(0,60%);gap:4px 10px;font-size:14px}
+.elCard dt{opacity:.65}.elCard dd{margin:0;overflow-wrap:anywhere}
