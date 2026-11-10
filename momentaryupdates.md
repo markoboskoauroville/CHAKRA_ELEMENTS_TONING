@@ -119,3 +119,7 @@ Also 10.11.2026, through the master: Suno song number 6, "Classical Om" from Yog
 ## Request 23 (10.11.2026): the page icon is the heart chakra circle with the six-pointed star; no rainbow stripe at the top
 
 > please in the page of toning make new icon which is heart chakra circle and inside is the *David*star of David and remove rainbow stripe from the top of the page
+
+## Request 24 (10.11.2026): a sing-along app
+
+> Basically this application Toning is a sing-along app and we need to promote it as such. So there will be six songs and the people are following with certain vowel the melody of the song to meditate in the sound.
