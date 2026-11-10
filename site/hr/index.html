@@ -67,7 +67,9 @@ section{padding:64px 0;border-top:1px solid var(--line)}
 .card img{aspect-ratio:3/4;width:100%;object-fit:cover;object-position:top}
 .card .txt{padding:18px}
 .gear{padding-left:20px}.gear li{margin:8px 0}.gear a{color:var(--amber)}
-.wide .card img{aspect-ratio:16/9;object-position:center}
+.wide{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.wide .card img{aspect-ratio:16/9;height:auto;object-position:center}
+.shots .card img{aspect-ratio:1/2;height:auto;object-fit:contain;background:#000}
 .card h3{margin:0 0 6px;font-size:20px}
 .card p{margin:0;color:var(--dim)}
 .el{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
@@ -168,7 +170,7 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
     </g>
   </svg>
   <h2 style="text-align:center"><span lang="en">One white light, every colour</span><span lang="hr">Jedno bijelo svjetlo, sve boje</span></h2>
-  <div class="grid">
+  <div class="grid shots">
     <div class="card"><picture><source srcset="/img/start.webp" type="image/webp"><img src="/img/start.jpg" alt="The first screen: two columns, Mantra Voice and Indian Raga, six sounds with their symbols in colour" width="600" height="1193" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Tap a sound</span><span lang="hr">Dodirni zvuk</span></h3><p><span lang="en">Six sounds, each with its symbol in its own colour. Left half Mantra Voice, right half Indian Raga: tap one and sing along.</span><span lang="hr">Šest zvukova, svaki sa svojim simbolom u svojoj boji. Lijeva polovica Mantra Voice, desna Indian Raga: dodirni jednu i pjevaj.</span></p></div></div>
     <div class="card"><picture><source srcset="/img/playing.webp" type="image/webp"><img src="/img/playing.jpg" alt="Earth playing: a dark glowing gold ball that breathes slowly" width="600" height="1216" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">Let it play</span><span lang="hr">Pusti da svira</span></h3><p><span lang="en">The sound fills the screen with a dark glowing ball in its colour, brightening and fading at the pace of the breath: gold earth, blue water, red fire, green air, violet OM.</span><span lang="hr">Zvuk ispuni ekran tamnom svjetlećom kuglom u svojoj boji, koja se pali i gasi u ritmu daha: zlatna zemlja, plava voda, crvena vatra, zeleni zrak, ljubičasti OM.</span></p></div></div>
     <div class="card"><picture><source srcset="/img/rainbow.webp" type="image/webp"><img src="/img/rainbow.jpg" alt="A-U-I-O playing: a radial rainbow, red in the centre, violet at the edge" width="600" height="1216" loading="lazy" decoding="async"></picture><div class="txt"><h3><span lang="en">The throat in every colour</span><span lang="hr">Grlo u svim bojama</span></h3><p><span lang="en">A-U-I-O sings all the vowels, so its light is the whole rainbow, from red in the centre to violet at the edge. One quiet button opens pranayama, the journey and education.</span><span lang="hr">A-U-I-O pjeva sve vokale, pa je njegovo svjetlo cijela duga, od crvene u sredini do ljubičaste na rubu. Jedan tihi gumb otvara pranayamu, putovanje i učenje.</span></p></div></div>
