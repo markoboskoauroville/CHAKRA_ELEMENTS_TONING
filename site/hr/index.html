@@ -28,11 +28,11 @@
 <meta name="twitter:title" content="Chakra and Elements Toning">
 <meta name="twitter:description" content="Besplatna aplikacija za meditaciju za Android na chakra toningu DJ Mantre. Bez interneta, bez računa.">
 <meta name="twitter:image" content="https://chakra-and-elements-toning.pages.dev/img/og.jpg">
-<link rel="icon" href="/favicon.ico?v=3" sizes="any">
-<link rel="icon" type="image/svg+xml" href="/logo.svg?v=3">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=3">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=3">
-<link rel="apple-touch-icon" href="/icon-180.png?v=3">
+<link rel="icon" href="/favicon.ico?v=4" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/logo.svg?v=4">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=4">
+<link rel="apple-touch-icon" href="/icon-180.png?v=4">
 <link rel="preload" as="image" href="/img/hero.webp" type="image/webp" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[
  {"@type":"MobileApplication","@id":"https://chakra-and-elements-toning.pages.dev/#app","name":"Chakra and Elements Toning","alternateName":"Chakra and Elements Toning (Mantra)","url":"https://chakra-and-elements-toning.pages.dev/","description":"A free meditation app for Android on DJ Mantra's chakra toning: a guided toning with MilkDrop visuals, the five elements and OM to sing along, a breath circle and a soft bell.","applicationCategory":"HealthApplication","applicationSubCategory":"Meditation","operatingSystem":"Android 10+","inLanguage":["en","hr"],"isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"downloadUrl":"https://github.com/markoboskoauroville/CHAKRA_ELEMENTS_TONING/releases/latest","installUrl":"https://github.com/markoboskoauroville/CHAKRA_ELEMENTS_TONING/releases/latest","image":"https://chakra-and-elements-toning.pages.dev/img/og.jpg","screenshot":["https://chakra-and-elements-toning.pages.dev/img/start.webp","https://chakra-and-elements-toning.pages.dev/img/journey.webp","https://chakra-and-elements-toning.pages.dev/img/modules.webp"],"author":{"@id":"https://chakra-and-elements-toning.pages.dev/#marko"},"publisher":{"@id":"https://chakra-and-elements-toning.pages.dev/#org"}},
@@ -49,7 +49,7 @@
 html,body{margin:0;background:var(--ground);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
 img{max-width:100%;display:block}
 .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
-.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero{position:relative;min-height:min(78vh,760px);padding-top:72px;display:flex;align-items:flex-end;overflow:hidden}
 .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.75}
 .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,18,21,0) 35%,rgba(16,18,21,.95))}
 .hero .wrap{position:relative;z-index:1;padding-bottom:48px}
@@ -114,16 +114,21 @@ html[data-lang="en"] [lang="hr"],html[data-lang="hr"] [lang="en"]{display:none}
 .lexp details{margin-top:6px} .lexp summary{color:var(--dim);cursor:pointer;font-size:14px}
 .lexp details p{margin-top:6px;color:var(--dim)}
 @media (max-width:480px){.lbox{width:84px;height:84px;font-size:72px}.lbox .l4{font-size:28px}.b-om{font-size:44px}}
+
+/* the icon on the title's first line, centred on its middle; same left margin as the page (Marko 10.11.2026) */
+.titleRow{display:flex;align-items:flex-start;gap:14px;margin:0 0 14px}
+.titleRow h1{margin:0}
+.titleIcon{flex:none;width:.78em;height:.78em;margin-top:.15em;font-size:clamp(34px,6vw,60px)}
+.brand{display:none}
 </style>
 </head>
 <body>
-<a class="brand" href="/" aria-label="Chakra and Elements Toning, home"><img src="/logo.svg?v=3" width="40" height="40" alt="Chakra and Elements Toning logotype: a glowing circle, gold in the heart, white between, violet outside"></a>
 <nav class="langsw" aria-label="Language"><a data-l="hr" href="/hr/" hreflang="hr">HR</a>|<a data-l="en" href="/" hreflang="en">EN</a></nav>
 <header class="hero">
   <picture><source srcset="/img/hero.webp" type="image/webp"><img class="bg" src="/img/hero.jpg" width="1024" height="572" fetchpriority="high" alt="A man sitting cross-legged on a terrace at dawn, eyes closed, singing a long vowel, the app beside him"></picture>
   <div class="wrap">
     <div class="rainbow" role="presentation"></div>
-    <h1>Chakra and Elements Toning</h1>
+    <div class="titleRow"><img class="titleIcon" src="/logo.svg?v=4" width="48" height="48" alt="The app icon: six stripes of the elements in a circle"><h1>Chakra and Elements Toning</h1></div>
     <p class="lead"><span lang="en">Sing yourself quiet. A free meditation app for Android built on DJ Mantra's chakra toning: one voice, held notes, five elements and OM, and light that moves with the sound.</span><span lang="hr">Otpjevaj se u tišinu. Besplatna aplikacija za meditaciju za Android na chakra toningu DJ Mantre: jedan glas, dugi tonovi, pet elemenata i OM, i svjetlo koje se miče sa zvukom.</span></p>
     <a class="btn" href="https://github.com/markoboskoauroville/CHAKRA_ELEMENTS_TONING/releases/latest" data-dl-app="chakratoning"><span lang="en">Download the latest version</span><span lang="hr">Preuzmi najnoviju verziju</span></a>
     <p class="small"><span lang="en">Android 10 or newer. Free. Offline, no account, no internet permission. The APK opens on GitHub: tap the .apk file.</span><span lang="hr">Android 10 ili noviji. Besplatno. Bez interneta, bez računa. APK se otvara na GitHubu: dodirni .apk datoteku.</span></p>
